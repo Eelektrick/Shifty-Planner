@@ -1,15 +1,91 @@
-import React from "react";
+import React, { Component } from "react";
 import "./style.css";
+import { FaHome } from "react-icons/fa";
+import { GrSchedules } from "react-icons/gr";
+import { AiOutlineSafetyCertificate } from "react-icons/ai";
 
 // Depending on the current path, this component sets the "active" class on the appropriate navigation link item
-function Navbar() {
-  return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <a className="navbar-brand" href="/">
-        LinkedUp
-      </a>
-    </nav>
-  );
-}
+export default class Navbar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      menu: false,
+    };
+    this.toggleMenu = this.toggleMenu.bind(this);
+  }
+  toggleMenu() {
+    this.setState({ menu: !this.state.menu });
+  }
 
-export default Navbar;
+  render() {
+    const show = this.state.menu ? "show" : "";
+    return (
+      <nav className="navbar navbar-expand-lg navbar-light">
+        <a className="navbar-brand" id="shifty" to="/">
+          Shifty Planner
+        </a>
+        <button
+          className="navbar-toggler ml-auto"
+          type="button"
+          onClick={this.toggleMenu}
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className={"collapse navbar-collapse " + show}>
+          <ul className="navbar-nav">
+            <li className="nav-item ">
+              <a
+                to="/"
+                className={
+                  window.location.pathname === "/" ||
+                  window.location.pathname === "/home"
+                    ? "nav-link active"
+                    : "nav-link"
+                }
+              >
+                <FaHome style={{ color: "black" }} /> Home
+              </a>
+            </li>
+            <li className="nav-item">
+              <a
+                to="/portfolio"
+                className={
+                  window.location.pathname === "/schedule"
+                    ? "nav-link active"
+                    : "nav-link"
+                }
+              >
+                <GrSchedules /> Schedule
+              </a>
+            </li>
+            <li className="nav-item">
+              <a
+                className={
+                  window.location.pathname === "/license"
+                    ? "nav-link active"
+                    : "nav-link"
+                }
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <AiOutlineSafetyCertificate style={{ color: "black" }} />{" "}
+                License
+              </a>
+            </li>
+            <li className="nav-item">
+              <a
+                className={
+                  window.location.pathname === "/contact"
+                    ? "nav-link active"
+                    : "nav-link"
+                }
+                target="_blank"
+                rel="noopener noreferrer"
+              ></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    );
+  }
+}
