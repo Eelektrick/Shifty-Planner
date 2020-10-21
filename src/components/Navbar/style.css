@@ -1,3 +1,20 @@
 nav.navbar.navbar-default {
   margin-bottom: 0;
 }
+
+#shifty {
+  color: blueviolet;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  margin-right: 40px;
+  font-weight: bold;
+}
+
+a {
+  color: black;
+  cursor: pointer;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+a:hover {
+  font-size: 18px;
+}
