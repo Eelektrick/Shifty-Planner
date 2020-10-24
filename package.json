@@ -25,6 +25,9 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "if-env": "^1.0.4",
-    "mongoose": "^5.10.10"
+    "mongoose": "^5.10.10",
+    "react-big-calendar": "^0.28.1",
+    "react-modal": "^3.11.2",
+    "moment": "^2.29.1"
   }
 }
