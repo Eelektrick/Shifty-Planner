@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import LoginButton from "./LoginButton";
-
 import "./style.css";
 
 export default class Login extends Component {
@@ -48,10 +47,7 @@ export default class Login extends Component {
                   Remember Me
                 </label>
               </div>
-              <a type="submit" className="button">
-                <span>Submit</span>
-                <LoginButton />
-              </a>
+              <LoginButton />
             </form>
           </div>
         </div>
