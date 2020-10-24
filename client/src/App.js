@@ -3,6 +3,7 @@ import Gallery from "./pages/Gallery";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Wrapper from "./components/Wrapper";
+import Scheduler from "./pages/Scheduler";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Navbar />
       <Wrapper>
         <Gallery />
+        {/* <Scheduler /> */}
       </Wrapper>
       <Footer />
     </div>
