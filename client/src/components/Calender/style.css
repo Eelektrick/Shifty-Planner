@@ -1,0 +1,29 @@
+.rbc-month-view {
+    height: 80vh;
+  }
+
+  .rbc-toolbar button{
+    background-color: #9c27b0;
+    color: #ffffff;
+    box-shadow: 0 2px 2px 0 rgba(156, 39, 176, 0.14), 0 3px 1px -2px rgba(156, 39, 176, 0.2), 0 1px 5px 0 rgba(156, 39, 176, 0.12);
+    border-width: 2px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    margin: 5px 1px;
+    border: none;
+    margin: 10px 1px;
+    border-radius: 30px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    outline: none;
+  }
+
+  .rbc-toolbar button:active:hover, .rbc-toolbar button:active:focus,
+  .rbc-toolbar button:hover, .rbc-toolbar button:focus,
+  .rbc-toolbar button.rbc-active:hover, .rbc-toolbar button.rbc-active:focus {
+    color:  #ffffff;
+    background-color: #661974;
+    border-color: #8c8c8c;
+}
