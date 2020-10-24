@@ -12,7 +12,7 @@ function App() {
       <Navbar />
       <Wrapper>
         <Login />
-        <Gallery />
+        {/* <Gallery /> */}
         {/* <Scheduler /> */}
       </Wrapper>
       <Footer />
