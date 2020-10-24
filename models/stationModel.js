@@ -1,6 +1,6 @@
 const { Schema } = require("mongoose");
 
-const personnelModel = new Schema
+shiftModel  = new Schema
 ({
     //unique id for user
     generated_ID: {
