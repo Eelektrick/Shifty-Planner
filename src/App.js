@@ -1,15 +1,16 @@
 import React from "react";
-import Gallery from "./pages/Gallery";
+
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Wrapper from "./components/Wrapper";
+import Login from "./components/Login";
 
 function App() {
   return (
     <div>
       <Navbar />
       <Wrapper>
-        <Gallery />
+        <Login />
       </Wrapper>
       <Footer />
     </div>

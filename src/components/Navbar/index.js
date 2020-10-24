@@ -32,9 +32,10 @@ export default class Navbar extends Component {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className={"collapse navbar-collapse " + show}>
-          <ul className="navbar-nav">
+          <ul className="navbar-nav ml-auto">
             <li className="nav-item ">
               <a
+                style={{ color: "rgb(190, 147, 3)" }}
                 to="/"
                 className={
                   window.location.pathname === "/" ||
@@ -43,11 +44,12 @@ export default class Navbar extends Component {
                     : "nav-link"
                 }
               >
-                <FaHome style={{ color: "black" }} /> Home
+                <FaHome style={{ color: "rgb(190, 147, 3)" }} /> Home
               </a>
             </li>
             <li className="nav-item">
               <a
+                style={{ color: "rgb(190, 147, 3)" }}
                 to="/portfolio"
                 className={
                   window.location.pathname === "/schedule"
@@ -55,11 +57,12 @@ export default class Navbar extends Component {
                     : "nav-link"
                 }
               >
-                <GrSchedules /> Schedule
+                <GrSchedules style={{ color: "rgb(190, 147, 3)" }} /> Schedule
               </a>
             </li>
             <li className="nav-item">
               <a
+                style={{ color: "rgb(190, 147, 3)" }}
                 className={
                   window.location.pathname === "/license"
                     ? "nav-link active"
@@ -68,7 +71,9 @@ export default class Navbar extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <AiOutlineSafetyCertificate style={{ color: "black" }} />{" "}
+                <AiOutlineSafetyCertificate
+                  style={{ color: "rgb(190, 147, 3)" }}
+                />{" "}
                 License
               </a>
             </li>
