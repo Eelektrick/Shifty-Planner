@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import LoginButton from "./LoginButton";
 
 import "./style.css";
 
@@ -49,6 +50,7 @@ export default class Login extends Component {
               </div>
               <a type="submit" className="button">
                 <span>Submit</span>
+                <LoginButton />
               </a>
             </form>
           </div>
