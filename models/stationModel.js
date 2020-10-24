@@ -1,7 +1,5 @@
-const { Schema } = require("mongoose");
-
-const personnelModel = new Schema
-({
+shiftModel =
+{
     //unique id for user
     generated_ID: {
         type: Number,
@@ -44,4 +42,4 @@ const personnelModel = new Schema
         required: true,
         trim: true
     }
-})
+}
