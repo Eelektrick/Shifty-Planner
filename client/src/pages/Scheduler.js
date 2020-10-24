@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import API from "../utils/API";
 import CardContainer from "../components/CardContainer";
+import Calender from "../components/Calender";
 import Row from "../components/Row";
+import Col from "../components/Col";
+import Container from "../components/Container";
 
 function Gallery() {
   const [user, setUser] = useState({});
@@ -55,12 +58,15 @@ function Gallery() {
 
   return (
     <div>
-      <h1 className="text-center">Welcome to LinkedUp</h1>
-      <p className="text-center h3">Click on the arrows to browse users</p>
+    <Container>
       <Row>
+        <Col size="md-12">
         {/* Pass props to the card container */}
-        <CardContainer />
+       
+        <Calender />
+        </Col>
       </Row>
+    </Container>
     </div>
   );
 }

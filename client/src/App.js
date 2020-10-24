@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Wrapper from "./components/Wrapper";
 import Login from "./components/Login";
+// import Scheduler from "./pages/Scheduler";
 
 function App() {
   return (
@@ -11,6 +12,8 @@ function App() {
       <Navbar />
       <Wrapper>
         <Login />
+        <Gallery />
+        {/* <Scheduler /> */}
       </Wrapper>
       <Footer />
     </div>
