@@ -2,6 +2,7 @@ const { Schema } = require("mongoose");
 
 const personnelModel = new Schema
 ({
+    
     //unique id for user
     generated_ID: {
         type: Number,
@@ -34,14 +35,18 @@ const personnelModel = new Schema
         required: true,
         trim: true
     },
+    //Person's certifications
     certifications:[{
         type: String,
         required: true,
         trim: true
     }],
+    //A,B,C custom?
     shift: {
         type: String,
         required: true,
         trim: true
     }
 })
+
+module.exports = mongoose.model('personnel', personnelModel);
