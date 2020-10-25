@@ -36,7 +36,7 @@ constructor() {
     // selectedDate: new Date(),
     // dropDownSelection: "Java 1",
     modalIsOpen: false,
-    // cal_events: []
+    cal_events: []
   };
 }
 componentDidMount() {
@@ -50,11 +50,12 @@ componentDidMount() {
 //   });
 // };
 
-handleSelect = e => {
+handleSelect = event => {
   //set model to true
-  console.log("here");
+  // console.log(event);
   this.setState({
-    modalIsOpen: true
+    modalIsOpen: true,
+    cal_events : event
   });
  
 };
@@ -69,6 +70,13 @@ closeModal = () => this.setState({
 
 renderModal() {
 
+  console.log(this.state.cal_events.title);
+  console.log(this.state.cal_events.start);
+  console.log(this.state.cal_events.end);
+  // const title= this.state.cal_events.title;
+  // const start= this.state.cal_events.start;
+  // const end= this.state.cal_events.end;
+
   return (
     <div>
       
@@ -78,18 +86,21 @@ renderModal() {
         onRequestClose={this.closeModal}
         contentLabel="Example Modal"
       >
-        <h2 ref={subtitle => (this.subtitle = subtitle)}>
-          Shift Details: <br/><br/>
-
-          Date : 10/24/2020 <br/>
-          Time : 9 - 5 PM
-
+        <h2>
+          Shift Details:   
+        <button  onClick={this.closeModal} data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> <br/><br/>
+       
+          Title : {this.state.cal_events.title} <br/>
+          StartTime : {moment(this.state.cal_events.start).format('MM/DD/YYYY, h:mm:ss a')} <br/>
+          EndTime : {moment(this.state.cal_events.end).format('MM/DD/YYYY, h:mm:ss a')} <br/> 
+   
         </h2>
-        <button onClick={this.closeModal}>close</button>
-        <div>Please Click on the below button to trade your shift</div>
+       
+        <div>Please Click on the below button to trade your shift</div><br/>
         <form onSubmit={this.onFormSubmit}>
-         
-
+ 
         <button type="button btn-primary">Click Me!</button>
 
         </form>

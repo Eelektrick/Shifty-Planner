@@ -10,8 +10,8 @@ function App() {
     <div>
       <Navbar />
       <Wrapper>
-        <Gallery />
-        {/* <Scheduler /> */}
+        {/* <Gallery /> */}
+         <Scheduler /> 
       </Wrapper>
       <Footer />
     </div>
