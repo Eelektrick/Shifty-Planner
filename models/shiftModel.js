@@ -1,7 +1,7 @@
-const { Schema } = require("mongoose")
+const mongoose = require("mongoose")
 
 
-const crewSchema = new Schema({ 
+const crewSchema = new mongoose.Schema({ 
 name: {
     type: String,
     required: true,
@@ -15,7 +15,7 @@ certification: {
 })
 
 
-const shiftModel = new Schema
+const shiftModel = new mongoose.Schema
 ({
     //unique id for user
     generated_ID: {
@@ -43,20 +43,16 @@ const shiftModel = new Schema
         required: true,
     },
     //A,B,C Custom
-    type: {
+    shift: {
         type: String,
         required: true,
         trim: true
     },
     //Who is on this shift
     crew:[{
-        crew:[crewSchema]
-    }],
-    shift: {
-        type: String,
-        required: true,
-        trim: true
-    }
+        personnel: crewSchema
+    }]
+    
 });
 
 module.exports = mongoose.model('Shift', shiftModel);

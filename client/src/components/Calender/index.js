@@ -151,7 +151,7 @@ class Calender extends Component {
             </button>
             <br /><br />
 
-          Title : {this.state.cal_events.title} <br />
+          Shift : {this.state.cal_events.shift} <br />
           Start : {moment(this.state.cal_events.start).format("MMMM Do YYYY, h:mm:ss a")}<br />
           End   : {moment(this.state.cal_events.end).format("MMMM Do YYYY, h:mm:ss a")}<br />
 
