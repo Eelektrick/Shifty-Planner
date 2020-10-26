@@ -4,7 +4,7 @@ import "./style.css";
 function Footer() {
   return (
     <footer className="footer">
-      <span>LinkedUp { new Date().getFullYear() }</span>
+      <p>Shifty Planner: 2020</p>
     </footer>
   );
 }

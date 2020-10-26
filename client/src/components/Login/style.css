@@ -1,0 +1,185 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-image: url(./wallpaper.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center center;
+  font-family: "Poppins", sans-serif;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  flex-wrap: wrap;
+  z-index: 1;
+}
+
+.login-box {
+  height: 100vh;
+}
+
+.login-title {
+  text-align: center;
+  font-size: 30px;
+  letter-spacing: 2px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+input:focus {
+  outline: none;
+  box-shadow: 0 0 0;
+}
+.form-control-label {
+  font-size: 20px;
+  color: #6c6c6c;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+input[type="text"],
+input[type="password"] {
+  background: #222d32;
+  border: none;
+  border-bottom: 2px solid white;
+  border-top: 0px;
+  border-radius: 0px;
+  font-weight: bold;
+  outline: 0;
+  margin-bottom: 20px;
+  padding-left: px;
+  color: #ecf0f5;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.form-control:focus {
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-bottom: 2px solid #dedb0d;
+  outline: 0;
+  background-color: #222d32;
+  color: #ecf0f5;
+}
+
+/* .btn-outline-primary {
+  font-family: "Poppins", sans-serif;
+  border-color: rgb(66, 66, 66);
+  color: white;
+  border-radius: 0px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.btn-outline-primary:hover {
+  background-color: rgb(197, 197, 197);
+}
+
+.btn-outline-primary:active {
+  background-color: orange;
+  box-shadow: 0 5px gray;
+  transform: translateY(2px);
+} */
+
+.button {
+  top: 30px;
+  left: 30px;
+  display: inline-block;
+  margin: 0 auto;
+  border: none;
+  outline: none;
+
+  -webkit-border-radius: 10px;
+
+  -webkit-box-shadow: 0px 3px rgba(128, 128, 128, 1),
+    /* gradient effects */ 0px 4px rgba(118, 118, 118, 1),
+    0px 5px rgba(108, 108, 108, 1), 0px 6px rgba(98, 98, 98, 1),
+    0px 7px rgba(88, 88, 88, 1), 0px 8px rgba(78, 78, 78, 1),
+    0px 14px 6px -1px rgba(128, 128, 128, 1); /* shadow */
+
+  -webkit-transition: -webkit-box-shadow 0.1s ease-in-out;
+}
+
+.button span {
+  background-color: #e8e8e8;
+
+  background-image: 
+      /* gloss gradient */ -webkit-gradient(
+      linear,
+      left bottom,
+      left top,
+      color-stop(50%, rgba(255, 255, 255, 0)),
+      color-stop(50%, rgba(255, 255, 255, 0.3)),
+      color-stop(100%, rgba(255, 255, 255, 0.2))
+    ),
+    /* dark outside gradient */ -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(210, 210, 210, 0.3)), color-stop(20%, rgba(210, 210, 210, 0)), color-stop(80%, rgba(210, 210, 210, 0)), color-stop(100%, rgba(210, 210, 210, 0.3))),
+    /* light inner gradient */ -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(20%, rgba(255, 255, 255, 0.5)), color-stop(80%, rgba(255, 255, 255, 0.5)), color-stop(100%, rgba(255, 255, 255, 0))),
+    /* diagonal line pattern */ -webkit-gradient(linear, 0% 100%, 100% 0%, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(40%, rgba(255, 255, 255, 0)), color-stop(40%, #d2d2d1), color-stop(60%, #d2d2d1), color-stop(60%, rgba(255, 255, 255, 0)), color-stop(100%, rgba(255, 255, 255, 0)));
+
+  -webkit-box-shadow: 0px -1px #fff, /* top highlight */ 0px 1px 1px #ffffff; /* bottom edge */
+
+  -webkit-background-size: 100%, 100%, 100%, 4px 4px;
+
+  -webkit-border-radius: 10px;
+  -webkit-transition: -webkit-transform 0.1s ease-in-out;
+
+  display: inline-block;
+  padding: 5px 20px 5px 20px;
+
+  color: #3a474d;
+
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+
+  text-shadow: 0px 1px #fff, 0px -1px #262f33;
+}
+
+.button span:hover {
+  color: rgb(190, 147, 3);
+
+  text-shadow: 0px -1px #97a63a;
+  cursor: pointer;
+}
+
+.button:active {
+  -webkit-box-shadow: 0px 3px rgba(128, 128, 128, 1),
+    0px 4px rgba(118, 118, 118, 1), 0px 5px rgba(108, 108, 108, 1),
+    0px 6px rgba(98, 98, 98, 1), 0px 7px rgba(88, 88, 88, 1),
+    0px 8px rgba(78, 78, 78, 1), 0px 10px 2px 0px rgba(128, 128, 128, 0.6); /* shadow */
+}
+
+.button:active span {
+  -webkit-transform: translate(0, 5px); /* depth of button press */
+}
+
+/* .button span:after {
+  display: block;
+  width: 10px;
+  height: 10px;
+
+  position: absolute;
+  right: 14px;
+  top: 12px;
+
+  font-family: "Cabin";
+  font-weight: 700;
+  color: #0db8de;
+  text-shadow: 0px 1px #fff, 0px -1px #97a63a;
+  font-size: 26px;
+} */
