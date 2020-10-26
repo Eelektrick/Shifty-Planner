@@ -1,6 +1,6 @@
-const { Schema } = require("mongoose");
+const mongoose = require("mongoose");
 
-const personnelModel = new Schema
+const personnelModel = new mongoose.Schema
 ({
     
     //unique id for user

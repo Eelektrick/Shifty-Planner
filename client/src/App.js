@@ -17,7 +17,8 @@ function App() {
 
           <Route  exact path="/" component={Login} />
           <Route  exact path="/example" component={Example} />
-         
+          <Route  exact path="/shift"/>
+
           {/* <Gallery /> */}
           {/* <Scheduler /> */}
         </Wrapper>
