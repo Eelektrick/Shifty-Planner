@@ -1,18 +1,18 @@
 const mongoose = require("mongoose")
 
 
-const crewSchema = new mongoose.Schema({ 
-name: {
-    type: String,
-    required: true,
-    trim: true
-},
-certification: {
-    type: String,
-    required: true,
-    trim: true
-}
-})
+// const crewSchema = new mongoose.Schema({ 
+// name: {
+//     type: String,
+//     required: true,
+//     trim: true
+// },
+// certification: {
+//     type: String,
+//     required: true,
+//     trim: true
+// }
+// })
 
 
 const shiftModel = new mongoose.Schema
@@ -50,7 +50,8 @@ const shiftModel = new mongoose.Schema
     },
     //Who is on this shift
     crew:[{
-        personnel: crewSchema
+        // personnel: crewSchema
+        type:String
     }]
     
 });
