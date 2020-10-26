@@ -23,12 +23,14 @@
     "@auth0/auth0-react": "^1.1.0",
     "axios": "^0.21.0",
     "body-parser": "^1.19.0",
+    "bootstrap": "^4.5.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "if-env": "^1.0.4",
     "moment": "^2.29.1",
     "mongoose": "^5.10.10",
     "react-big-calendar": "^0.28.1",
+    "react-bootstrap": "^1.4.0",
     "react-modal": "^3.11.2",
     "rsuite": "^4.8.4"
   }
