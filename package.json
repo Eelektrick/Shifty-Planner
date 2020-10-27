@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@auth0/auth0-react": "^1.1.0",
+    "animate.css": "^4.1.1",
     "axios": "^0.21.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
@@ -30,6 +31,7 @@
     "mongoose": "^5.10.10",
     "react-big-calendar": "^0.28.1",
     "react-modal": "^3.11.2",
+    "react-notifications-component": "^2.4.1",
     "rsuite": "^4.8.4"
   }
 }
