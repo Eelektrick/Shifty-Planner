@@ -7,8 +7,13 @@ import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import * as dates from '../../utils/dates'
 import "./style.css"
-import { Notification } from 'rsuite';
-import 'rsuite/dist/styles/rsuite-default.css'
+// import { Notification } from 'rsuite';
+// import 'rsuite/dist/styles/rsuite-default.css'
+
+import ReactNotification from "react-notifications-component";
+import { store } from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
+import "animate.css";
 
 // import { makeStyles } from "@material-ui/core/styles";
 // import styles from "assets/jss/nextjs-material-dashboard-pro/components/buttonStyle.js";
@@ -90,6 +95,10 @@ const eventStyleGetter = (events, start, end, isSelected) => {
   };
 };
 
+const dayPropGetter = (Date) => {
+
+}
+
 class Calender extends Component {
   constructor() {
     super();
@@ -105,14 +114,32 @@ class Calender extends Component {
   }
 
 
-  openNotfication() {
-    Notification.open({
-      title: 'Notification',
-      description:
-        'Your shift trade successful done!! It will be notified to others too..'
+  // openNotfication() {
+  //   Notification.open({
+  //     title: 'Notification',
+  //     description:
+  //       'Your shift trade successful done!! It will be notified to others too..'
 
+  //   });
+  // }
+
+ handleOnclickTread = (event) => {
+   event.preventDefault();
+    store.addNotification({
+      title: "Trade schedule",
+      message: "Your schedule is now ready to be trade!",
+      type: "info",
+      container: "top-right",
+      insert: "Top",
+      animationIn: ["animate__animated", "animate__flipInY"],
+      animationOut: ["animate__animated", "animate__flipOutY"],
+      dismiss: {
+        duration: 5000,
+        showIcon: true,
+        onScreen: true,
+      },
     });
-  }
+  };
 
   handleSelect = event => {
     //set model to true
@@ -160,7 +187,10 @@ class Calender extends Component {
           <form onSubmit={this.onFormSubmit}>
 
 
-            <button type="button btn-primary">Click Me!</button>
+            <button onClick={this.handleOnclickTread} type="button btn-primary">Click Me!
+           
+            </button>
+            <ReactNotification />
           </form>
         </Modal>
       </div>
@@ -182,9 +212,11 @@ class Calender extends Component {
           defaultDate={new Date()}
           localizer={localizer}
           eventPropGetter={eventStyleGetter}
+          dayPropGetter ={dayPropGetter}
         />
         {/* <button onClick={this.openModal}>Open Modal</button> */}
         {this.renderModal()}
+       
 
       </div>
     )
