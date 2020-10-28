@@ -5,7 +5,7 @@ const moment = require("moment");
 
 mongoose.connect(
   process.env.MONGODB_URI ||
-  "mongodb://localhost/shiftplanner"
+  "mongodb://localhost/shifty-planner"
 );
 
 var begin = moment().startOf('month');

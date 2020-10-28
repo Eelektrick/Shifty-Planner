@@ -8,9 +8,6 @@ router.route("/")
 
 // Matches with "/api/shifts/:id"
 router
-  .route("/:first/:last")
-  .get(shiftController.findShiftBtwDates);
-router
   .route("/:id")
   .get(shiftController.findById)
   .put(shiftController.update)
