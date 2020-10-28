@@ -3,6 +3,7 @@ import "./style.css";
 import { FaHome } from "react-icons/fa";
 import { GrSchedules } from "react-icons/gr";
 import { AiOutlineSafetyCertificate } from "react-icons/ai";
+import image from "../Navbar/shiftyLogo3.png";
 
 // Depending on the current path, this component sets the "active" class on the appropriate navigation link item
 export default class Navbar extends Component {
@@ -21,6 +22,8 @@ export default class Navbar extends Component {
     const show = this.state.menu ? "show" : "";
     return (
       <nav className="navbar navbar-expand-lg navbar-light">
+        <a className="navbar-brand" href="#" />
+        <img src={image} width="70" height="60" alt="logo" />
         <a className="navbar-brand" id="shifty" to="/">
           Shifty Planner
         </a>
