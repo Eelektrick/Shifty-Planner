@@ -35,11 +35,7 @@
     "react-bootstrap": "^1.4.0",
     "react-modal": "^3.11.2",
     "react-notifications-component": "^2.4.1",
-<<<<<<< HEAD
-    "rsuite": "^4.8.4"
-=======
     "rsuite": "^4.8.4",
     "web-push": "^3.4.4"
->>>>>>> c2c137dd0654274c0c95c3c7aa5410999ec2720b
   }
 }

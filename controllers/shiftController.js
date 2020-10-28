@@ -9,12 +9,6 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
- findShiftBtwDates: function(req,res) {
-    db.Shift
-      .find({"start":{ $gte: req.params.first, $lt: req.params.last} })
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
- },
   findById: function(req, res) {
     db.Shift
       .findById(req.params.id)

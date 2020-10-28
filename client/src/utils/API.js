@@ -5,9 +5,6 @@ export default {
   getShifts: function() {
     return axios.get("/api/shifts");
   },
-  getShiftsBtwDates: function(first, last){
-    return axios.get("/api/shifts/" + first +last);
-  },
   // Gets the shift with the given id
   getShift: function(id) {
     return axios.get("/api/shifts/" + id);

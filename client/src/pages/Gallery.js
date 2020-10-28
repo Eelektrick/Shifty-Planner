@@ -8,15 +8,9 @@ function Gallery() {
 
   API.getShifts().then((json) => {
     console.log(json);
-<<<<<<< HEAD
-    // console.log(json.data[0]._id);
-    // id = json.data[0]._id
-  })
-=======
     console.log(json.data[0]._id);
     id = json.data[0]._id;
   });
->>>>>>> c2c137dd0654274c0c95c3c7aa5410999ec2720b
 
   let shift = {
     crew: ["Sam", "Yakini", "Atima"],

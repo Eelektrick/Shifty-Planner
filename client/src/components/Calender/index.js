@@ -24,53 +24,49 @@ const localizer = momentLocalizer(moment);
 
 let allViews = Object.keys(Views).map(k => Views[k])
 
-var date = moment().format();
-console.log("Current Date" +date);
-var begin = moment().startOf('month');
-console.log("Begin" +begin);
-var end = moment().endOf('month');
-API.getShiftsBtwDates(begin, end).then(res=>{
-  console.log(res);
-})
+// renderCalender = (data) => {
+//     // var date = moment().format();
+//     // console.log("Current Date" +date);
+//     // var begin = moment().startOf('month');
+//     // console.log("Begin" +begin);
+//     // var end = moment().endOf('month');
 
-if(date === begin){
-  console.log("true");
-} else console.log("false");
+//     const events = [];
 
-const events = [];
+//     for (var i = 0; i < data.length; i++) {
 
-for (var i = 0; i < moment().daysInMonth(); i++) {
+//       // var j = i % 6;
 
-  var j = i % 6;
+//       // if (j === 0 || j === 1) {
+//         events[i]
+//           = {
+//           'shift': data.shift,
+//           'title': data.shift,
+//           'start': data.start,
+//           'end': data.end
+//         };
+//       }
+//     }
 
-  if (j === 0 || j === 1) {
-    events[i]
-      = {
-      'shift': 'A',
-      'title': 'A',
-      'start': moment(begin).add(i, 'days').hours('10').toDate(),
-      'end': moment(begin).add(i, 'days').hours('17').toDate()
-    };
+    //   } else if (j === 2 || j === 3) {
+    //     events[i]
+    //       = {
+    //       'shift': 'B',
+    //       'title': 'B',
+    //       'start': moment(begin).add(i, 'days').hours('13').toDate(),
+    //       'end': moment(begin).add(i, 'days').hours('19').toDate()
+    //     };
+    //   } else if (j === 4 || j === 5) {
+    //     events[i]
+    //       = {
+    //       'shift': 'C',
+    //       'title': 'C',
+    //       'start': moment(begin).add(i, 'days').hours('20').toDate(),
+    //       'end': moment(begin).add(i, 'days').hours('02').toDate()
+    //     };
+    //   }
 
-  } else if (j === 2 || j === 3) {
-    events[i]
-      = {
-      'shift': 'B',
-      'title': 'B',
-      'start': moment(begin).add(i, 'days').hours('13').toDate(),
-      'end': moment(begin).add(i, 'days').hours('19').toDate()
-    };
-  } else if (j === 4 || j === 5) {
-    events[i]
-      = {
-      'shift': 'C',
-      'title': 'C',
-      'start': moment(begin).add(i, 'days').hours('20').toDate(),
-      'end': moment(begin).add(i, 'days').hours('02').toDate()
-    };
-  }
-
-}
+    // }
 
 
 // const eventColors = (event) => {
@@ -115,13 +111,28 @@ class Calender extends Component {
     super();
     this.state = {
       modalIsOpen: false,
-      cal_events: []
+      cal_events: [],
+      events: []
     };
   }
 
   componentDidMount() {
     console.log("mounted calander");
     Modal.setAppElement("body");
+    API.getShifts().then((data) => {
+      console.log(data);
+      const e=[];
+      for (var i = 0; i < data.length; i++) {
+     
+          e[i]
+            = {
+            'shift': data[i].shift,
+            'start': data[i].start,
+            'end': data[i].end
+          }
+        }
+        this.setState({events: e});
+      })
   }
 
 
@@ -210,12 +221,12 @@ class Calender extends Component {
 
   render() {
 
-    console.log(events);
+    // console.log(events);
     return (
       <div>
         <Calendar
           selectable
-          events={events}
+          events={this.state.events}
           views={allViews}
           onSelectEvent={this.handleSelect}
           defaultView="month"

@@ -13,16 +13,9 @@ function App() {
       <div>
         <Navbar />
         <Wrapper>
-<<<<<<< HEAD
-
-          <Route  exact path="/" component={Login} />
-          <Route  exact path="/example" component={Example} />
-          <Route  exact path="/scheduler" component={Scheduler} />
-=======
           <Route exact path="/" component={Login} />
           <Route exact path="/example" component={Example} />
           <Route exact path="/scheduler" component={Scheduler} />
->>>>>>> c2c137dd0654274c0c95c3c7aa5410999ec2720b
           {/* <Gallery /> */}
          {/* <Scheduler />  */}
         </Wrapper>

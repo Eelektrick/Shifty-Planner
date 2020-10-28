@@ -19,90 +19,36 @@ for (var i = 0; i < moment().daysInMonth(); i++) {
     shiftSeed[i]
       = {
       // 'generated_ID': 
+      'authID': '123',
       'shift': 'A',
-      'start': moment(begin).add(i, 'days').hours('10').toDate(),
-      'end': moment(begin).add(i, 'days').hours('17').toDate(),
+      'start': moment(begin).add(i, 'days').hours('07').toDate(),
+      'end': moment(begin).add(i, 'days').hours('19').toDate(),
       'traded': 1,
-      'crew' : "Sam"
-    },
-    {
-    'shift': 'A',
-    'start': moment(begin).add(i, 'days').hours('10').toDate(),
-    'end': moment(begin).add(i, 'days').hours('17').toDate(),
-    'traded': 1,
-    'crew' : "Corey"
-  },
-  {
-    'shift': 'A',
-    'start': moment(begin).add(i, 'days').hours('10').toDate(),
-    'end': moment(begin).add(i, 'days').hours('17').toDate(),
-    'traded': 1,
-    'crew' : "Atima"
-  },
-  {
-    'shift': 'A',
-    'start': moment(begin).add(i, 'days').hours('10').toDate(),
-    'end': moment(begin).add(i, 'days').hours('17').toDate(),
-    'traded': 1,
-    'crew' : "Yakini"
-  }
+      'name' : "Sam"
+    }
   } else if (j === 2 || j === 3) {
     shiftSeed[i]
       = {
+      'authID': '456',
       'shift': 'B',
-      'start': moment(begin).add(i, 'days').hours('10').toDate(),
-      'end': moment(begin).add(i, 'days').hours('17').toDate(),
+      'start': moment(begin).add(i, 'days').hours('07').toDate(),
+      'end': moment(begin).add(i, 'days').hours('19').toDate(),
       'traded': 1,
       'crew' : "Wyatt"
-    },
-    {
-      'shift': 'B',
-      'start': moment(begin).add(i, 'days').hours('10').toDate(),
-      'end': moment(begin).add(i, 'days').hours('17').toDate(),
-      'traded': 1,
-      'crew' : "Dilan"
-    
-    };
+    }
   } else if (j === 4 || j === 5) {
     shiftSeed[i]
       = {
+      'authID': '789',
       'shift': 'C',
-      'start': moment(begin).add(i, 'days').hours('10').toDate(),
-      'end': moment(begin).add(i, 'days').hours('17').toDate(),
+      'start': moment(begin).add(i, 'days').hours('07').toDate(),
+      'end': moment(begin).add(i, 'days').hours('19').toDate(),
       'traded': 1,
       'crew' : "Dennis"
-    },
-    {
-      'shift': 'C',
-      'start': moment(begin).add(i, 'days').hours('10').toDate(),
-      'end': moment(begin).add(i, 'days').hours('17').toDate(),
-      'traded': 1,
-      'crew' : "Jordan"
-    },
-    {
-      'shift': 'C',
-      'start': moment(begin).add(i, 'days').hours('10').toDate(),
-      'end': moment(begin).add(i, 'days').hours('17').toDate(),
-      'traded': 1,
-      'crew' : "Jameson"
-    };
+    }
   }
 }
-// const shiftSeed = [{
-//       //unique id for user
-//     generated_ID: 123,
-//     //Date of shift
-//     date: new Date(),
-//     //Hours of shift
-//     hours: "0700-1900",
-//     //Has this shift been traded
-//     traded: false,
-//     //A,B,C Custom
-//     shift: "A",
-//     //Who is on this shift
-//     crew:["Sam","Yakini","Atima"]},
 
-// ];
 console.log(shiftSeed);
 db.Shift
   .remove({})
