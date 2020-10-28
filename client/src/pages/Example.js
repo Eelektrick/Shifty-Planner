@@ -2,6 +2,7 @@ import React from "react";
 import API from "../utils/API"
 import {Button, Form} from "react-bootstrap"
 import "./example.css"
+import Refresh from "../components/CalendarRefresher"
 
 
 function Gallery() {
@@ -75,6 +76,8 @@ function testdelete() {
     Submit
   </Button>
 </Form> */}
+
+<Refresh/>
 
       </div>
   );

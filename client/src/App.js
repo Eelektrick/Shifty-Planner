@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Wrapper from "./components/Wrapper";
 import Login from "./components/Login";
-import Example from "./pages/Gallery";
+import Example from "./pages/Example";
 // import Scheduler from "./pages/Scheduler";
 
 function App() {
