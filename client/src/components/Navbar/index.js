@@ -4,7 +4,7 @@ import { FaHome } from "react-icons/fa";
 import { GrSchedules } from "react-icons/gr";
 import { AiOutlineSafetyCertificate } from "react-icons/ai";
 import image from "../Navbar/shiftyLogo3.png";
-
+import LogoutButton from "../LogoutButton";
 // Depending on the current path, this component sets the "active" class on the appropriate navigation link item
 export default class Navbar extends Component {
   constructor(props) {
@@ -79,6 +79,9 @@ export default class Navbar extends Component {
                 />{" "}
                 License
               </a>
+              <li className="nav-item">
+                <LogoutButton />
+              </li>
             </li>
             <li className="nav-item">
               <a

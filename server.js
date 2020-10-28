@@ -28,7 +28,7 @@ app.post("/subscribe", (req, res) => {
   res.status(201).json({});
 
   // Create payload
-  const payload = JSON.stringify({ title: "Push Test" });
+  const payload = JSON.stringify({ title: "SHIFTY PLANNER" });
 
   // Pass object into sendNotification
   webpush
@@ -47,7 +47,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(routes);
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/shiftplanner");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/test",{useNewUrlParser: true, useUnifiedTopology: true });
 
 // Start the API server
 app.listen(PORT, function () {

@@ -35,4 +35,5 @@ a {
 a:hover {
   font-size: 18px;
   color: rgb(190, 147, 3);
+  cursor: pointer;
 }
