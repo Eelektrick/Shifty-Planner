@@ -14,9 +14,9 @@ body {
   background-attachment: fixed;
   background-position: center center;
   font-family: "Poppins", sans-serif;
-  position: fixed;
+  /* position: fixed;
   bottom: 0;
-  right: 0;
+  right: 0; */
 }
 
 .container {

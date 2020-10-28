@@ -20,7 +20,7 @@ function App() {
           <Route exact path="/example" component={Example} />
           <Route exact path="/scheduler" component={Scheduler} />
           {/* <Gallery /> */}
-          {/* <Scheduler /> */}
+         {/* <Scheduler />  */}
         </Wrapper>
       </div>
     </Router>
