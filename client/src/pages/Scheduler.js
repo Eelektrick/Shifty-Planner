@@ -13,7 +13,7 @@ function Gallery() {
 
   // When the component mounts, a call will be made to get random users.
   useEffect(() => {
-    loadUsers();
+    // loadUsers();
   }, []);
 
   function nextUser(userIndex) {
@@ -46,15 +46,15 @@ function Gallery() {
     }
   }
 
-  function loadUsers() {
-    API.fetchUsers()
-      .then(users => {
-        setUsers(users);
-        setUser(users[0]);
-      })
+  // function loadUsers() {
+  //   API.fetchUsers()
+  //     .then(users => {
+  //       setUsers(users);
+  //       setUser(users[0]);
+  //     })
 
-      .catch(err => console.log(err));
-  }
+  //     .catch(err => console.log(err));
+  // }
 
   return (
     <div>

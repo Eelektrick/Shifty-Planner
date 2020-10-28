@@ -10,20 +10,20 @@ import Scheduler from "./pages/Scheduler";
 function App() {
   return (
 
-    // <Router>
+    <Router>
       <div>
         <Navbar />
         <Wrapper>
-{/* 
+
           <Route  exact path="/" component={Login} />
           <Route  exact path="/example" component={Example} />
-           */}
+          <Route  exact path="/scheduler" component={Scheduler} />
           {/* <Gallery /> */}
-         <Scheduler /> 
+         {/* <Scheduler />  */}
         </Wrapper>
         <Footer />
       </div>
-    // </Router>
+    </Router>
   );
 }
 

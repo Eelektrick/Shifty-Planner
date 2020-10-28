@@ -9,7 +9,7 @@ import * as dates from '../../utils/dates'
 import "./style.css"
 // import { Notification } from 'rsuite';
 // import 'rsuite/dist/styles/rsuite-default.css'
-
+import API from "../../utils/API"
 import ReactNotification from "react-notifications-component";
 import { store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
@@ -24,7 +24,18 @@ const localizer = momentLocalizer(moment);
 
 let allViews = Object.keys(Views).map(k => Views[k])
 
+var date = moment().format();
+console.log("Current Date" +date);
 var begin = moment().startOf('month');
+console.log("Begin" +begin);
+var end = moment().endOf('month');
+API.getShiftsBtwDates(begin, end).then(res=>{
+  console.log(res);
+})
+
+if(date === begin){
+  console.log("true");
+} else console.log("false");
 
 const events = [];
 
@@ -37,8 +48,8 @@ for (var i = 0; i < moment().daysInMonth(); i++) {
       = {
       'shift': 'A',
       'title': 'A',
-      'start': moment(begin).add(i, 'days').toDate(),
-      'end': moment(begin).add(i, 'days').toDate()
+      'start': moment(begin).add(i, 'days').hours('10').toDate(),
+      'end': moment(begin).add(i, 'days').hours('17').toDate()
     };
 
   } else if (j === 2 || j === 3) {
@@ -46,16 +57,16 @@ for (var i = 0; i < moment().daysInMonth(); i++) {
       = {
       'shift': 'B',
       'title': 'B',
-      'start': moment(begin).add(i, 'days').toDate(),
-      'end': moment(begin).add(i, 'days').toDate()
+      'start': moment(begin).add(i, 'days').hours('13').toDate(),
+      'end': moment(begin).add(i, 'days').hours('19').toDate()
     };
   } else if (j === 4 || j === 5) {
     events[i]
       = {
       'shift': 'C',
       'title': 'C',
-      'start': moment(begin).add(i, 'days').toDate(),
-      'end': moment(begin).add(i, 'days').toDate()
+      'start': moment(begin).add(i, 'days').hours('20').toDate(),
+      'end': moment(begin).add(i, 'days').hours('02').toDate()
     };
   }
 
