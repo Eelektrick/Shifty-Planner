@@ -9,6 +9,10 @@ export default {
   getShift: function(id) {
     return axios.get("/api/shifts/" + id);
   },
+   // Update the shift with the given id
+  updateShift: function(id) {
+    return axios.update("/api/shifts/" + id);
+  },
   // Deletes the shift with the given id
   deleteShift: function(id) {
     return axios.delete("/api/shifts/" + id);

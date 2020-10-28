@@ -27,11 +27,9 @@
     background-color: #661974;
     border-color: #8c8c8c;
 }
-
-.rbc-event {
- background-color: black;
-}
-
+ .rbc-event {
+ background-color: white;
+} 
 body {
   margin: 0;
   padding: 0;

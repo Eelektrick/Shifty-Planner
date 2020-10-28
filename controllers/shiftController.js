@@ -22,10 +22,21 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   update: function(req, res) {
+    console.log(req);
+    const filter = { _id: req.params.id };
+    const update = { traded: 2 };
+    // db.Shift
+    //   .findOneAndUpdate({ _id: req.params._id},  { $push: { traded: 2 } } , {
+    //     new: true,
+    //     upsert: true 
+    //   })
     db.Shift
-      .findOneAndUpdate({ _id: req.params.id }, req.body)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
+      .findOneAndUpdate(filter,  update , {
+        new: true,
+        upsert: true 
+      })
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
   },
   remove: function(req, res) {
     db.Shift

@@ -47,7 +47,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(routes);
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI|| "mongodb://localhost/shifty-planner",{useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGODB_URI|| "mongodb://localhost/shifty-planner",{useNewUrlParser: true, useUnifiedTopology: true,  useCreateIndex: true, useFindAndModify: false});
 
 // Start the API server
 app.listen(PORT, function () {

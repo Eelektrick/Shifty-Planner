@@ -84,17 +84,17 @@ const eventStyleGetter = (events, start, end, isSelected) => {
   var style = {
     // backgroundColor: backgroundColor,
     borderRadius: '0px',
-    opacity: 0.8,
+    // opacity: 0.8,
     // color: 'black',
     border: '0px',
     display: 'block'
 };
   if(events.shift === 'A'){
-    style = { color: 'yellow'}
+    style = { color: 'blue'}
   }else if(events.shift === 'B'){
     style = { color: 'red'}
   }else if(events.shift === 'C'){
-    style = { color: 'white'}
+    style = { color: 'green'}
   }
  
   return {
@@ -117,18 +117,24 @@ class Calender extends Component {
   }
 
   componentDidMount() {
-    console.log("mounted calander");
+    // console.log("mounted calander");
     Modal.setAppElement("body");
     API.getShifts().then((data) => {
-      console.log(data);
+      // console.log("My Data from db");
+      // console.log(data.data);
       const e=[];
-      for (var i = 0; i < data.length; i++) {
+      for (var i = 0; i < data.data.length; i++) {
      
           e[i]
             = {
-            'shift': data[i].shift,
-            'start': data[i].start,
-            'end': data[i].end
+            'shift': data.data[i].shift,
+            'title': data.data[i].shift + "   " +data.data[i].name,
+            'start': data.data[i].start,
+            'end': data.data[i].end,
+            '_id': data.data[i]._id,
+            'name': data.data[i].name,
+            'traded': data.data[i].traded
+
           }
         }
         this.setState({events: e});
@@ -165,13 +171,22 @@ class Calender extends Component {
 
   handleSelect = event => {
     //set model to true
-    console.log("here");
+    // console.log("here");
     this.setState({
       modalIsOpen: true,
       cal_events: event
     });
 
   };
+
+  handleSubmit = (e) =>{
+    e.preventDefault();
+    console.log("Handle Submit Events");
+    console.log(this.state.cal_events);
+     API.updateShift(this.state.cal_events._id).then(response =>{
+       console.log(response);
+     })
+  }
 
   closeModal = () => this.setState({
     modalIsOpen: false
@@ -201,15 +216,15 @@ class Calender extends Component {
             <br /><br />
 
           Shift : {this.state.cal_events.shift} <br />
-          Start : {moment(this.state.cal_events.start).format("MMMM Do YYYY, h:mm:ss a")}<br />
-          End   : {moment(this.state.cal_events.end).format("MMMM Do YYYY, h:mm:ss a")}<br />
+          Start : {this.state.cal_events.start}<br />
+          End   : {this.state.cal_events.end}<br />
 
           </h2>
           <div>Please Click on the below button to trade your shift</div>
           <form onSubmit={this.onFormSubmit}>
 
 
-            <button onClick={this.handleOnclickTread} type="button btn-primary">Click Me!
+            <button onClick={this.handleSubmit} type="button btn-primary">Click Me!
            
             </button>
             <ReactNotification />
@@ -234,7 +249,7 @@ class Calender extends Component {
           defaultDate={new Date()}
           localizer={localizer}
           eventPropGetter={eventStyleGetter}
-          dayPropGetter ={dayPropGetter}
+          // dayPropGetter ={dayPropGetter}
         />
         {/* <button onClick={this.openModal}>Open Modal</button> */}
         {this.renderModal()}

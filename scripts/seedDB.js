@@ -34,7 +34,7 @@ for (var i = 0; i < moment().daysInMonth(); i++) {
       'start': moment(begin).add(i, 'days').hours('07').toDate(),
       'end': moment(begin).add(i, 'days').hours('19').toDate(),
       'traded': 1,
-      'crew' : "Wyatt"
+      'name' : "Wyatt"
     }
   } else if (j === 4 || j === 5) {
     shiftSeed[i]
@@ -44,7 +44,7 @@ for (var i = 0; i < moment().daysInMonth(); i++) {
       'start': moment(begin).add(i, 'days').hours('07').toDate(),
       'end': moment(begin).add(i, 'days').hours('19').toDate(),
       'traded': 1,
-      'crew' : "Dennis"
+      'name' : "Dennis"
     }
   }
 }
