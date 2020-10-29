@@ -1,4 +1,5 @@
 module.exports = {
-    Shift: require("./shiftModel")
+    Shift: require("./shiftModel"),
+    Personnel: require("./personnelModel")
   };
   

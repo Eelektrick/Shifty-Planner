@@ -9,12 +9,14 @@ export default {
     return axios.get("/api/shifts/");
   },
   // Gets the shift with the given id
-  getShift: function(id) {
-    return axios.get("/api/shifts/" + id);
-  },
+  // getShift: function(id) {
+  //   return axios.get("/api/shifts/" + id);
+  // },
    // Update the shift with the given id
-  updateShift: function(id) {
-    return axios.update("/api/shifts/" + id);
+  updateShift: function(id, data) {
+    return axios.put("/api/shifts/" + id, data).then(res =>{
+      console.log(res);
+    });
   },
   // Deletes the shift with the given id
   deleteShift: function(id) {
