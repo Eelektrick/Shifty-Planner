@@ -9,7 +9,7 @@ router.route("/")
 // Matches with "/api/shifts/:id"
 router
   .route("/:id")
-  .get(shiftController.findById)
+  //.get(shiftController.findById)
   .put(shiftController.update)
   .delete(shiftController.remove);
 
