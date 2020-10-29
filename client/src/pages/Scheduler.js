@@ -6,7 +6,7 @@ import Row from "../components/Row";
 import Col from "../components/Col";
 import Container from "../components/Container";
 
-function Gallery() {
+function Scheduler() {
   const [user, setUser] = useState({});
   const [users, setUsers] = useState([]);
   const [userIndex, setUserIndex] = useState(0);
@@ -71,4 +71,4 @@ function Gallery() {
   );
 }
 
-export default Gallery;
+export default Scheduler;

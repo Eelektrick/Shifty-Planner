@@ -22,19 +22,25 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   update: function(req, res) {
-    console.log(req);
-    const filter = { _id: req.params.id };
+    console.log(id);
+    const filter = { _id: id };
     const update = { traded: 2 };
     // db.Shift
     //   .findOneAndUpdate({ _id: req.params._id},  { $push: { traded: 2 } } , {
     //     new: true,
     //     upsert: true 
     //   })
+    // db.Shift
+    //   .findOneAndUpdate(filter,  update , {
+    //     new: true,
+    //     upsert: true 
+    //   })
     db.Shift
-      .findOneAndUpdate(filter,  update , {
-        new: true,
-        upsert: true 
-      })
+      .findOneAndUpdate(
+      { _id : req.params.id},
+      { $set: { "traded" : 2} },
+      {  upsert:true, new : true }
+      )
     .then(dbModel => res.json(dbModel))
     .catch(err => res.status(422).json(err));
   },

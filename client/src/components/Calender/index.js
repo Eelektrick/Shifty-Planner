@@ -81,6 +81,7 @@ let allViews = Object.keys(Views).map(k => Views[k])
 
 const eventStyleGetter = (events, start, end, isSelected) => {
   // var backgroundColor = '#' + events.hexColor;
+  
   var style = {
     // backgroundColor: backgroundColor,
     borderRadius: '0px',
@@ -91,6 +92,7 @@ const eventStyleGetter = (events, start, end, isSelected) => {
 };
   if(events.shift === 'A'){
     style = { color: 'blue'}
+    
   }else if(events.shift === 'B'){
     style = { color: 'red'}
   }else if(events.shift === 'C'){
@@ -132,6 +134,7 @@ class Calender extends Component {
             'start': data.data[i].start,
             'end': data.data[i].end,
             '_id': data.data[i]._id,
+            'authID': data.data[i].authID,
             'name': data.data[i].name,
             'traded': data.data[i].traded
 
@@ -183,6 +186,7 @@ class Calender extends Component {
     e.preventDefault();
     console.log("Handle Submit Events");
     console.log(this.state.cal_events);
+     
      API.updateShift(this.state.cal_events._id).then(response =>{
        console.log(response);
      })
@@ -198,7 +202,10 @@ class Calender extends Component {
 
 
   renderModal() {
+    // API.getShift(this.state.cal_events.authID).then(response => {
 
+    // })
+    // {this.state.cal_events.authID}
     return (
       <div>
 
@@ -214,7 +221,7 @@ class Calender extends Component {
               <span aria-hidden="true">&times;</span>
             </button>
             <br /><br />
-
+            {this.state.cal_events.authID}
           Shift : {this.state.cal_events.shift} <br />
           Start : {this.state.cal_events.start}<br />
           End   : {this.state.cal_events.end}<br />

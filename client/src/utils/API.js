@@ -5,6 +5,9 @@ export default {
   getShifts: function() {
     return axios.get("/api/shifts");
   },
+  getShiftByTrade: function() {
+    return axios.get("/api/shifts/");
+  },
   // Gets the shift with the given id
   getShift: function(id) {
     return axios.get("/api/shifts/" + id);
