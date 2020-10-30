@@ -5,7 +5,7 @@ const db = require("../models");
 module.exports = {
   findAll: function(req, res) {
     db.Shift
-      .find(req.query)
+      .find({ignoredLists: { $ne: req.params.userId } })
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
@@ -34,15 +34,28 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  update: function(req, res) {
- 
+  saveID: function(req, res) {
+    console.log(req.body);
     db.Shift
-      .findOneAndUpdate(
-      { _id : req.params.id},
-      { $set: { "traded" : 2} },
-      {  upsert:true, new : true }
-      )
-    .then(dbModel => res.json(dbModel))
+      .findOneAndUpdate({ _id: req.params.id}, {$push:{ignoredLists: req.body.userId}} ,{new: true})
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  update: function(req, res) {
+   
+    db.Shift
+      .findOneAndUpdate({ _id: req.params.id}, {traded:2} ,{new: true})
+      .then(json => {
+        console.log("put request made");
+        console.log(json);
+        res.json(json);
+      })
+    // db.Shift
+    //   .findOneAndUpdate(filter,  update , {
+    //     new: true,
+    //     upsert: true 
+    //   })
+   
     .catch(err => res.status(422).json(err));
   },
   remove: function(req, res) {

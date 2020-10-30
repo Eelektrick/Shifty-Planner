@@ -25,7 +25,8 @@ for (var i = 0; i < moment().daysInMonth(); i++) {
       'start': moment(begin).add(i, 'days').hours('07').toDate(),
       'end': moment(begin).add(i, 'days').hours('19').toDate(),
       'traded': 2,
-      'name' : "Sam"
+      'name' : "Sam",
+      'ignoredLists' : []
     }
   } else if (j === 2 || j === 3) {
     shiftSeed[i]
@@ -36,7 +37,8 @@ for (var i = 0; i < moment().daysInMonth(); i++) {
       'start': moment(begin).add(i, 'days').hours('07').toDate(),
       'end': moment(begin).add(i, 'days').hours('19').toDate(),
       'traded': 1,
-      'name' : "Wyatt"
+      'name' : "Wyatt",
+      'ignoredLists' : []
     }
   } else if (j === 4 || j === 5) {
     shiftSeed[i]
@@ -47,7 +49,8 @@ for (var i = 0; i < moment().daysInMonth(); i++) {
       'start': moment(begin).add(i, 'days').hours('07').toDate(),
       'end': moment(begin).add(i, 'days').hours('19').toDate(),
       'traded': 1,
-      'name' : "Dennis"
+      'name' : "Dennis",
+      'ignoredLists' : []
     }
   }
 }

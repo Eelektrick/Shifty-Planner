@@ -7,6 +7,8 @@ import Col from "../components/Col";
 import Modal from "react-modal";
 import Container from "../components/Container";
 
+const userId = "abc";
+
 class HomePage extends Component {
 
     constructor() {
@@ -18,7 +20,6 @@ class HomePage extends Component {
         }
 
     }
-
     handleClose = () => this.state.showModal(false);
     handleShow = () => this.state.showModal(true);
 
@@ -28,7 +29,7 @@ class HomePage extends Component {
            console.log(data);
         })
 
-        API.getShifts().then((data) => {
+        API.getShifts(userId).then((data) => {
         
             const e = [];
             for (var i = 0; i < data.data.length; i++) {
@@ -58,7 +59,9 @@ class HomePage extends Component {
            this.setState({...this.state.events, events: newList}) ;
            // Save this new list to DB or remove that particular Id details from db
            // After refresh all the removed items still exist
+           API.saveID(id, userId).then ( (data) => {
 
+           })
        }
     
      MyModal(props){
