@@ -4,9 +4,7 @@ const moment = require("moment");
 // This file empties the Shifts collection and inserts the shifts below
 
 //Seed Online MongoDB
-mongoose.connect(
-  "mongodb+srv://admin:35w7Hq$9mzJq@cluster0.7zk9f.mongodb.net/shifty-planner?retryWrites=true&w=majority" ,{ useNewUrlParser: true }
-);
+
 
 //Seed Local
 // mongoose.connect(
