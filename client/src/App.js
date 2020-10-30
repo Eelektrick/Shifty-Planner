@@ -6,6 +6,7 @@ import Wrapper from "./components/Wrapper";
 // import Login from "./components/Login";
 import Example from "./pages/Gallery";
 import Scheduler from "./pages/Scheduler";
+import HomePage from "./pages/HomePage";
 import Callback from './Callback';
 import Home from './Home';
 
@@ -16,6 +17,7 @@ function App() {
         <Navbar />
         <Wrapper>
           <Route exact path="/" component={Home} exact />
+          <Route exact path="/home" component={HomePage} exact />
           <Route exact path='/callback' component={Callback} exact />
           <Route exact path="/example" component={Example} />
           <Route exact path="/scheduler" component={Scheduler} />

@@ -6,10 +6,11 @@ router.route("/")
   .get(shiftController.findAll)
   .post(shiftController.create);
 
-// Matches with "/api/shifts/:id"
+
+// Matches with "/api/shifts/:id"    .get(shiftController.findById)
 router
-  .route("/:id")
-  //.get(shiftController.findById)
+  .route("/api/shifts/:id")
+  .get(shiftController.findByAuthId)
   .put(shiftController.update)
   .delete(shiftController.remove);
 

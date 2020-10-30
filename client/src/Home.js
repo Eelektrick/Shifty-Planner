@@ -2,8 +2,18 @@ import React, { Component } from 'react';
 import logo from './shiftyLogo3.png';
 import auth0Client from './Auth';
 import API from './utils/API';
+import moment from 'moment';
 
 class Home extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+         
+          events: []
+        };
+      }
+
     componentDidMount() {
 
         API.getShifts().then( (data) => {
@@ -12,8 +22,7 @@ class Home extends Component {
             // let e=[];
             const e=[];
             for (var i = 0; i < data.data.length; i++) {
-           
-             
+
                 if(data.data[i].traded === 2){
                     e[i]
                     = {
@@ -29,7 +38,8 @@ class Home extends Component {
                 }
                 }
                 console.log(e);
-              
+                this.setState({events : e});
+                console.log(this.state.events);
             })
 
         if (!auth0Client.isAuthenticated()) {
@@ -43,6 +53,7 @@ class Home extends Component {
     render() {
 
         return (
+         <div>
             <div className="App" >
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo" />
@@ -57,6 +68,20 @@ class Home extends Component {
 
                 </header>
             </div>
+
+            {/* <div>
+                 <ul>
+                   Shifts that are ready for trade:
+                  {this.state.events.filter(details => (
+                      <li>
+                      <p>{details.name} on shift {details.shift}, timing between {moment(details.start).format('MMMM Do YYYY, h:mm:ss a')} and {moment(details.end).format('MMMM Do YYYY, h:mm:ss a')} </p>
+
+                      </li>
+                  ))}
+                 </ul>
+
+            </div> */}
+        </div>
         )
     }
 

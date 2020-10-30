@@ -1,23 +1,15 @@
 import React, { Component } from 'react'
 import { Calendar, Views } from 'react-big-calendar'
 import { momentLocalizer } from 'react-big-calendar'
-// import Modal from '../Modal'
 import Modal from "react-modal";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import * as dates from '../../utils/dates'
 import "./style.css"
-// import { Notification } from 'rsuite';
-// import 'rsuite/dist/styles/rsuite-default.css'
 import API from "../../utils/API"
 import ReactNotification from "react-notifications-component";
 import { store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 import "animate.css";
-
-// import { makeStyles } from "@material-ui/core/styles";
-// import styles from "assets/jss/nextjs-material-dashboard-pro/components/buttonStyle.js";
-
 
 const localizer = momentLocalizer(moment);
 // const useStyles = makeStyles(styles);

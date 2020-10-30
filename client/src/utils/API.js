@@ -8,6 +8,9 @@ export default {
   getShiftByTrade: function() {
     return axios.get("/api/shifts/");
   },
+  getShiftByAuthId: function(authid) {
+    return axios.get("/api/shifts/" +authid);
+  },
   // Gets the shift with the given id
   // getShift: function(id) {
   //   return axios.get("/api/shifts/" + id);
