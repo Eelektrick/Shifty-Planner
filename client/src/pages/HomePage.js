@@ -8,6 +8,7 @@ import Modal from "react-modal";
 import Container from "../components/Container";
 
 const userId = "abc";
+const authID = 123;
 
 class HomePage extends Component {
 
@@ -25,7 +26,7 @@ class HomePage extends Component {
 
     componentDidMount() {
 
-        API.getShiftByAuthId('123').then( (data) => {
+        API.getShiftByAuthId(authID).then( (data) => {
            console.log(data);
         })
 
