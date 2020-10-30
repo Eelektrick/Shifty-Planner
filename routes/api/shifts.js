@@ -1,15 +1,21 @@
 const router = require("express").Router();
 const shiftController = require("../../controllers/shiftController");
 
-// Matches with "/api/books"
+// Matches with "/api/shifts"
 router.route("/")
   .get(shiftController.findAll)
   .post(shiftController.create);
+  
 
-// Matches with "/api/books/:id"
+router.route("/:id/ignore")
+  .put(shiftController.saveID)
+
+router.route("/byAuth")
+  .get(shiftController.findByAuthId)
+
+// Matches with "/api/shifts/:id"    .get(shiftController.findById)
 router
   .route("/:id")
-  .get(shiftController.findById)
   .put(shiftController.update)
   .delete(shiftController.remove);
 

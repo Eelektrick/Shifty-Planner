@@ -3,7 +3,9 @@ import "./style.css";
 import { FaHome } from "react-icons/fa";
 import { GrSchedules } from "react-icons/gr";
 import { AiOutlineSafetyCertificate } from "react-icons/ai";
-
+import image from "../Navbar/shiftyLogo3.png";
+import { Link } from "react-router-dom";
+import LogoutButton from "../LogoutButton";
 // Depending on the current path, this component sets the "active" class on the appropriate navigation link item
 export default class Navbar extends Component {
   constructor(props) {
@@ -21,6 +23,8 @@ export default class Navbar extends Component {
     const show = this.state.menu ? "show" : "";
     return (
       <nav className="navbar navbar-expand-lg navbar-light">
+        <a className="navbar-brand" href="#" />
+        <img src={image} width="70" height="60" alt="logo" />
         <a className="navbar-brand" id="shifty" to="/">
           Shifty Planner
         </a>
@@ -34,7 +38,8 @@ export default class Navbar extends Component {
         <div className={"collapse navbar-collapse " + show}>
           <ul className="navbar-nav ml-auto">
             <li className="nav-item ">
-              <a
+          
+              <Link
                 style={{ color: "rgb(190, 147, 3)" }}
                 to="/"
                 className={
@@ -45,37 +50,39 @@ export default class Navbar extends Component {
                 }
               >
                 <FaHome style={{ color: "rgb(190, 147, 3)" }} /> Home
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a
+              <Link
                 style={{ color: "rgb(190, 147, 3)" }}
-                to="/portfolio"
+                to="/scheduler"
                 className={
-                  window.location.pathname === "/schedule"
+                  window.location.pathname === "/scheduler"
                     ? "nav-link active"
                     : "nav-link"
                 }
               >
                 <GrSchedules style={{ color: "rgb(190, 147, 3)" }} /> Schedule
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a
+              <Link
                 style={{ color: "rgb(190, 147, 3)" }}
+                to="/license"
                 className={
                   window.location.pathname === "/license"
                     ? "nav-link active"
                     : "nav-link"
                 }
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 <AiOutlineSafetyCertificate
                   style={{ color: "rgb(190, 147, 3)" }}
                 />{" "}
                 License
-              </a>
+              </Link>
+              <li className="nav-item">
+                <LogoutButton />
+              </li>
             </li>
             <li className="nav-item">
               <a

@@ -1,86 +1,23 @@
-import React from "react";
+import React from "react"
+import {Button} from "react-bootstrap"
 import API from "../utils/API"
-import {Button, Form} from "react-bootstrap"
-import "./example.css"
-import Refresh from "../components/CalendarRefresher"
 
+const authID = "123"
 
-function Gallery() {
-let id;
-
-  API.getShifts()
-  .then(json =>{
-    console.log(json);
-    console.log(json.data[0]._id);
-    id = json.data[0]._id
+function getByAuth() {
+  API.getShiftByAuthId(authID).then( (data) => {
+    console.log(data);
   })
+};
 
-  let shift =     {
-    crew: [
-        "Sam",
-        "Yakini",
-        "Atima"
-    ],
-    generated_ID: 123,
-    date: "2020-10-26T15:08:40.745Z",
-    hours: "0700-1900",
-    traded: false,
-    shift: "A"
+
+function example(params) {
+  return(
+    <Button onClick={getByAuth}>Get Shifts By Auth (check the consol)</Button>
+  )
 }
 
-function testsave() {
-  API.saveShift(shift).catch(err => console.log(err.response
-  ))
-}
 
-function testdelete() {
-  API.deleteShift(id).catch(err => console.log(err.response
-  ))
-}
-  
+export default example;
 
 
-
-  return (
-      <div>
-      <h1 className="text-center">Welcome to LinkedUp</h1>
-
-      
-
-    <Button onClick={testsave}>Test Save</Button>
-    <Button onClick={testdelete }>Test Delete</Button>
-
-    {/* <Form>
-  <Form.Group controlId="exampleForm.ControlInput1">
-  </Form.Group>
-  <Form.Group controlId="exampleForm.ControlSelect1">
-    <Form.Label>Example select</Form.Label>
-    <Form.Control as="select">
-    <option>A</option>
-      <option>B</option>
-      <option>C</option>
-    </Form.Control>
-  </Form.Group>
-
-  <Form.Group controlId="exampleForm.ControlTextarea1">
-    <Form.Label>Example textarea</Form.Label>
-    <Form.Control as="textarea" rows={3} />
-  </Form.Group>
-
-  <Form.Group controlId="exampleForm.ControlTextarea1">
-    <Form.Label>Example textarea</Form.Label>
-    <Form.Control as="textarea" rows={3} />
-  </Form.Group>
-
-  <Button variant="primary" type="submit">
-    Submit
-  </Button>
-</Form> */}
-
-<Refresh/>
-
-      </div>
-  );
-}
-
-export default Gallery;

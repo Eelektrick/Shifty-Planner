@@ -27,7 +27,20 @@
     background-color: #661974;
     border-color: #8c8c8c;
 }
-
-.rbc-event {
- background-color: black;
+ .rbc-event {
+ background-color: white;
+} 
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  /* background-image: url(./wallpaper.jpg); */
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* background-attachment: fixed; */
+  background-position: center center;
+  font-family: "Poppins", sans-serif;
+  /* position: fixed;
+  bottom: 0;
+  right: 0; */
 }

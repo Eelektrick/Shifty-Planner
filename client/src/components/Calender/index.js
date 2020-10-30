@@ -1,60 +1,64 @@
 import React, { Component } from 'react'
 import { Calendar, Views } from 'react-big-calendar'
 import { momentLocalizer } from 'react-big-calendar'
-// import Modal from '../Modal'
 import Modal from "react-modal";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import * as dates from '../../utils/dates'
 import "./style.css"
-import { Notification } from 'rsuite';
-import 'rsuite/dist/styles/rsuite-default.css'
-
-// import { makeStyles } from "@material-ui/core/styles";
-// import styles from "assets/jss/nextjs-material-dashboard-pro/components/buttonStyle.js";
-
+import API from "../../utils/API"
+import ReactNotification from "react-notifications-component";
+import { store } from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
+import "animate.css";
 
 const localizer = momentLocalizer(moment);
 // const useStyles = makeStyles(styles);
 
 let allViews = Object.keys(Views).map(k => Views[k])
 
-var begin = moment().startOf('month');
+// renderCalender = (data) => {
+//     // var date = moment().format();
+//     // console.log("Current Date" +date);
+//     // var begin = moment().startOf('month');
+//     // console.log("Begin" +begin);
+//     // var end = moment().endOf('month');
 
-const events = [];
+//     const events = [];
 
-for (var i = 0; i < moment().daysInMonth(); i++) {
+//     for (var i = 0; i < data.length; i++) {
 
-  var j = i % 6;
+//       // var j = i % 6;
 
-  if (j === 0 || j === 1) {
-    events[i]
-      = {
-      'shift': 'A',
-      'title': 'A',
-      'start': moment(begin).add(i, 'days').toDate(),
-      'end': moment(begin).add(i, 'days').toDate()
-    };
+//       // if (j === 0 || j === 1) {
+//         events[i]
+//           = {
+//           'shift': data.shift,
+//           'title': data.shift,
+//           'start': data.start,
+//           'end': data.end
+//         };
+//       }
+//     }
 
-  } else if (j === 2 || j === 3) {
-    events[i]
-      = {
-      'shift': 'B',
-      'title': 'B',
-      'start': moment(begin).add(i, 'days').toDate(),
-      'end': moment(begin).add(i, 'days').toDate()
-    };
-  } else if (j === 4 || j === 5) {
-    events[i]
-      = {
-      'shift': 'C',
-      'title': 'C',
-      'start': moment(begin).add(i, 'days').toDate(),
-      'end': moment(begin).add(i, 'days').toDate()
-    };
-  }
+    //   } else if (j === 2 || j === 3) {
+    //     events[i]
+    //       = {
+    //       'shift': 'B',
+    //       'title': 'B',
+    //       'start': moment(begin).add(i, 'days').hours('13').toDate(),
+    //       'end': moment(begin).add(i, 'days').hours('19').toDate()
+    //     };
+    //   } else if (j === 4 || j === 5) {
+    //     events[i]
+    //       = {
+    //       'shift': 'C',
+    //       'title': 'C',
+    //       'start': moment(begin).add(i, 'days').hours('20').toDate(),
+    //       'end': moment(begin).add(i, 'days').hours('02').toDate()
+    //     };
+    //   }
 
-}
+    // }
 
 
 // const eventColors = (event) => {
@@ -69,20 +73,22 @@ for (var i = 0; i < moment().daysInMonth(); i++) {
 
 const eventStyleGetter = (events, start, end, isSelected) => {
   // var backgroundColor = '#' + events.hexColor;
+  
   var style = {
     // backgroundColor: backgroundColor,
     borderRadius: '0px',
-    opacity: 0.8,
+    // opacity: 0.8,
     // color: 'black',
     border: '0px',
     display: 'block'
 };
   if(events.shift === 'A'){
-    style = { color: 'yellow'}
+    style = { color: 'blue'}
+    
   }else if(events.shift === 'B'){
     style = { color: 'red'}
   }else if(events.shift === 'C'){
-    style = { color: 'white'}
+    style = { color: 'green'}
   }
  
   return {
@@ -90,39 +96,93 @@ const eventStyleGetter = (events, start, end, isSelected) => {
   };
 };
 
+const dayPropGetter = (Date) => {
+
+}
+
 class Calender extends Component {
   constructor() {
     super();
     this.state = {
       modalIsOpen: false,
-      cal_events: []
+      cal_events: [],
+      events: []
     };
   }
 
   componentDidMount() {
-    console.log("mounted calander");
+    // console.log("mounted calander");
     Modal.setAppElement("body");
+    API.getShifts().then((data) => {
+      // console.log("My Data from db");
+      // console.log(data.data);
+      const e=[];
+      for (var i = 0; i < data.data.length; i++) {
+     
+          e[i]
+            = {
+            'shift': data.data[i].shift,
+            'title': data.data[i].shift + "   " +data.data[i].name,
+            'start': data.data[i].start,
+            'end': data.data[i].end,
+            '_id': data.data[i]._id,
+            'authID': data.data[i].authID,
+            'name': data.data[i].name,
+            'traded': data.data[i].traded
+
+          }
+        }
+        this.setState({events: e});
+      })
   }
 
 
-  openNotfication() {
-    Notification.open({
-      title: 'Notification',
-      description:
-        'Your shift trade successful done!! It will be notified to others too..'
+  // openNotfication() {
+  //   Notification.open({
+  //     title: 'Notification',
+  //     description:
+  //       'Your shift trade successful done!! It will be notified to others too..'
 
+  //   });
+  // }
+
+ handleOnclickTread = (event) => {
+   event.preventDefault();
+    store.addNotification({
+      title: "Trade schedule",
+      message: "Your schedule is now ready to be trade!",
+      type: "info",
+      container: "top-right",
+      insert: "Top",
+      animationIn: ["animate__animated", "animate__flipInY"],
+      animationOut: ["animate__animated", "animate__flipOutY"],
+      dismiss: {
+        duration: 5000,
+        showIcon: true,
+        onScreen: true,
+      },
     });
-  }
+  };
 
   handleSelect = event => {
     //set model to true
-    console.log("here");
+    // console.log("here");
     this.setState({
       modalIsOpen: true,
       cal_events: event
     });
 
   };
+
+  handleSubmit = (e) =>{
+    e.preventDefault();
+    console.log("Handle Submit Events");
+    console.log(this.state.cal_events);
+     
+     API.updateShift(this.state.cal_events._id).then(response =>{
+       console.log(response);
+     })
+  }
 
   closeModal = () => this.setState({
     modalIsOpen: false
@@ -134,7 +194,10 @@ class Calender extends Component {
 
 
   renderModal() {
+    // API.getShift(this.state.cal_events.authID).then(response => {
 
+    // })
+    // {this.state.cal_events.authID}
     return (
       <div>
 
@@ -150,17 +213,20 @@ class Calender extends Component {
               <span aria-hidden="true">&times;</span>
             </button>
             <br /><br />
-
+            {this.state.cal_events.authID}
           Shift : {this.state.cal_events.shift} <br />
-          Start : {moment(this.state.cal_events.start).format("MMMM Do YYYY, h:mm:ss a")}<br />
-          End   : {moment(this.state.cal_events.end).format("MMMM Do YYYY, h:mm:ss a")}<br />
+          Start : {this.state.cal_events.start}<br />
+          End   : {this.state.cal_events.end}<br />
 
           </h2>
           <div>Please Click on the below button to trade your shift</div>
           <form onSubmit={this.onFormSubmit}>
 
 
-            <button type="button btn-primary">Click Me!</button>
+            <button onClick={this.handleSubmit} type="button btn-primary">Click Me!
+           
+            </button>
+            <ReactNotification />
           </form>
         </Modal>
       </div>
@@ -169,12 +235,12 @@ class Calender extends Component {
 
   render() {
 
-    console.log(events);
+    // console.log(events);
     return (
       <div>
         <Calendar
           selectable
-          events={events}
+          events={this.state.events}
           views={allViews}
           onSelectEvent={this.handleSelect}
           defaultView="month"
@@ -182,9 +248,11 @@ class Calender extends Component {
           defaultDate={new Date()}
           localizer={localizer}
           eventPropGetter={eventStyleGetter}
+          // dayPropGetter ={dayPropGetter}
         />
         {/* <button onClick={this.openModal}>Open Modal</button> */}
         {this.renderModal()}
+       
 
       </div>
     )

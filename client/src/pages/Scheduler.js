@@ -6,14 +6,14 @@ import Row from "../components/Row";
 import Col from "../components/Col";
 import Container from "../components/Container";
 
-function Gallery() {
+function Scheduler() {
   const [user, setUser] = useState({});
   const [users, setUsers] = useState([]);
   const [userIndex, setUserIndex] = useState(0);
 
   // When the component mounts, a call will be made to get random users.
   useEffect(() => {
-    loadUsers();
+    // loadUsers();
   }, []);
 
   function nextUser(userIndex) {
@@ -46,15 +46,15 @@ function Gallery() {
     }
   }
 
-  function loadUsers() {
-    API.fetchUsers()
-      .then(users => {
-        setUsers(users);
-        setUser(users[0]);
-      })
+  // function loadUsers() {
+  //   API.fetchUsers()
+  //     .then(users => {
+  //       setUsers(users);
+  //       setUser(users[0]);
+  //     })
 
-      .catch(err => console.log(err));
-  }
+  //     .catch(err => console.log(err));
+  // }
 
   return (
     <div>
@@ -71,4 +71,4 @@ function Gallery() {
   );
 }
 
-export default Gallery;
+export default Scheduler;
