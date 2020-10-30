@@ -3,61 +3,58 @@ const db = require("../models");
 const moment = require("moment");
 // This file empties the Shifts collection and inserts the shifts below
 
-mongoose.connect(
-  process.env.MONGODB_URI ||
-  "mongodb://localhost/shifty-planner"
-);
+//Seed Online MongoDB
 
-var begin = moment().startOf('month');
 
-const shiftSeed =[];
-for (var i = 0; i < moment().daysInMonth(); i++) {
+//Seed Local
+// mongoose.connect(
+//   process.env.MONGODB_URI ||
+//   "mongodb://localhost/shifty-planner" ,{ useNewUrlParser: true }
+// );
 
-  var j = i % 6;
+const personnelSeed = [
+  {
+    authID: "123",
+    emailID: "abc@gmail.com",
+    name: "Sam",
+    certifications: ["AEMT", "EMT"],
+    AssignedShift: "A",
+    PermissionsLevel: "Default",
+  },
+  {
+    authID: "1344",
+    emailID: "test1@gmail.com",
+    name: "Yakini",
+    certifications: ["Paramedic", "EMT"],
+    AssignedShift: "B",
+    PermissionsLevel: "Manager",
+  },
+  {
+    authID: "137744",
+    emailID: "test2@gmail.com",
+    name: "Atima",
+    certifications: ["Paramedic", "EMT"],
+    AssignedShift: "C",
+    PermissionsLevel: "Default",
+  },
+  {
+    authID: "133244344",
+    emailID: "test3@gmail.com",
+    name: "Corey",
+    certifications: ["AEMT", "EMT"],
+    AssignedShift: "Custom",
+    PermissionsLevel: "Manager",
+  },
+];
 
-  if (j === 0 || j === 1) {
-    shiftSeed[i]
-      = {
-      // 'generated_ID': 
-      'authID': '123',
-      'shift': 'A',
-      'start': moment(begin).add(i, 'days').hours('07').toDate(),
-      'end': moment(begin).add(i, 'days').hours('19').toDate(),
-      'traded': 1,
-      'name' : "Sam"
-    }
-  } else if (j === 2 || j === 3) {
-    shiftSeed[i]
-      = {
-      'authID': '456',
-      'shift': 'B',
-      'start': moment(begin).add(i, 'days').hours('07').toDate(),
-      'end': moment(begin).add(i, 'days').hours('19').toDate(),
-      'traded': 1,
-      'crew' : "Wyatt"
-    }
-  } else if (j === 4 || j === 5) {
-    shiftSeed[i]
-      = {
-      'authID': '789',
-      'shift': 'C',
-      'start': moment(begin).add(i, 'days').hours('07').toDate(),
-      'end': moment(begin).add(i, 'days').hours('19').toDate(),
-      'traded': 1,
-      'crew' : "Dennis"
-    }
-  }
-}
-
-console.log(shiftSeed);
-db.Shift
-  .remove({})
-  .then(() => db.Shift.collection.insertMany(shiftSeed))
-  .then(data => {
+console.log(personnelSeed);
+db.Personnel.remove({})
+  .then(() => db.Personnel.collection.insertMany(personnelSeed))
+  .then((data) => {
     console.log(data.result.n + " records inserted!");
     process.exit(0);
   })
-  .catch(err => {
+  .catch((err) => {
     console.error(err);
     process.exit(1);
   });

@@ -3,10 +3,14 @@ const db = require("../models");
 const moment = require("moment");
 // This file empties the Shifts collection and inserts the shifts below
 
-mongoose.connect(
-  process.env.MONGODB_URI ||
-  "mongodb://localhost/shifty-planner" ,{ useNewUrlParser: true }
-);
+//Seed Online MongoDB
+
+
+//Seed Local
+// mongoose.connect(
+//   process.env.MONGODB_URI ||
+//   "mongodb://localhost/shifty-planner" ,{ useNewUrlParser: true }
+// );
 
 var begin = moment().startOf('month');
 
