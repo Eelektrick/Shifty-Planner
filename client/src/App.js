@@ -8,7 +8,7 @@ import Example from "./pages/Gallery";
 import Scheduler from "./pages/Scheduler";
 import HomePage from "./pages/HomePage";
 // import Home from './Home';
-import { ProtectedRoute } from './ProtectedRoute';
+import {ProtectedRoute} from './ProtectedRoute';
 
 function App() {
   return (
