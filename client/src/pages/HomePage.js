@@ -20,14 +20,15 @@ function HomePage() {
         const [isOpen, setIsOpen] = useState(false);
         const [events, setEvents] = useState([]);
         const userId = "abc";
-        const authID = 123;
+        const authID = 456;
     // }
-    const handleClose = () =>  setIsOpen(false);
-    const handleShow = () =>  setIsOpen(true);
+    // const handleClose = () =>  setIsOpen(false);
+    // const handleShow = () =>  setIsOpen(true);
 
     useEffect(() => { 
 
         API.getShiftByAuthId(authID).then( (data) => {
+           console.log("Get data by Auth Id");
            console.log(data);
         })
 

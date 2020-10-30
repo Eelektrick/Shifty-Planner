@@ -4,7 +4,7 @@ const db = require("../models");
 // Defining methods for the shiftsController
 module.exports = {
   findAll: function(req, res) {
-    console.log(req.query.userId);
+    // console.log(req.query.userId);
     db.Shift
       .find({ignoredLists: { $ne: req.query.userId } })
       .sort({ date: -1 })
@@ -18,11 +18,12 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findByAuthId: function(req, res) {
+    console.log(req.query.authID);
     db.Shift
-      .find({ authID : { $eq: req.params.authID } } )
+      .find({authID: { $eq: req.query.authID } })
+      .sort({ date : -1 })
       .then(dbModel => 
-        res.json(dbModel),
-        console.log(dbModel)
+        res.json(dbModel)
         )
       .catch(err => res.status(422).json(err));
   },

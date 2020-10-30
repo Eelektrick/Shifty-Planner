@@ -9,7 +9,7 @@ export default {
     return axios.get("/api/shifts/");
   },
   getShiftByAuthId: function(authID) {
-    return axios.get("/api/shifts/" , {params: { authID }});
+    return axios.get("/api/shifts" , {params: { authID }});
   },
   // Gets the shift with the given id
   getShift: function(id) {
