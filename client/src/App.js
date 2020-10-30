@@ -9,6 +9,7 @@ import Scheduler from "./pages/Scheduler";
 import HomePage from "./pages/HomePage";
 import Callback from './Callback';
 import Home from './Home';
+import { ProtectedRoute } from './ProtectedRoute';
 
 function App() {
   return (
@@ -16,11 +17,10 @@ function App() {
       <div>
         <Navbar />
         <Wrapper>
-          <Route exact path="/" component={Home} exact />
-          <Route exact path="/home" component={HomePage} exact />
-          <Route exact path='/callback' component={Callback} exact />
-          <Route exact path="/example" component={Example} />
-          <Route exact path="/scheduler" component={Scheduler} />
+          <ProtectedRoute exact path="/" component={Home} />
+          <ProtectedRoute exact path="/example" component={Example} />
+          <ProtectedRoute exact path="/scheduler" component={Scheduler} />
+          <ProtectedRoute exact path="/home" component={HomePage} />
           {/* <Gallery /> */}
          {/* <Scheduler />  */}
         </Wrapper>
