@@ -7,10 +7,10 @@ const moment = require("moment");
 
 
 //Seed Local
-// mongoose.connect(
-//   process.env.MONGODB_URI ||
-//   "mongodb://localhost/shifty-planner" ,{ useNewUrlParser: true }
-// );
+mongoose.connect(
+  process.env.MONGODB_URI ||
+  "mongodb://localhost/shifty-planner" ,{ useNewUrlParser: true }
+);
 
 const personnelSeed = [
   {

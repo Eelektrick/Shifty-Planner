@@ -6,11 +6,11 @@ const moment = require("moment");
 //Seed Online MongoDB
 
 
-//Seed Local
-// mongoose.connect(
-//   process.env.MONGODB_URI ||
-//   "mongodb://localhost/shifty-planner" ,{ useNewUrlParser: true }
-// );
+// Seed Local
+mongoose.connect(
+  process.env.MONGODB_URI ||
+  "mongodb://localhost/shifty-planner" ,{ useNewUrlParser: true }
+);
 
 var begin = moment().startOf('month');
 
