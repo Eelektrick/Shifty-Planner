@@ -1,96 +1,127 @@
-import React from "react";
-import API from "../utils/API";
-import { Button, Form } from "react-bootstrap";
-import "./example.css";
+import React, { Component } from 'react';
+import { Button, ModalBody } from 'react-bootstrap'
+import API from '../utils/API';
+import moment from 'moment';
+import Row from "../components/Row";
+import Col from "../components/Col";
+import Modal from "react-modal";
+import Container from "../components/Container";
 
-function Gallery() {
-  let id;
+const userId = "abc";
 
-  API.getShifts().then((json) => {
-    console.log(json);
-    console.log(json.data[0]._id);
-    id = '5f9a235460126d13f1846e62';
-  });
+class HomePage extends Component {
 
-  let shift = {
-    crew: ["Sam", "Yakini", "Atima"],
-    generated_ID: 123,
-    date: "2020-10-26T15:08:40.745Z",
-    hours: "0700-1900",
-    traded: false,
-    shift: "A",
-  };
+    constructor() {
+        super();
+        this.state = {
+            showModal: false,
+            events: [],
+            
+        }
 
-  function testsave() {
-    API.saveShift(shift).catch((err) => console.log(err.response));
-  }
+    }
+    handleClose = () => this.state.showModal(false);
+    handleShow = () => this.state.showModal(true);
 
-  function testdelete() {
-    API.deleteShift(id).catch((err) => console.log(err.response));
-  }
+    componentDidMount() {
 
-  let updateShift ={
+        // API.getShiftByAuthId('123').then( (data) => {
+        //    console.log(data);
+        // })
+
+        API.getShifts(userId).then((data) => {
+            console.log(data);
+            const e = [];
+            for (var i = 0; i < data.data.length; i++) {
+
+                if (data.data[i].traded === 2) {
+                    e[i]
+                        = {
+                        'shift': data.data[i].shift,
+                        'title': data.data[i].shift + "   " + data.data[i].name,
+                        'start': data.data[i].start,
+                        'end': data.data[i].end,
+                        '_id': data.data[i]._id,
+                        'authID': data.data[i].authID,
+                        'name': data.data[i].name,
+                        'traded': data.data[i].traded
+                    }
+                }
+            }
+           
+            this.setState({ events: e });
+        })
+
+    }
+
+    handleDelete = (id) => {
+       const newList = this.state.events.filter(e => (e._id!==id) )
+           this.setState({...this.state.events, events: newList}) ;
+           // Save this new list to DB or remove that particular Id details from db
+           // After refresh all the removed items still exist
+           API.saveID(id, userId).then ( (data) => {
+
+           })
+       }
     
-    //unique id for user
-     authID: 456,
-    //Email Id for user
-     emailID: "abc@gmail.com",
-    //A,B,C Custom
-    shift: "A",
-    //Start Date and Time
-    start: 12345,
-    //End Date and Time
-    end: 12345,
-    //Has this shift been traded
-    traded: 1,
-    //Who is on this shift
-    name:"Wyatt",
-};
+     MyModal(props){
+       return(
+        <Modal 
+            {...props}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered>
+                <Modal.Header closeButton>
+                <Modal.Title>Modal heading</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                <Modal.Footer>
+                <Button variant="secondary" onClick={props.onHide}>
+                    Close
+                </Button>
+                <Button variant="primary" onClick={props.onHide}>
+                    Save Changes
+                </Button>
+                </Modal.Footer>
+        </Modal>
+       )
+       }
 
-  function testUpdateOne() {
+render() {
 
+    return (
+        <div>
+            <Container>
+            <Row>
+                <Col size="md-12">
+             <ol>
+                Shifts that are ready for trade:
+                {this.state.events.map(details => (
+                <li key={details._id}>
+                    <p>{details.name} on shift {details.shift}, timing between {moment(details.start).format('MMMM Do YYYY, h:mm:ss a')} and {moment(details.end).format('MMMM Do YYYY, h:mm:ss a')} </p>
+                    <button type="button" class="btn btn-dark mr-3">Accept</button>
+                     {/* onClick=
+                     {() =>  
+                             expandable && this.setState({showModal : true}),
+                            <Modal
+                            show={this.state.showModal}
+                            onHide={() => this.handleClose}
+                        />
+                 }  class="btn btn-dark mr-3">Accept</button>  */}
 
+                    <button type="button" onClick={() => this.handleDelete(details._id)}  class="btn btn-dark">Ignore</button>
+               
+                </li>
+            ))}
+            </ol> 
+                </Col>
+            </Row>
+            </Container>
+        </div>
 
-    API.updateShift(id,updateShift).catch((err) => console.log(err.response));
-    
-  }
+    )
+    };
 
-  return (
-    <div>
-      <h1 className="text-center">Welcome to LinkedUp</h1>
-
-      <Button onClick={testsave}>Test Save</Button>
-      <Button onClick={testdelete}>Test Delete</Button>
-      <Button onClick={testUpdateOne}>Test Update</Button>
-
-      {/* <Form>
-  <Form.Group controlId="exampleForm.ControlInput1">
-  </Form.Group>
-  <Form.Group controlId="exampleForm.ControlSelect1">
-    <Form.Label>Example select</Form.Label>
-    <Form.Control as="select">
-    <option>A</option>
-      <option>B</option>
-      <option>C</option>
-    </Form.Control>
-  </Form.Group>
-
-  <Form.Group controlId="exampleForm.ControlTextarea1">
-    <Form.Label>Example textarea</Form.Label>
-    <Form.Control as="textarea" rows={3} />
-  </Form.Group>
-
-  <Form.Group controlId="exampleForm.ControlTextarea1">
-    <Form.Label>Example textarea</Form.Label>
-    <Form.Control as="textarea" rows={3} />
-  </Form.Group>
-
-  <Button variant="primary" type="submit">
-    Submit
-  </Button>
-</Form> */}
-    </div>
-  );
 }
 
-export default Gallery;
+export default HomePage;
