@@ -20,31 +20,37 @@ for (var i = 0; i < moment().daysInMonth(); i++) {
       = {
       // 'generated_ID': 
       'authID': '123',
+      'emailID': 'abc@gmail.com',
       'shift': 'A',
       'start': moment(begin).add(i, 'days').hours('07').toDate(),
       'end': moment(begin).add(i, 'days').hours('19').toDate(),
-      'traded': 1,
-      'name' : "Sam"
+      'traded': 2,
+      'name' : "Sam",
+      'ignoredLists' : []
     }
   } else if (j === 2 || j === 3) {
     shiftSeed[i]
       = {
       'authID': '456',
+      'emailID': 'abc@gmail.com',
       'shift': 'B',
       'start': moment(begin).add(i, 'days').hours('07').toDate(),
       'end': moment(begin).add(i, 'days').hours('19').toDate(),
       'traded': 1,
-      'name' : "Wyatt"
+      'name' : "Wyatt",
+      'ignoredLists' : []
     }
   } else if (j === 4 || j === 5) {
     shiftSeed[i]
       = {
       'authID': '789',
+      'emailID': 'abc@gmail.com',
       'shift': 'C',
       'start': moment(begin).add(i, 'days').hours('07').toDate(),
       'end': moment(begin).add(i, 'days').hours('19').toDate(),
       'traded': 1,
-      'name' : "Dennis"
+      'name' : "Dennis",
+      'ignoredLists' : []
     }
   }
 }

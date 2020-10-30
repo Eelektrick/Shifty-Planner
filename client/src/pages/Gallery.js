@@ -9,7 +9,7 @@ function Gallery() {
   API.getShifts().then((json) => {
     console.log(json);
     console.log(json.data[0]._id);
-    id = json.data[0]._id;
+    id = '5f9a235460126d13f1846e62';
   });
 
   let shift = {
@@ -32,9 +32,9 @@ function Gallery() {
   let updateShift ={
     
     //unique id for user
-     authID: 123,
+     authID: 456,
     //Email Id for user
-     emailID: "samgreilick@gmail.com",
+     emailID: "abc@gmail.com",
     //A,B,C Custom
     shift: "A",
     //Start Date and Time
@@ -44,7 +44,7 @@ function Gallery() {
     //Has this shift been traded
     traded: 1,
     //Who is on this shift
-    name:"sam",
+    name:"Wyatt",
 };
 
   function testUpdateOne() {
