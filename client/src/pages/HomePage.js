@@ -63,6 +63,10 @@ function HomePage() {
     API.saveID(id, userId).then((data) => {});
   };
 
+   const saveDetails = () => {
+
+   }
+
   const MyModal = (props) => {
     return (
         <Modal 
@@ -101,7 +105,7 @@ function HomePage() {
                 <Button variant="secondary" onClick={props.onHide}>
                     Close
                 </Button>
-                <Button variant="primary" onClick={props.onHide}>
+                <Button variant="primary" onClick={saveDetails}>
                     Save Changes
                 </Button>
                 </Modal.Footer> 
@@ -167,7 +171,7 @@ function HomePage() {
                       </button>
                       <button
                         type="button"
-                        onClick={() => this.handleDelete(details._id)}
+                        onClick={() => handleDelete(details._id)}
                         class="btn btn-dark"
                         id="btn2"
                       >
