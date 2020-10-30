@@ -2,6 +2,9 @@ import React from 'react';
 import logo from './shiftyLogo3.png';
 import { useAuth0 } from "@auth0/auth0-react";
 import JSONPretty from 'react-json-pretty';
+import auth0Client from './Auth';
+import API from './utils/API';
+import moment from 'moment';
 
 const Home = () =>{
     const { user } = useAuth0();

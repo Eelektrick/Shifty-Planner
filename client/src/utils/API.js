@@ -2,8 +2,14 @@ import axios from "axios";
 
 export default {
   // Gets all shifts
-  getShifts: function() {
-    return axios.get("/api/shifts");
+  getShifts: function(userId) {
+    return axios.get("/api/shifts", {params: { userId }});
+  },
+  getShiftByTrade: function() {
+    return axios.get("/api/shifts/");
+  },
+  getShiftByAuthId: function(authid) {
+    return axios.get("/api/shifts/" +authid);
   },
   // Gets the shift with the given id
   getShift: function(id) {
@@ -11,15 +17,12 @@ export default {
   },
    // Update the shift with the given id
   updateShift: function(id, data) {
-    let config = {
+     let config = {
       headers: {
         header1: "Test-Header",
       }
-    }
-    
-    // let data = {
-      
-    // }
+     }
+ 
     return axios.put("/api/shifts/" + id, data, config).then(res =>{
       console.log(res);
     });
@@ -31,5 +34,8 @@ export default {
   // Saves a shift to the database
   saveShift: function(shiftData) {
     return axios.post("/api/shifts", shiftData);
+  },
+  saveID: function(id, userId){
+    return axios.put("/api/shifts/" +id+ '/ignore', {userId});
   }
 };
