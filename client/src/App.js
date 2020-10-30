@@ -1,15 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-// import Footer from "./components/Footer";
 import Wrapper from "./components/Wrapper";
-// import Login from "./components/Login";
 import Example from "./pages/Gallery";
 import Scheduler from "./pages/Scheduler";
 import HomePage from "./pages/HomePage";
-import Callback from './Callback';
+import License from "./pages/License";
 import Home from './Home';
-import { ProtectedRoute } from './ProtectedRoute';
+import {ProtectedRoute} from './ProtectedRoute';
 
 function App() {
   return (
@@ -17,12 +15,11 @@ function App() {
       <div>
         <Navbar />
         <Wrapper>
-          <ProtectedRoute exact path="/" component={Home} />
+          <ProtectedRoute exact path="/" component={HomePage} />
           <ProtectedRoute exact path="/example" component={Example} />
           <ProtectedRoute exact path="/scheduler" component={Scheduler} />
           <ProtectedRoute exact path="/home" component={HomePage} />
-          {/* <Gallery /> */}
-         {/* <Scheduler />  */}
+          <ProtectedRoute exact path="/license" component={License} />
         </Wrapper>
       </div>
     </Router>

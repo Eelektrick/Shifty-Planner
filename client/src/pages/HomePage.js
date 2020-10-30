@@ -1,31 +1,34 @@
-import React, { Component } from 'react';
-import { Button, ModalBody } from 'react-bootstrap'
+import React, { useState, useEffect } from 'react';
+import { Button, Modal } from 'react-bootstrap'
 import API from '../utils/API';
 import moment from 'moment';
 import Row from "../components/Row";
 import Col from "../components/Col";
-import Modal from "react-modal";
 import Container from "../components/Container";
 
-const userId = "abc";
 
-class HomePage extends Component {
 
-    constructor() {
-        super();
-        this.state = {
-            showModal: false,
-            events: [],
+function HomePage() {
+
+    // constructor() {
+    //     super();
+        // this.state = {
+        //     showModal: false,
+        //     events: [],
             
-        }
+        // }
+        const [isOpen, setIsOpen] = useState(false);
+        const [events, setEvents] = useState([]);
+        const userId = "abc";
+        const authID = 456;
+    // }
+    // const handleClose = () =>  setIsOpen(false);
+    // const handleShow = () =>  setIsOpen(true);
 
-    }
-    handleClose = () => this.state.showModal(false);
-    handleShow = () => this.state.showModal(true);
+    useEffect(() => { 
 
-    componentDidMount() {
-
-        API.getShiftByAuthId('123').then( (data) => {
+        API.getShiftByAuthId(authID).then( (data) => {
+           console.log("Get data by Auth Id");
            console.log(data);
         })
 
@@ -49,14 +52,15 @@ class HomePage extends Component {
                 }
             }
            
-            this.setState({ events: e });
+            setEvents(e);
         })
 
-    }
+    }, []);
 
-    handleDelete = (id) => {
-       const newList = this.state.events.filter(e => (e._id!==id) )
-           this.setState({...this.state.events, events: newList}) ;
+    const handleDelete = (id) => {
+       const newList = events.filter(e => (e._id!==id) )
+        //    this.setState({...events, events: newList}) ;
+        setEvents(newList)
            // Save this new list to DB or remove that particular Id details from db
            // After refresh all the removed items still exist
            API.saveID(id, userId).then ( (data) => {
@@ -64,13 +68,16 @@ class HomePage extends Component {
            })
        }
     
-     MyModal(props){
+     const MyModal = (props) => {
+     
        return(
         <Modal 
-            {...props}
-            size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered>
+          className="modal-container"
+        //   show={isOpen}
+        //   onHide={() => setIsOpen(false)}
+        {...props}
+       >
+            <div>
                 <Modal.Header closeButton>
                 <Modal.Title>Modal heading</Modal.Title>
                 </Modal.Header>
@@ -82,12 +89,11 @@ class HomePage extends Component {
                 <Button variant="primary" onClick={props.onHide}>
                     Save Changes
                 </Button>
-                </Modal.Footer>
+                </Modal.Footer> 
+            </div>
         </Modal>
        )
        }
-
-render() {
 
     return (
         <div>
@@ -96,23 +102,19 @@ render() {
                 <Col size="md-12">
              <ol>
                 Shifts that are ready for trade:
-                {this.state.events.map(details => (
+                {events.map(details => (
                 <li key={details._id}>
                     <p>{details.name} on shift {details.shift}, timing between {moment(details.start).format('MMMM Do YYYY, h:mm:ss a')} and {moment(details.end).format('MMMM Do YYYY, h:mm:ss a')} </p>
-                    <button type="button" class="btn btn-dark mr-3">Accept</button>
-                     {/* onClick=
-                     {() =>  
-                             expandable && this.setState({showModal : true}),
-                            <Modal
-                            show={this.state.showModal}
-                            onHide={() => this.handleClose}
-                        />
-                 }  class="btn btn-dark mr-3">Accept</button>  */}
-
-                    <button type="button" onClick={() => this.handleDelete(details._id)}  class="btn btn-dark">Ignore</button>
+                    <button type="button" class="btn btn-dark mr-3" onClick= { () => setIsOpen(true) }  class="btn btn-dark mr-3">Accept</button> 
+                  
+                    <button type="button" onClick={() => handleDelete(details._id)}  class="btn btn-dark">Ignore</button>
                
                 </li>
             ))}
+             <MyModal
+        show={isOpen}
+        onHide={() => setIsOpen(false)}
+      />
             </ol> 
                 </Col>
             </Row>
@@ -122,6 +124,6 @@ render() {
     )
     };
 
-}
+
 
 export default HomePage;

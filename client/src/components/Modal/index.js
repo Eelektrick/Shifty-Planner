@@ -1,7 +1,8 @@
 import React, { useState }  from 'react'
-import { Button } from 'react-bootstrap'
+import { Button, Modal } from 'react-bootstrap'
+// import { Button } from 'react-bootstrap'
 
-function Modal(){
+function ModalComponent(){
         const [show, setShow] = useState(false);
       
         const handleClose = () => setShow(false);
@@ -10,7 +11,7 @@ function Modal(){
         return (
           <>
            
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={handleShow} onHide={handleClose}>
               <Modal.Header closeButton>
                 <Modal.Title>Modal heading</Modal.Title>
               </Modal.Header>
@@ -28,4 +29,4 @@ function Modal(){
         );
       }
 
-export default Modal;
+export default ModalComponent;
