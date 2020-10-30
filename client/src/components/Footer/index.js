@@ -62,12 +62,6 @@ function Footer() {
                 <h4>Heading 3</h4>
                 <ul className="list-unstyled">
                   <li>
-                    <a href="#">Parks and Recreation</a>
-                  </li>
-                  <li>
-                    <a href="#">Public Works</a>
-                  </li>
-                  <li>
                     <a href="#">Police Department</a>
                   </li>
                   <li>
@@ -101,7 +95,8 @@ function Footer() {
           <div className="row">
             <div className="col-md-12 copy">
               <p className="text-center">
-                &copy; Copyright 2020 - Company Name. All rights reserved.
+                &copy;2020 Copyright Shifty Planner : Sam Greilick, Yakini
+                Arumuga Kani ,Corey Post and Atima Bennett
               </p>
             </div>
           </div>

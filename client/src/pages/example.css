@@ -1,3 +1,78 @@
-Form{
-    color: aliceblue;
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-image: url(./CalendarBG.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center center;
+  font-family: "Poppins", sans-serif;
+}
+
+Form {
+  color: rgb(218, 218, 218);
+}
+
+#header {
+  text-align: left;
+  color: rgba(255, 255, 255, 0.699);
+  margin-bottom: 20px;
+}
+
+/* .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  flex-wrap: wrap;
+  z-index: 1;
+} */
+
+#table {
+  background-color: rgba(255, 255, 255, 0.616);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+#cover {
+  background-color: rgba(255, 255, 255, 0.699);
+  margin: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  z-index: 3;
+  padding-top: 20px;
+  font-size: 14px;
+  border-radius: 10px;
+}
+
+#btn1,
+#btn2 {
+  border: none;
+  outline: none;
+}
+
+#btn1:active,
+#btn2:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+  border: none;
+}
+
+#btn1:hover {
+  background-color: #249e05;
+  border: none;
+}
+#btn2:hover {
+  background-color: #c90d06;
+  border: none;
+}
+
+.table-responsive {
+  /* display: block; */
+  width: 100%;
+  overflow-x: auto;
 }
