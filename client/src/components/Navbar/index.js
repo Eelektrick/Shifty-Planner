@@ -22,7 +22,7 @@ export default class Navbar extends Component {
   render() {
     const show = this.state.menu ? "show" : "";
     return (
-      <nav className="navbar navbar-expand-lg navbar-light">
+      <nav className="navbar navbar-expand-lg navbar-light sticky-top">
         <a className="navbar-brand" href="#" />
         <img src={image} width="70" height="60" alt="logo" />
         <a className="navbar-brand" id="shifty" to="/">
@@ -38,7 +38,6 @@ export default class Navbar extends Component {
         <div className={"collapse navbar-collapse " + show}>
           <ul className="navbar-nav ml-auto">
             <li className="nav-item ">
-          
               <Link
                 style={{ color: "rgb(190, 147, 3)" }}
                 to="/"

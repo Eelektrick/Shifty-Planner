@@ -1,129 +1,165 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Modal } from 'react-bootstrap'
-import API from '../utils/API';
-import moment from 'moment';
-import Row from "../components/Row";
-import Col from "../components/Col";
-import Container from "../components/Container";
-
-
+import React, { useState, useEffect } from "react";
+import { Button, Modal } from "react-bootstrap";
+import API from "../utils/API";
+import moment from "moment";
+// import Footer from "../components/Footer";
+import "./example.css";
+import Schedule from "../components/Schedule";
+import Footer from "../components/Footer";
 
 function HomePage() {
+  // constructor() {
+  //     super();
+  // this.state = {
+  //     showModal: false,
+  //     events: [],
 
-    // constructor() {
-    //     super();
-        // this.state = {
-        //     showModal: false,
-        //     events: [],
-            
-        // }
-        const [isOpen, setIsOpen] = useState(false);
-        const [events, setEvents] = useState([]);
-        const userId = "abc";
-        const authID = 456;
-    // }
-    // const handleClose = () =>  setIsOpen(false);
-    // const handleShow = () =>  setIsOpen(true);
+  // }
+  const [isOpen, setIsOpen] = useState(false);
+  const [events, setEvents] = useState([]);
+  const userId = "abc";
+  const authID = 456;
+  // }
+  // const handleClose = () =>  setIsOpen(false);
+  // const handleShow = () =>  setIsOpen(true);
 
-    useEffect(() => { 
+  useEffect(() => {
+    API.getShiftByAuthId(authID).then((data) => {
+      console.log("Get data by Auth Id");
+      console.log(data);
+    });
 
-        API.getShiftByAuthId(authID).then( (data) => {
-           console.log("Get data by Auth Id");
-           console.log(data);
-        })
+    API.getShifts(userId).then((data) => {
+      const e = [];
+      for (var i = 0; i < data.data.length; i++) {
+        if (data.data[i].traded === 2) {
+          e[i] = {
+            shift: data.data[i].shift,
+            title: data.data[i].shift + "   " + data.data[i].name,
+            start: data.data[i].start,
+            end: data.data[i].end,
+            _id: data.data[i]._id,
+            authID: data.data[i].authID,
+            name: data.data[i].name,
+            traded: data.data[i].traded,
+          };
+        }
+      }
 
-        API.getShifts(userId).then((data) => {
-        
-            const e = [];
-            for (var i = 0; i < data.data.length; i++) {
+      setEvents(e);
+    });
+  }, []);
 
-                if (data.data[i].traded === 2) {
-                    e[i]
-                        = {
-                        'shift': data.data[i].shift,
-                        'title': data.data[i].shift + "   " + data.data[i].name,
-                        'start': data.data[i].start,
-                        'end': data.data[i].end,
-                        '_id': data.data[i]._id,
-                        'authID': data.data[i].authID,
-                        'name': data.data[i].name,
-                        'traded': data.data[i].traded
-                    }
-                }
-            }
-           
-            setEvents(e);
-        })
+  const handleDelete = (id) => {
+    const newList = events.filter((e) => e._id !== id);
+    //    this.setState({...events, events: newList}) ;
+    setEvents(newList);
+    // Save this new list to DB or remove that particular Id details from db
+    // After refresh all the removed items still exist
+    API.saveID(id, userId).then((data) => {});
+  };
 
-    }, []);
-
-    const handleDelete = (id) => {
-       const newList = events.filter(e => (e._id!==id) )
-        //    this.setState({...events, events: newList}) ;
-        setEvents(newList)
-           // Save this new list to DB or remove that particular Id details from db
-           // After refresh all the removed items still exist
-           API.saveID(id, userId).then ( (data) => {
-
-           })
-       }
-    
-     const MyModal = (props) => {
-     
-       return(
-        <Modal 
-          className="modal-container"
+  const MyModal = (props) => {
+    return (
+      <Modal
+        className="modal-container"
         //   show={isOpen}
         //   onHide={() => setIsOpen(false)}
         {...props}
-       >
-            <div>
-                <Modal.Header closeButton>
-                <Modal.Title>Modal heading</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-                <Modal.Footer>
-                <Button variant="secondary" onClick={props.onHide}>
-                    Close
-                </Button>
-                <Button variant="primary" onClick={props.onHide}>
-                    Save Changes
-                </Button>
-                </Modal.Footer> 
-            </div>
-        </Modal>
-       )
-       }
-
-    return (
+      >
         <div>
-            <Container>
-            <Row>
-                <Col size="md-12">
-             <ol>
-                Shifts that are ready for trade:
-                {events.map(details => (
-                <li key={details._id}>
-                    <p>{details.name} on shift {details.shift}, timing between {moment(details.start).format('MMMM Do YYYY, h:mm:ss a')} and {moment(details.end).format('MMMM Do YYYY, h:mm:ss a')} </p>
-                    <button type="button" class="btn btn-dark mr-3" onClick= { () => setIsOpen(true) }  class="btn btn-dark mr-3">Accept</button> 
-                  
-                    <button type="button" onClick={() => handleDelete(details._id)}  class="btn btn-dark">Ignore</button>
-               
-                </li>
-            ))}
-             <MyModal
-        show={isOpen}
-        onHide={() => setIsOpen(false)}
-      />
-            </ol> 
-                </Col>
-            </Row>
-            </Container>
+          <Modal.Header closeButton>
+            <Modal.Title>Modal heading</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={props.onHide}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={props.onHide}>
+              Save Changes
+            </Button>
+          </Modal.Footer>
         </div>
+      </Modal>
+    );
+  };
 
-    )
-    };
+  return (
+    <div>
+      <div id="cover">
+        <h4
+          style={{
+            textAlign: "left",
+            color: "black",
+            marginBottom: "20px",
+            fontSize: "22px",
+          }}
+        >
+          Trade Shifts
+        </h4>
+        <div
+          className="container"
+          style={{ height: "300px", overflow: "scroll" }}
+        >
+          <div classNane="col sm-12" id="table">
+            <table class="table table-fix table-hover table-responsive">
+              <thead>
+                <tr style={{ backgroundColor: "#dedb0d" }}>
+                  <th class="col-xs-2">ID.</th>
+                  <th class="col-xs-2">Name</th>
+                  <th class="col-xs-2">Team</th>
+                  <th class="col-xs-2">Time</th>
+                  <th class="col-xs-2">Date</th>
+                  <th class="col-xs-2">Status</th>
+                </tr>
+              </thead>
+              {events.map((details) => (
+                <tbody>
+                  <tr>
+                    <td class="col-xs-2" key={details._id}></td>
+                    <td class="col-xs-2"> {details.name}</td>
+                    <td class="col-xs-2"> {details.shift}</td>
+                    <td class="col-xs-2">
+                      {" "}
+                      {moment(details.start).format("MMMM Do YYYY")}
+                    </td>
+                    <td class="col-xs-2">
+                      {" "}
+                      {moment(details.start).format(" HH:mm:ss ")} to{" "}
+                      {moment(details.end).format("HH:mm:ss ")}
+                    </td>
 
-
+                    <td class="col-xs-2">
+                      <button
+                        type="button"
+                        class="btn btn-dark mr-3"
+                        onClick={() => setIsOpen(true)}
+                        id="btn1"
+                      >
+                        Accept
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => this.handleDelete(details._id)}
+                        class="btn btn-dark"
+                        id="btn2"
+                      >
+                        Ignore
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              ))}
+              <MyModal show={isOpen} onHide={() => setIsOpen(false)} />
+            </table>
+          </div>
+        </div>
+      </div>
+      <Schedule />
+      <Footer />
+    </div>
+  );
+}
 
 export default HomePage;

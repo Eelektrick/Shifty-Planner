@@ -16,7 +16,8 @@ nav.navbar.navbar-default {
 }
 
 .navbar {
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.795);
+  margin-bottom: 10px;
 }
 
 #shifty {
