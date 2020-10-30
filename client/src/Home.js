@@ -1,37 +1,28 @@
-import React, { Component } from 'react';
+import React from 'react';
 import logo from './shiftyLogo3.png';
-import auth0Client from './Auth';
+import { useAuth0 } from "@auth0/auth0-react";
+import JSONPretty from 'react-json-pretty';
 
-class Home extends Component {
-    componentDidMount() {
-        if (!auth0Client.isAuthenticated()) {
-            auth0Client.signIn();
-        }
-    }
-    signOut = () => {
-        auth0Client.signOut();
-        this.props.history.replace('/');
-    }
-    render() {
-
-        return (
-            <div className="App" >
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-                    {
-                        auth0Client.isAuthenticated() &&
-                        <div>
-                            <label className="mr-2 text-white">{auth0Client.getProfile().name}</label>
-                            <br />
-                            <button className="btn btn-dark" onClick={() => { this.signOut() }}>Sign Out</button>
-                        </div>
-                    }
-
-                </header>
-            </div>
-        )
-    }
-
+const Home = () =>{
+    const { user } = useAuth0();
+    // signOut = () => {
+    //     auth0Client.signOut();
+    //     this.props.history.replace('/');
+    // }   
+    return (
+        <div className="App" >
+            <header className="App-header">
+                <img src={logo} className="App-logo" alt="logo" />
+                {
+                    <div>
+                        <label className="mr-2 text-white">HI</label>
+                        <JSONPretty data={user} />
+                        {/* {JSON.stringify(user, null, 2)} */}
+                    </div>
+                }
+            </header>
+        </div>
+    )
 }
 
 export default Home;
