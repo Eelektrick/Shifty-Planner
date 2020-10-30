@@ -5,14 +5,17 @@ const shiftController = require("../../controllers/shiftController");
 router.route("/")
   .get(shiftController.findAll)
   .post(shiftController.create);
+  
 
-  router.route("/:id/ignore")
+router.route("/:id/ignore")
   .put(shiftController.saveID)
+
+router.route("/byAuth")
+  .get(shiftController.findByAuthId)
 
 // Matches with "/api/shifts/:id"    .get(shiftController.findById)
 router
   .route("/:id")
-  .get(shiftController.findByAuthId)
   .put(shiftController.update)
   .delete(shiftController.remove);
 
