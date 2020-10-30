@@ -1,20 +1,22 @@
-import React, { Component } from 'react'
-import { Calendar, Views } from 'react-big-calendar'
-import { momentLocalizer } from 'react-big-calendar'
+import React, { Component } from "react";
+import { Calendar, Views } from "react-big-calendar";
+import { momentLocalizer } from "react-big-calendar";
 import Modal from "react-modal";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import "./style.css"
-import API from "../../utils/API"
+import "./style.css";
+import API from "../../utils/API";
 import ReactNotification from "react-notifications-component";
 import { store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 import "animate.css";
+// import { Footer } from "rsuite";
+import Footer from "../Footer";
 
 const localizer = momentLocalizer(moment);
 // const useStyles = makeStyles(styles);
 
-let allViews = Object.keys(Views).map(k => Views[k])
+let allViews = Object.keys(Views).map((k) => Views[k]);
 
 // renderCalender = (data) => {
 //     // var date = moment().format();
@@ -40,26 +42,25 @@ let allViews = Object.keys(Views).map(k => Views[k])
 //       }
 //     }
 
-    //   } else if (j === 2 || j === 3) {
-    //     events[i]
-    //       = {
-    //       'shift': 'B',
-    //       'title': 'B',
-    //       'start': moment(begin).add(i, 'days').hours('13').toDate(),
-    //       'end': moment(begin).add(i, 'days').hours('19').toDate()
-    //     };
-    //   } else if (j === 4 || j === 5) {
-    //     events[i]
-    //       = {
-    //       'shift': 'C',
-    //       'title': 'C',
-    //       'start': moment(begin).add(i, 'days').hours('20').toDate(),
-    //       'end': moment(begin).add(i, 'days').hours('02').toDate()
-    //     };
-    //   }
+//   } else if (j === 2 || j === 3) {
+//     events[i]
+//       = {
+//       'shift': 'B',
+//       'title': 'B',
+//       'start': moment(begin).add(i, 'days').hours('13').toDate(),
+//       'end': moment(begin).add(i, 'days').hours('19').toDate()
+//     };
+//   } else if (j === 4 || j === 5) {
+//     events[i]
+//       = {
+//       'shift': 'C',
+//       'title': 'C',
+//       'start': moment(begin).add(i, 'days').hours('20').toDate(),
+//       'end': moment(begin).add(i, 'days').hours('02').toDate()
+//     };
+//   }
 
-    // }
-
+// }
 
 // const eventColors = (event) => {
 //   var backgroundColor = "event-";
@@ -73,32 +74,29 @@ let allViews = Object.keys(Views).map(k => Views[k])
 
 const eventStyleGetter = (events, start, end, isSelected) => {
   // var backgroundColor = '#' + events.hexColor;
-  
+
   var style = {
     // backgroundColor: backgroundColor,
-    borderRadius: '0px',
+    borderRadius: "0px",
     // opacity: 0.8,
     // color: 'black',
-    border: '0px',
-    display: 'block'
-};
-  if(events.shift === 'A'){
-    style = { color: 'blue'}
-    
-  }else if(events.shift === 'B'){
-    style = { color: 'red'}
-  }else if(events.shift === 'C'){
-    style = { color: 'green'}
+    border: "0px",
+    display: "block",
+  };
+  if (events.shift === "A") {
+    style = { color: "blue" };
+  } else if (events.shift === "B") {
+    style = { color: "red" };
+  } else if (events.shift === "C") {
+    style = { color: "green" };
   }
- 
+
   return {
-      style: style
+    style: style,
   };
 };
 
-const dayPropGetter = (Date) => {
-
-}
+const dayPropGetter = (Date) => {};
 
 class Calender extends Component {
   constructor() {
@@ -106,7 +104,7 @@ class Calender extends Component {
     this.state = {
       modalIsOpen: false,
       cal_events: [],
-      events: []
+      events: [],
     };
   }
 
@@ -116,26 +114,22 @@ class Calender extends Component {
     API.getShifts().then((data) => {
       // console.log("My Data from db");
       // console.log(data.data);
-      const e=[];
+      const e = [];
       for (var i = 0; i < data.data.length; i++) {
-     
-          e[i]
-            = {
-            'shift': data.data[i].shift,
-            'title': data.data[i].shift + "   " +data.data[i].name,
-            'start': data.data[i].start,
-            'end': data.data[i].end,
-            '_id': data.data[i]._id,
-            'authID': data.data[i].authID,
-            'name': data.data[i].name,
-            'traded': data.data[i].traded
-
-          }
-        }
-        this.setState({events: e});
-      })
+        e[i] = {
+          shift: data.data[i].shift,
+          title: data.data[i].shift + "   " + data.data[i].name,
+          start: data.data[i].start,
+          end: data.data[i].end,
+          _id: data.data[i]._id,
+          authID: data.data[i].authID,
+          name: data.data[i].name,
+          traded: data.data[i].traded,
+        };
+      }
+      this.setState({ events: e });
+    });
   }
-
 
   // openNotfication() {
   //   Notification.open({
@@ -146,8 +140,8 @@ class Calender extends Component {
   //   });
   // }
 
- handleOnclickTread = (event) => {
-   event.preventDefault();
+  handleOnclickTread = (event) => {
+    event.preventDefault();
     store.addNotification({
       title: "Trade schedule",
       message: "Your schedule is now ready to be trade!",
@@ -164,34 +158,33 @@ class Calender extends Component {
     });
   };
 
-  handleSelect = event => {
+  handleSelect = (event) => {
     //set model to true
     // console.log("here");
     this.setState({
       modalIsOpen: true,
-      cal_events: event
+      cal_events: event,
     });
-
   };
 
-  handleSubmit = (e) =>{
+  handleSubmit = (e) => {
     e.preventDefault();
     console.log("Handle Submit Events");
     console.log(this.state.cal_events);
-     
-     API.updateShift(this.state.cal_events._id).then(response =>{
-       console.log(response);
-     })
-  }
 
-  closeModal = () => this.setState({
-    modalIsOpen: false
-  });
+    API.updateShift(this.state.cal_events._id).then((response) => {
+      console.log(response);
+    });
+  };
+
+  closeModal = () =>
+    this.setState({
+      modalIsOpen: false,
+    });
 
   // handleShow = () => this.setState({
   //   modalIsOpen: true
   // });
-
 
   renderModal() {
     // API.getShift(this.state.cal_events.authID).then(response => {
@@ -200,7 +193,6 @@ class Calender extends Component {
     // {this.state.cal_events.authID}
     return (
       <div>
-
         <Modal
           isOpen={this.state.modalIsOpen}
           // onAfterOpen={this.afterOpenModal}
@@ -209,22 +201,26 @@ class Calender extends Component {
         >
           <h2>
             Shift Details:
-          <button onClick={this.closeModal} data-dismiss="modal" aria-label="Close">
+            <button
+              onClick={this.closeModal}
+              data-dismiss="modal"
+              aria-label="Close"
+            >
               <span aria-hidden="true">&times;</span>
             </button>
-            <br /><br />
+            <br />
+            <br />
             {this.state.cal_events.authID}
-          Shift : {this.state.cal_events.shift} <br />
-          Start : {this.state.cal_events.start}<br />
-          End   : {this.state.cal_events.end}<br />
-
+            Shift : {this.state.cal_events.shift} <br />
+            Start : {this.state.cal_events.start}
+            <br />
+            End : {this.state.cal_events.end}
+            <br />
           </h2>
           <div>Please Click on the below button to trade your shift</div>
           <form onSubmit={this.onFormSubmit}>
-
-
-            <button onClick={this.handleSubmit} type="button btn-primary">Click Me!
-           
+            <button onClick={this.handleSubmit} type="button btn-primary">
+              Click Me!
             </button>
             <ReactNotification />
           </form>
@@ -234,29 +230,34 @@ class Calender extends Component {
   }
 
   render() {
-
     // console.log(events);
     return (
       <div>
-        <Calendar
-          selectable
-          events={this.state.events}
-          views={allViews}
-          onSelectEvent={this.handleSelect}
-          defaultView="month"
-          scrollToTime={new Date(1970, 1, 1, 6)}
-          defaultDate={new Date()}
-          localizer={localizer}
-          eventPropGetter={eventStyleGetter}
-          // dayPropGetter ={dayPropGetter}
-        />
-        {/* <button onClick={this.openModal}>Open Modal</button> */}
-        {this.renderModal()}
-       
-
+        <div
+          className="container"
+          style={{ backgroundColor: "rgba(255, 255, 255, 0.774)" }}
+        >
+          <Calendar
+            selectable
+            events={this.state.events}
+            views={allViews}
+            onSelectEvent={this.handleSelect}
+            defaultView="month"
+            scrollToTime={new Date(1970, 1, 1, 6)}
+            defaultDate={new Date()}
+            localizer={localizer}
+            eventPropGetter={eventStyleGetter}
+            // dayPropGetter ={dayPropGetter}
+          />
+          {/* <button onClick={this.openModal}>Open Modal</button> */}
+          {this.renderModal()}
+        </div>
+        <div className="row" style={{ paddingTop: "20px" }}>
+          <Footer />
+        </div>
       </div>
-    )
+    );
   }
 }
 
-export default Calender
+export default Calender;
