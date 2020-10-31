@@ -112,8 +112,11 @@ class Calender extends Component {
     //set model to true
     // console.log("here");
     console.log(event);
+    console.log(moment(event.start).format('MMMM Do YYYY, h:mm:ss a'));
+    console.log(moment().format('MMMM Do YYYY, h:mm:ss a'));
     const authID = this.props.authID;
-    if (event.authID !== authID) {
+    if(event.authID !== authID || 
+      moment(event.start).isBefore() ){
       return;
     }
     this.setState({
@@ -185,6 +188,7 @@ class Calender extends Component {
     // console.log(events);
     return (
       <div>
+         <div style={{color: "white", textAlign:"center", fontSize:"20px", marginBottom:"2%"}}> Welcome {this.props.nickname.split(".").join(" ")} !!</div>
         <div
           className="container"
           style={{ backgroundColor: "rgba(255, 255, 255, 0.774)" }}
@@ -192,10 +196,9 @@ class Calender extends Component {
           <Calendar
             selectable
             events={this.state.events}
-            views={allViews}
+            views= {["month"]}
             onSelectEvent={this.handleSelect}
             defaultView="month"
-            scrollToTime={new Date(1970, 1, 1, 6)}
             defaultDate={new Date()}
             localizer={localizer}
             eventPropGetter={eventStyleGetter}

@@ -3,26 +3,21 @@ import { Button, Modal, Form } from "react-bootstrap";
 import API from "../utils/API";
 import moment from "moment";
 import { useAuth0 } from "@auth0/auth0-react";
-// import Footer from "../components/Footer";
 import "./example.css";
 import Schedule from "../components/Schedule";
 import Footer from "../components/Footer";
 
 function HomePage() {
-  // constructor() {
-  //     super();
-  // this.state = {
-  //     showModal: false,
-  //     events: [],
 
-  // }
   const [isOpen, setIsOpen] = useState(false);
   const [details, setDetails] = useState([]);
   const [events, setEvents] = useState([]);
   const { user } = useAuth0();
   console.log(user);
   console.log(user.sub);
+  const userInfo = user;
   const authID = user.sub;
+  const nickname = user.nickname.split(".").join(" ");
   // const traded =1;
   // }
   const handleClose = () => setIsOpen(false);
@@ -119,6 +114,7 @@ function HomePage() {
 
   return (
     <div>
+      <div style={{color:"white", textAlign:"center", fontSize:"20px"}}> Welcome {nickname} !! </div>
       <div id="cover">
         <h4
           style={{
