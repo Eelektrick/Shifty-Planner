@@ -39,3 +39,33 @@
   background-color: rgb(172, 172, 172);
   font-weight: bold;
 }
+
+p {
+  font-size: 14px;
+}
+
+#trade:hover {
+  box-shadow: 0 5px 5px #666;
+  background-color: #00449c;
+  border: none;
+}
+
+#close:hover {
+  box-shadow: 0 5px 5px #666;
+  background-color: #666666;
+  border: none;
+}
+
+#trade:active {
+  box-shadow: 0 5px 5px #666;
+  background-color: #00449c;
+  transform: translateY(3px);
+  border: none;
+}
+
+#close:active {
+  box-shadow: 0 5px 5px #666;
+  background-color: #666666;
+  transform: translateY(3px);
+  border: none;
+}
