@@ -9,7 +9,11 @@ import License from "./pages/License";
 import Home from "./Home";
 import { ProtectedRoute } from "./ProtectedRoute";
 
+
 function App() {
+
+ 
+
   return (
     <Router>
       <div>

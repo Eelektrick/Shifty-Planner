@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import API from "../utils/API";
 import moment from "moment";
+import { useAuth0 } from "@auth0/auth0-react";
 // import Footer from "../components/Footer";
 import "./example.css";
 import Schedule from "../components/Schedule";
@@ -18,8 +19,10 @@ function HomePage() {
   const [isOpen, setIsOpen] = useState(false);
   const [details, setDetails] = useState([]);
   const [events, setEvents] = useState([]);
-  const userId = "abc";
-  const authID = 456;
+  const { user } = useAuth0();
+  console.log(user);
+  console.log(user.sub);
+  const authID = user.sub;
   // const traded =1;
   // }
   const handleClose = () =>  setIsOpen(false);
@@ -34,7 +37,7 @@ function HomePage() {
       setDetails(data.data)
     });
 
-    API.getShifts(userId).then((data) => {
+    API.getShifts(authID).then((data) => {
       const e = [];
       for (var i = 0; i < data.data.length; i++) {
         if (data.data[i].traded === 2 && (data.data[i].authID !== authID)) {
@@ -61,7 +64,7 @@ function HomePage() {
     setEvents(newList);
     // Save this new list to DB or remove that particular Id details from db
     // After refresh all the removed items still exist
-    API.saveID(id, userId).then((data) => {});
+    API.saveID(id, authID).then((data) => {});
   };
 
    const saveDetails = () => {

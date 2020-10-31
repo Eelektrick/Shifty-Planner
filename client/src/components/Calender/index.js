@@ -42,7 +42,10 @@ const eventStyleGetter = (events, start, end, isSelected) => {
   };
 };
 
-const dayPropGetter = (Date) => {};
+const dayPropGetter = (Date) => {
+   
+
+};
 
 class Calender extends Component {
   constructor() {
@@ -54,13 +57,19 @@ class Calender extends Component {
     };
   }
 
+
+
   componentDidMount() {
     // console.log("mounted calander");
     // Modal.setAppElement("body");
+ 
     API.getShifts().then((data) => {
       // console.log("My Data from db");
       // console.log(data.data);
       const e = [];
+      console.log("Props");
+      console.log(this.props);
+     
       for (var i = 0; i < data.data.length; i++) {
         e[i] = {
           shift: data.data[i].shift,
@@ -107,6 +116,11 @@ class Calender extends Component {
   handleSelect = (event) => {
     //set model to true
     // console.log("here");
+    console.log(event);
+    const authID = this.props.authID;
+    if(event.authID !== authID){
+      return;
+    }
     this.setState({
       modalIsOpen: true,
       cal_events: event,
@@ -191,7 +205,7 @@ class Calender extends Component {
             defaultDate={new Date()}
             localizer={localizer}
             eventPropGetter={eventStyleGetter}
-            // dayPropGetter ={dayPropGetter}
+            dayPropGetter ={dayPropGetter}
           />
           {/* <button onClick={this.openModal}>Open Modal</button> */}
           {/* {this.renderModal()}  show={this.state.modalIsOpen} onHide={() => this.closeModal}*/}

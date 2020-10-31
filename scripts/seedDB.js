@@ -23,39 +23,50 @@ for (var i = 0; i < moment().daysInMonth(); i++) {
     shiftSeed[i]
       = {
       // 'generated_ID': 
-      'authID': 123,
-      'emailID': 'abc@gmail.com',
+      'authID': 'auth0|5f9d8116b472680076ec6966',
+      'emailID': 'corey.post@mail.com',
       'shift': 'A',
       'start': moment(begin).add(i, 'days').hours('07').toDate(),
       'end': moment(begin).add(i, 'days').hours('19').toDate(),
       'traded': 1,
-      'name' : "Sam",
+      'name' : "Corey",
       'ignoredLists' : []
     }
   } else if (j === 2 || j === 3) {
     shiftSeed[i]
       = {
-      'authID': 456,
-      'emailID': 'abc@gmail.com',
+      'authID': 'auth0|5f9d80efe12ecb0068a0d7ef',
+      'emailID': 'yakini.arumugakani@mail.com',
       'shift': 'B',
       'start': moment(begin).add(i, 'days').hours('07').toDate(),
       'end': moment(begin).add(i, 'days').hours('19').toDate(),
       'traded': 1,
-      'name' : "Wyatt",
+      'name' : "Yakini",
       'ignoredLists' : []
     }
   } else if (j === 4 || j === 5) {
-    shiftSeed[i]
+    shiftSeed[i]  
       = {
-      'authID': 789,
-      'emailID': 'abc@gmail.com',
+      'authID': 'auth0|5f9d80a8e12ecb0068a0d7eb',
+      'emailID': 'atime.bennet@mail.com',
       'shift': 'C',
       'start': moment(begin).add(i, 'days').hours('07').toDate(),
       'end': moment(begin).add(i, 'days').hours('19').toDate(),
       'traded': 1,
-      'name' : "Dennis",
+      'name' : "Atima",
       'ignoredLists' : []
-    }
+    },
+    shiftSeed[i]  
+    = {
+    'authID': 'auth0|5f9d83219faf390069c6acae',
+    'emailID': 'sam.grelick@mail.com',
+    'shift': 'C',
+    'start': moment(begin).add(i, 'days').hours('07').toDate(),
+    'end': moment(begin).add(i, 'days').hours('19').toDate(),
+    'traded': 1,
+    'name' : "Sam",
+    'ignoredLists' : []
+  }
   }
 }
 
