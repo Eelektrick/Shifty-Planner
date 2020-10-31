@@ -22,7 +22,6 @@ Form {
 
 .card {
   width: 14rem;
-  border-radius: 10px;
 }
 .card-body {
   margin: 0px;
@@ -69,16 +68,25 @@ p {
 }
 
 #btn1:hover {
+  box-shadow: 0 5px 5px #666;
   background-color: #249e05;
   border: none;
 }
 #btn2:hover {
+  box-shadow: 0 5px 5px #666;
   background-color: #c90d06;
   border: none;
 }
 
-.table-responsive {
-  /* display: block; */
-  width: 100%;
-  overflow-x: auto;
+#submit:hover {
+  box-shadow: 0 5px 5px #666;
+  background-color: #00449c;
+  border: none;
+}
+
+#submit:active {
+  box-shadow: 0 5px 5px #666;
+  background-color: #00449c;
+  transform: translateY(3px);
+  border: none;
 }

@@ -42,10 +42,7 @@ const eventStyleGetter = (events, start, end, isSelected) => {
   };
 };
 
-const dayPropGetter = (Date) => {
-   
-
-};
+const dayPropGetter = (Date) => {};
 
 class Calender extends Component {
   constructor() {
@@ -57,19 +54,17 @@ class Calender extends Component {
     };
   }
 
-
-
   componentDidMount() {
     // console.log("mounted calander");
     // Modal.setAppElement("body");
- 
+
     API.getShifts().then((data) => {
       // console.log("My Data from db");
       // console.log(data.data);
       const e = [];
       console.log("Props");
       console.log(this.props);
-     
+
       for (var i = 0; i < data.data.length; i++) {
         e[i] = {
           shift: data.data[i].shift,
@@ -132,7 +127,7 @@ class Calender extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
- 
+
     console.log("Handle Submit Events");
     console.log(this.state.cal_events);
 
@@ -141,7 +136,6 @@ class Calender extends Component {
     });
 
     this.closeModal();
-   
   };
 
   closeModal = () =>
@@ -153,40 +147,40 @@ class Calender extends Component {
   //   modalIsOpen: true
   // });
 
-  renderModal(props){
+  renderModal(props) {
     return (
-        <Modal
-         className="modal-container"
-         show= {this.state.modalIsOpen}
-         onHide = {this.closeModal}
-        >
-           <>
-                <Modal.Header closeButton>
-                <Modal.Title> Shift Details:</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-
-            Shift : {this.state.cal_events.shift} <br />
-           Date/Time :  {moment(this.state.cal_events.start).format("MMMM Do YYYY")} 
-                        {" - "}
-                        {moment(this.state.cal_events.start).format(" HH:mm:ss ")} to{" "}
-                        {moment(this.state.cal_events.end).format("HH:mm:ss ")} <br/>
-      
-          <div>Please Click on the below button to trade your shift</div>
+      <Modal
+        className="modal-container"
+        show={this.state.modalIsOpen}
+        onHide={this.closeModal}
+      >
+        <>
+          <Modal.Header closeButton>
+            <Modal.Title> Shift Details:</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Shift :{" "}
+            <p style={{ color: "blue", fontWeight: "bold" }}>
+              {this.state.cal_events.shift}
+            </p>
+            Time:{" "}
+            <p style={{ color: "blue", fontWeight: "bold" }}>
+              {moment(this.state.cal_events.start).format(" HH:mm:ss ")} -{" "}
+              {moment(this.state.cal_events.end).format("HH:mm:ss ")}
+            </p>{" "}
+            "Would you like to trade this shift?"
           </Modal.Body>
-          </>
-          <Modal.Footer>
-          <Button variant="secondary" onClick={this.closeModal}>
-                    Close
-                </Button>
-          <Button variant="primary" onClick={this.handleSubmit}>
-                    Trade
+        </>
+        <Modal.Footer>
+          <Button variant="secondary" id="close" onClick={this.closeModal}>
+            Close
           </Button>
-          </Modal.Footer> 
-          <ReactNotification />
-        
-        </Modal>
-     
+          <Button variant="primary" id="trade" onClick={this.handleSubmit}>
+            Trade
+          </Button>
+        </Modal.Footer>
+        <ReactNotification />
+      </Modal>
     );
   }
 
@@ -208,11 +202,11 @@ class Calender extends Component {
             defaultDate={new Date()}
             localizer={localizer}
             eventPropGetter={eventStyleGetter}
-            dayPropGetter ={dayPropGetter}
+            dayPropGetter={dayPropGetter}
           />
           {/* <button onClick={this.openModal}>Open Modal</button> */}
           {/* {this.renderModal()}  show={this.state.modalIsOpen} onHide={() => this.closeModal}*/}
-          { this.renderModal() }
+          {this.renderModal()}
         </div>
         <div className="row" style={{ paddingTop: "20px" }}>
           <Footer />
