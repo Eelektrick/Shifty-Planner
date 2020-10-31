@@ -122,6 +122,8 @@ class Calender extends Component {
     API.updateShift(this.state.cal_events._id).then((response) => {
       console.log(response);
     });
+
+    this.closeModal();
    
   };
 

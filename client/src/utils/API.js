@@ -8,7 +8,11 @@ export default {
   getShiftByTrade: function() {
     return axios.get("/api/shifts/");
   },
-  getShiftByAuthId: function(authID, traded) {
+  // getShiftByAuthId: function(authID) {
+  //   console.log(JSON.stringify(authID)+" FROM getShiftByAuthId AXIOS Call");
+  //   return axios.get("/api/shifts/byAuth" , {params: { authID }});
+  // },
+  getShiftByAuthId: function(authID) {
     console.log(JSON.stringify(authID)+" FROM getShiftByAuthId AXIOS Call");
     return axios.get("/api/shifts/byAuth" , {params: { authID }});
   },

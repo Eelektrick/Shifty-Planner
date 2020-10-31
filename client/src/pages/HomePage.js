@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Form } from "react-bootstrap";
 import API from "../utils/API";
 import moment from "moment";
 // import Footer from "../components/Footer";
@@ -20,8 +20,9 @@ function HomePage() {
   const [events, setEvents] = useState([]);
   const userId = "abc";
   const authID = 456;
+  // const traded =1;
   // }
-  // const handleClose = () =>  setIsOpen(false);
+  const handleClose = () =>  setIsOpen(false);
   // const handleShow = () =>  setIsOpen(true);
 
   useEffect(() => {
@@ -36,7 +37,7 @@ function HomePage() {
     API.getShifts(userId).then((data) => {
       const e = [];
       for (var i = 0; i < data.data.length; i++) {
-        if (data.data[i].traded === 2) {
+        if (data.data[i].traded === 2 && (data.data[i].authID !== authID)) {
           e[i] = {
             shift: data.data[i].shift,
             title: data.data[i].shift + "   " + data.data[i].name,
@@ -64,7 +65,7 @@ function HomePage() {
   };
 
    const saveDetails = () => {
-
+    handleClose();
    }
 
   const MyModal = (props) => {
@@ -81,34 +82,26 @@ function HomePage() {
                 </Modal.Header>
                 <Modal.Body>
                    <div>
-                       Please select from your shift to swap with:
+                      
+                       <Form>
+                       <Form.Group controlId="exampleForm.ControlSelect1">
+                          <Form.Label> Please select from your shift to swap with:</Form.Label>
+                          <Form.Control as="select">
+                          {details.map(detail => (
+                            <option> {detail.shift}   
+                            {"-"}
+                            {moment(detail.start).format("MMMM Do YYYY")} 
+                            {"-"}
+                               {moment(detail.start).format(" HH:mm:ss ")} to{" "}
+                               {moment(detail.end).format("HH:mm:ss ")}</option>
+                            ))}
+                          </Form.Control>
+                        </Form.Group>
 
-                       {details.map(detail => (
-                       <>
-                        <Button variant="warning">
-                          
-                         {detail.shift}   
-                         {"-"}
-                         {moment(detail.start).format("MMMM Do YYYY")} 
-                         {"-"}
-                            {moment(detail.start).format(" HH:mm:ss ")} to{" "}
-                            {moment(detail.end).format("HH:mm:ss ")}
-                         {/* {moment(detail.end).format('MMMM Do YYYY, h:mm:ss a')} */}
-                        </Button>
-                        </>
-                       ))}
-
+                        <Button type="submit" onClick={saveDetails}>Submit</Button>
+                        </Form>
                    </div>
-
                 </Modal.Body>
-                <Modal.Footer>
-                <Button variant="secondary" onClick={props.onHide}>
-                    Close
-                </Button>
-                <Button variant="primary" onClick={saveDetails}>
-                    Save Changes
-                </Button>
-                </Modal.Footer> 
             </div>
         </Modal>
 
