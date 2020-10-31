@@ -16,6 +16,7 @@ function HomePage() {
 
   // }
   const [isOpen, setIsOpen] = useState(false);
+  const [details, setDetails] = useState([]);
   const [events, setEvents] = useState([]);
   const userId = "abc";
   const authID = 456;
@@ -26,7 +27,10 @@ function HomePage() {
   useEffect(() => {
     API.getShiftByAuthId(authID).then((data) => {
       console.log("Get data by Auth Id");
-      console.log(data);
+      console.log(data.data);
+      const dataArr = [data.data]
+      console.log(dataArr);
+      setDetails(data.data)
     });
 
     API.getShifts(userId).then((data) => {
@@ -59,29 +63,55 @@ function HomePage() {
     API.saveID(id, userId).then((data) => {});
   };
 
+   const saveDetails = () => {
+
+   }
+
   const MyModal = (props) => {
     return (
-      <Modal
-        className="modal-container"
+        <Modal 
+          className="modal-container"
         //   show={isOpen}
         //   onHide={() => setIsOpen(false)}
         {...props}
-      >
-        <div>
-          <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={props.onHide}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={props.onHide}>
-              Save Changes
-            </Button>
-          </Modal.Footer>
-        </div>
-      </Modal>
+       >
+            <div>
+                <Modal.Header closeButton>
+                <Modal.Title>Details</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                   <div>
+                       Please select from your shift to swap with:
+
+                       {details.map(detail => (
+                       <>
+                        <Button variant="warning">
+                          
+                         {detail.shift}   
+                         {"-"}
+                         {moment(detail.start).format("MMMM Do YYYY")} 
+                         {"-"}
+                            {moment(detail.start).format(" HH:mm:ss ")} to{" "}
+                            {moment(detail.end).format("HH:mm:ss ")}
+                         {/* {moment(detail.end).format('MMMM Do YYYY, h:mm:ss a')} */}
+                        </Button>
+                        </>
+                       ))}
+
+                   </div>
+
+                </Modal.Body>
+                <Modal.Footer>
+                <Button variant="secondary" onClick={props.onHide}>
+                    Close
+                </Button>
+                <Button variant="primary" onClick={saveDetails}>
+                    Save Changes
+                </Button>
+                </Modal.Footer> 
+            </div>
+        </Modal>
+
     );
   };
 
@@ -141,7 +171,7 @@ function HomePage() {
                       </button>
                       <button
                         type="button"
-                        onClick={() => this.handleDelete(details._id)}
+                        onClick={() => handleDelete(details._id)}
                         class="btn btn-dark"
                         id="btn2"
                       >
