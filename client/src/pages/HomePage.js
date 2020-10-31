@@ -122,67 +122,64 @@ function HomePage() {
           style={{
             textAlign: "left",
             color: "black",
-            marginBottom: "20px",
             fontSize: "22px",
           }}
         >
           Trade Shifts
         </h4>
+
         <div
           className="container"
           style={{ height: "300px", overflow: "scroll" }}
         >
-          <div classNane="col sm-12" id="table">
-            <table class="table table-fix table-hover table-responsive">
-              <thead>
-                <tr style={{ backgroundColor: "#dedb0d" }}>
-                  <th class="col-xs-2">ID.</th>
-                  <th class="col-xs-2">Name</th>
-                  <th class="col-xs-2">Team</th>
-                  <th class="col-xs-2">Time</th>
-                  <th class="col-xs-2">Date</th>
-                  <th class="col-xs-2">Status</th>
-                </tr>
-              </thead>
-              {events.map((details) => (
-                <tbody>
-                  <tr>
-                    <td class="col-xs-2" key={details._id}></td>
-                    <td class="col-xs-2"> {details.name}</td>
-                    <td class="col-xs-2"> {details.shift}</td>
-                    <td class="col-xs-2">
-                      {" "}
-                      {moment(details.start).format("MMMM Do YYYY")}
-                    </td>
-                    <td class="col-xs-2">
-                      {" "}
-                      {moment(details.start).format(" HH:mm:ss ")} to{" "}
-                      {moment(details.end).format("HH:mm:ss ")}
-                    </td>
 
-                    <td class="col-xs-2">
-                      <button
-                        type="button"
-                        class="btn btn-dark mr-3"
-                        onClick={() => setIsOpen(true)}
-                        id="btn1"
-                      >
-                        Accept
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => handleDelete(details._id)}
-                        class="btn btn-dark"
-                        id="btn2"
-                      >
-                        Ignore
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              ))}
-              <MyModal show={isOpen} onHide={() => setIsOpen(false)} />
-            </table>
+          <div className="row">
+            {events.map((details) => (
+              <div className="card">
+                <div className="card-body" style={{ height: "14rem" }}>
+                  <h5 className="card-title">Name : {details.name}</h5>
+                  <h6 className="card-subtitle mb-2 text-muted">
+                    Shift : {details.shift}
+                  </h6>
+                  <p className="card-text">
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">
+                        Date:{" "}
+                        <p style={{ color: "blue", fontWeight: "bold" }}>
+                          {moment(details.start).format("MMMM Do YYYY")}
+                        </p>
+                      </li>
+                      <li class="list-group-item">
+                        Time :{" "}
+                        <p style={{ color: "blue", fontWeight: "bold" }}>
+                          {moment(details.start).format(" HH:mm:ss")} -{" "}
+                          {moment(details.end).format("HH:mm:ss")}
+                        </p>
+                      </li>
+                    </ul>
+                  </p>
+                  <button
+                    type="button"
+                    class="btn btn-dark mr-3"
+                    onClick={() => setIsOpen(true)}
+                    id="btn1"
+                  >
+                    Accept
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => this.handleDelete(details._id)}
+                    class="btn btn-dark"
+                    id="btn2"
+                  >
+                    Ignore
+                  </button>
+                </div>
+              </div>
+            ))}
+            <MyModal show={isOpen} onHide={() => setIsOpen(false)} />
+
+          
           </div>
         </div>
       </div>

@@ -20,19 +20,25 @@ Form {
   margin-bottom: 20px;
 }
 
-/* .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 50px;
-  flex-wrap: wrap;
-  z-index: 1;
-} */
+.card {
+  width: 14rem;
+  border-radius: 10px;
+}
+.card-body {
+  margin: 0px;
+  height: 100px;
+}
 
-#table {
+p {
+  font-size: 12px;
+  margin-top: 0;
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+/* #table {
   background-color: rgba(255, 255, 255, 0.616);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-}
+} */
 
 #cover {
   background-color: rgba(255, 255, 255, 0.699);
