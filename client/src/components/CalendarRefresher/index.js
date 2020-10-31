@@ -13,6 +13,20 @@ class CalenderRefresher extends Component {
   }
 
   componentDidMount() {
+
+
+
+
+
+
+
+  }
+
+  handleSelect = event => {
+    console.log("Generate Shift");
+    
+
+
     //When "Generate Shift" is pressed.
     //Then a popup with 2 options is displayed plus a submit button.
     //options:
@@ -27,17 +41,6 @@ class CalenderRefresher extends Component {
 
 
 
-
-
-
-  }
-
-  handleSelect = event => {
-    console.log("Hello");
-
-    API.getShifts().then((json)=> {
-        console.log(json);
-    })
 
   };
 
