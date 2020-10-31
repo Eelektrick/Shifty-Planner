@@ -22,7 +22,9 @@ function HomePage() {
   const { user } = useAuth0();
   console.log(user);
   console.log(user.sub);
+  const userInfo = user;
   const authID = user.sub;
+  const nickname = user.nickname.split(".").join(" ");
   // const traded =1;
   // }
   const handleClose = () =>  setIsOpen(false);
@@ -91,6 +93,8 @@ function HomePage() {
                           <Form.Label> Please select from your shift to swap with:</Form.Label>
                           <Form.Control as="select">
                           {details.map(detail => (
+
+                            moment(detail.start).isAfter() &&
                             <option> {detail.shift}   
                             {"-"}
                             {moment(detail.start).format("MMMM Do YYYY")} 
@@ -98,6 +102,7 @@ function HomePage() {
                                {moment(detail.start).format(" HH:mm:ss ")} to{" "}
                                {moment(detail.end).format("HH:mm:ss ")}</option>
                             ))}
+                             
                           </Form.Control>
                         </Form.Group>
 
@@ -113,6 +118,7 @@ function HomePage() {
 
   return (
     <div>
+      <div style={{color:"white", textAlign:"center", fontSize:"20px"}}> Welcome {nickname} !! </div>
       <div id="cover">
         <h4
           style={{

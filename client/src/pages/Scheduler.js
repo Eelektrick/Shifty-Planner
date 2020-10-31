@@ -13,6 +13,7 @@ function Scheduler() {
   console.log(user);
   // console.log(user.sub);
   const authID = (user || {}).sub;
+  const nickname = (user || {}).nickname;
 
   // When the component mounts, a call will be made to get random users.
   useEffect(() => {
@@ -26,7 +27,7 @@ function Scheduler() {
         <Col size="md-12">
         {/* Pass props to the card container */}
        
-        <Calender authID= {authID}/>
+        <Calender authID= {authID} nickname = {nickname} />
         </Col>
       </Row>
     </Container>
