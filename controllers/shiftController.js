@@ -17,10 +17,21 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  // findByAuthId: function(req, res) {
+  //   console.log(req.query.authID);
+  //   db.Shift
+  //     .find({authID: { $eq: req.query.authID } })
+  //     .sort({ date : -1 })
+  //     .then(dbModel => 
+  //       res.json(dbModel)
+  //       )
+  //     .catch(err => res.status(422).json(err));
+  // },
   findByAuthId: function(req, res) {
     console.log(req.query.authID);
+   
     db.Shift
-      .find({authID: { $eq: req.query.authID } })
+      .find( {authID: req.query.authID , traded: 1 } )
       .sort({ date : -1 })
       .then(dbModel => 
         res.json(dbModel)
