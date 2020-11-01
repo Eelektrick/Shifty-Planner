@@ -11,8 +11,6 @@ function example(params) {
   return(
     <div>
     <Refresh/>
-
-
     </div>
   )
 }

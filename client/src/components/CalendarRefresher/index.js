@@ -1,69 +1,45 @@
-import React, { Component } from 'react'
-import {Button} from "react-bootstrap"
-import API from '../../utils/API';
+import React, { Component } from "react";
+import { Button, Form, Col } from "react-bootstrap";
+import API from "../../utils/API";
 
-
-class CalenderRefresher extends Component {
-  constructor() {
-    super();
+class CalenderRefresher extends React.Component {
+  constructor(props) {
+    super(props);
     this.state = {
+      name: "",
+      shift: "",
+      interval:"",
       
-     
     };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount() {
-
-
-
-
-
-
-
+  handleChange(event) {
+    this.setState({ name: event.target.value });
   }
 
-  handleSelect = event => {
-    console.log("Generate Shift");
-    
-
-
-    //When "Generate Shift" is pressed.
-    //Then a popup with 2 options is displayed plus a submit button.
-    //options:
-    //  1 - Interval to determine when shift will occur/at what interval
-    //    1.a - allows for custom time frame, option to select classic A B C.
-    //  2 - Option to determine who will be on the shift (api call is made to check certification to dynamically verify
-    //      that crew is up to spec).
-    //    2.a Allows user to select a default where and api call will be made and select everyone who is defaulted to
-    //        that shift.
-    //When popup submit is pressed then the data is verified against the database and if it clears a post request will be 
-    // sent storing the new shift(s)
-
-
-
-
-  };
-
-
-
-  
-
-
- 
-
-
-
+  handleSubmit(event) {
+    console.log(this.state.name);
+    event.preventDefault();
+  }
 
   render() {
-
-        return (
-      <div>
-       <Button onClick={this.handleSelect}>Test Cal Refresh</Button>
-
-
-      </div>
-    )
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Name:
+          <input
+            type="text"
+            value={this.state.name}
+            onChange={this.handleChange}
+          />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+    );
   }
 }
 
-export default CalenderRefresher
+export default CalenderRefresher;
