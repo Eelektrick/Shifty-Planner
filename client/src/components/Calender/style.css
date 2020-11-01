@@ -30,6 +30,7 @@
   color: #ffffff;
   background-color: #661974;
   border-color: #8c8c8c;
+  font-family: "Kanit", "sans-serif";
 }
 .rbc-event {
   background-color: white;
@@ -38,4 +39,36 @@
 .rbc-event:hover {
   background-color: rgb(172, 172, 172);
   font-weight: bold;
+  font-family: "Kanit", "sans-serif";
+}
+
+p {
+  font-size: 14px;
+  font-family: "Kanit", "sans-serif";
+}
+
+#trade:hover {
+  box-shadow: 0 5px 5px #666;
+  background-color: #00449c;
+  border: none;
+}
+
+#close:hover {
+  box-shadow: 0 5px 5px #666;
+  background-color: #666666;
+  border: none;
+}
+
+#trade:active {
+  box-shadow: 0 5px 5px #666;
+  background-color: #00449c;
+  transform: translateY(3px);
+  border: none;
+}
+
+#close:active {
+  box-shadow: 0 5px 5px #666;
+  background-color: #666666;
+  transform: translateY(3px);
+  border: none;
 }

@@ -12,10 +12,10 @@ mongoose.connect(
   "mongodb://localhost/shifty-planner" ,{ useNewUrlParser: true }
 );
 
-var begin = moment().startOf('month');
+var begin = moment().startOf('month').add(1, 'M');
 
 const shiftSeed =[];
-for (var i = 0; i < moment().daysInMonth(); i++) {
+for (var i = 0; i < begin.daysInMonth(); i++) {
 
   var j = i % 6;
 
