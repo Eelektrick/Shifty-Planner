@@ -8,7 +8,6 @@ import Schedule from "../components/Schedule";
 import Footer from "../components/Footer";
 
 function HomePage() {
-
   const [isOpen, setIsOpen] = useState(false);
   const [details, setDetails] = useState([]);
   const [events, setEvents] = useState([]);
@@ -76,13 +75,15 @@ function HomePage() {
       >
         <div>
           <Modal.Header closeButton>
-            <Modal.Title>Details</Modal.Title>
+            <Modal.Title style={{ fontFamily: "Kanit, sans-serif" }}>
+              Details
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div>
               <Form>
                 <Form.Group controlId="exampleForm.ControlSelect1">
-                  <Form.Label>
+                  <Form.Label style={{ fontFamily: "Kanit, sans-serif" }}>
                     {" "}
                     Please select from your shift to swap with:
                   </Form.Label>
@@ -101,7 +102,12 @@ function HomePage() {
                   </Form.Control>
                 </Form.Group>
 
-                <Button type="submit" id="submit" onClick={saveDetails}>
+                <Button
+                  type="submit"
+                  id="submit"
+                  onClick={saveDetails}
+                  style={{ fontFamily: "Kanit, sans-serif" }}
+                >
                   Submit
                 </Button>
               </Form>
@@ -114,13 +120,17 @@ function HomePage() {
 
   return (
     <div>
-      <div style={{color:"white", textAlign:"center", fontSize:"20px"}}> Welcome {nickname} !! </div>
+      <div style={{ color: "white", textAlign: "center", fontSize: "20px" }}>
+        {" "}
+        Welcome {nickname} !!{" "}
+      </div>
       <div id="cover">
         <h4
           style={{
             textAlign: "left",
             color: "black",
             fontSize: "22px",
+            fontFamily: "Kanit, sans-serif",
           }}
         >
           Trade Shifts

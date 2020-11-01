@@ -8,7 +8,7 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-  font-family: "Poppins", sans-serif;
+  font-family: "Kanit", sans-serif;
 }
 
 nav.navbar.navbar-default {
@@ -22,7 +22,7 @@ nav.navbar.navbar-default {
 
 #shifty {
   color: rgb(190, 147, 3);
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Kanit", "sans-serif";
   margin-right: 40px;
   font-weight: bold;
 }
@@ -30,7 +30,8 @@ nav.navbar.navbar-default {
 a {
   color: rgb(233, 173, 7);
   cursor: pointer;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Kanit", "sans-serif";
+  font-size: 16px;
 }
 
 a:hover {

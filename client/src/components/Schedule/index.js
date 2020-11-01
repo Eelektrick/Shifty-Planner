@@ -11,6 +11,7 @@ function Schedule() {
             color: "black",
             marginBottom: "20px",
             fontSize: "22px",
+            fontFamily: "Kanit, sans-serif",
           }}
         >
           Today's Schedule
