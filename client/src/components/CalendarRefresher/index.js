@@ -25,15 +25,8 @@ class CalenderRefresher extends React.Component {
       this.handleSubmitTime = this.handleSubmitTime.bind(this);
     }
   
-    handleChangeName(event) {
-      this.setState({name: event.target.value});
-      console.log(this.state.name);
-    }
-    handleSubmitName(event) {
-      alert('A name was submitted: ' + this.state.value);
-      event.preventDefault();
-    }
 
+// /* -------------SHIFT----------- */
     handleChangeTime(event) {
       this.setState({value: event.target.value});
       event.preventDefault();
@@ -42,11 +35,25 @@ class CalenderRefresher extends React.Component {
       alert('A name was submitted: ' + this.state.value);
       event.preventDefault();
     }
+///* ---------------NAME------------- */
+    handleChangeName(event) {
+      this.setState({name: event.target.value});
+      console.log(this.state.name);
+    }
+    handleSubmitName(event) {
+      alert('A name was submitted: ' + this.state.value);
 
+      API.getUser
+
+
+
+      event.preventDefault();
+    }
+///* ---------Final Gen-------------- */
     handleSubmit(event){
       alert("WHY DID YOU PUSH THE BUTTON");
     }
-  
+  //---------------------------------------------------
     render() {
       return (
         <div>

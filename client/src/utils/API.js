@@ -1,6 +1,8 @@
 import axios from "axios";
 
 export default {
+
+  ///-----------------------START SHIFT ROUTES---------------------
   // Gets all shifts
   getShifts: function(userId) {
     return axios.get("/api/shifts", {params: { userId }});
@@ -42,5 +44,11 @@ export default {
   },
   saveID: function(id, userId){
     return axios.put("/api/shifts/" +id+ '/ignore', {userId});
-  }
+  },
+///-----------------------END SHIFT ROUTES---------------------
+///-----------------------START PERSONNEL ROUTES---------------------
+//Get Routes
+getUsers: function(userId) {
+  return axios.get("/api/Users", {params: { userId }});
+},
 };
