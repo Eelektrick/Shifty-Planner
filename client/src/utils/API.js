@@ -47,8 +47,20 @@ export default {
   },
 ///-----------------------END SHIFT ROUTES---------------------
 ///-----------------------START PERSONNEL ROUTES---------------------
-//Get Routes
+//GET Routes
 getUsers: function() {
   return axios.get("/api/users");
+},
+getUser: function(id) {
+  return axios.get("/api/users"+id);
+},
+
+saveShift: function(shiftData) {
+  return axios.post("/api/shifts", shiftData);
+},
+
+//POST Routes
+createUser: function(personnelData) {
+  return axios.get("/api/users", personnelData);
 },
 };
