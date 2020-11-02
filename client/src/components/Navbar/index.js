@@ -29,7 +29,7 @@ export default class Navbar extends Component {
           className="navbar-brand"
           id="shifty"
           to="/"
-          style={{ fontFamily: "Kanit, sans-serif" }}
+          style={{ fontFamily: "Kanit, sans-serif", fontSize: "25px" }}
         >
           Shifty Planner
         </a>
@@ -85,10 +85,11 @@ export default class Navbar extends Component {
                 />{" "}
                 License
               </Link>
-              <li className="nav-item">
-                <LogoutButton />
-              </li>
             </li>
+            <li className="nav-item">
+              <LogoutButton />
+            </li>
+
             <li className="nav-item">
               <a
                 className={

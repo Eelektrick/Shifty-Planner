@@ -120,7 +120,15 @@ function HomePage() {
 
   return (
     <div>
-      <div style={{ color: "white", textAlign: "center", fontSize: "20px" }}>
+      <div
+        style={{
+          padding: "20px",
+          color: "white",
+          textAlign: "center",
+          fontSize: "23px",
+          fontFamily: "Kanit, sans-serif",
+        }}
+      >
         {" "}
         Welcome {nickname} !!{" "}
       </div>
@@ -133,7 +141,7 @@ function HomePage() {
             fontFamily: "Kanit, sans-serif",
           }}
         >
-          Trade Shifts
+          TRADE SHIFTS
         </h4>
 
         <div
@@ -144,13 +152,13 @@ function HomePage() {
             {events.map((details) => (
               <div className="card">
                 <div className="card-body">
-                  <h5 class="card-title">Name : {details.name}</h5>
+                  <h5 className="card-title">Name : {details.name}</h5>
                   <h6 className="card-subtitle mb-2 text-muted">
                     Shift : {details.shift}
                   </h6>
                   <div className="card-text">
-                    <ul class="list-group list-group-flush">
-                      <li class="list-group-item">
+                    <ul className="list-group list-group-flush">
+                      <li className="list-group-item">
                         Date:{" "}
                         <div
                           style={{
@@ -161,7 +169,7 @@ function HomePage() {
                           {moment(details.start).format("MMMM Do YYYY")}
                         </div>
                       </li>
-                      <li class="list-group-item">
+                      <li className="list-group-item">
                         Time :{" "}
                         <div
                           style={{
@@ -177,7 +185,7 @@ function HomePage() {
                   </div>
                   <button
                     type="button"
-                    class="btn btn-dark mr-3"
+                    className="btn btn-dark mr-3"
                     onClick={() => setIsOpen(true)}
                     id="btn1"
                   >
@@ -186,7 +194,7 @@ function HomePage() {
                   <button
                     type="button"
                     onClick={() => this.handleDelete(details._id)}
-                    class="btn btn-dark"
+                    className="btn btn-dark"
                     id="btn2"
                   >
                     Ignore

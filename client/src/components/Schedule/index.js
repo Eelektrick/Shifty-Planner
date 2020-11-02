@@ -14,13 +14,13 @@ function Schedule() {
             fontFamily: "Kanit, sans-serif",
           }}
         >
-          Today's Schedule
+          TODAY'S SCHEDULE
         </h4>
         <div
           className="container"
           style={{ height: "300px", overflow: "scroll" }}
         >
-          <div classNane="col sm-12" id="table"></div>
+          <div className="col sm-12" id="table"></div>
         </div>
       </div>
     </div>
