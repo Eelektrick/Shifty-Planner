@@ -13,6 +13,9 @@ router.route("/:id/ignore")
 router.route("/byAuth")
   .get(userController.findByAuthId)
 
+router.route("/byName")
+  .get(userController.findByName)
+
 // Matches with "/api/users/:id"    .get(userController.findById)
 router
   .route("/:id")

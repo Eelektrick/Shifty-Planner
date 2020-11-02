@@ -15,7 +15,6 @@ export default {
   //   return axios.get("/api/shifts/byAuth" , {params: { authID }});
   // },
   getShiftByAuthId: function(authID) {
-    console.log(JSON.stringify(authID)+" FROM getShiftByAuthId AXIOS Call");
     return axios.get("/api/shifts/byAuth" , {params: { authID }});
   },
   // Gets the shift with the given id
@@ -54,10 +53,11 @@ getUsers: function() {
 getUser: function(id) {
   return axios.get("/api/users"+id);
 },
-
-saveShift: function(shiftData) {
-  return axios.post("/api/shifts", shiftData);
+getUserByName: function(name) {
+  console.log("UserByName hit "+name);
+  return axios.get("/api/users/byName", {params: { name }});
 },
+
 
 //POST Routes
 createUser: function(personnelData) {

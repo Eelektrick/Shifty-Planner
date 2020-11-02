@@ -32,7 +32,8 @@ class CalenderRefresher extends React.Component {
       event.preventDefault();
     }
     handleSubmitTime(event) {
-      alert('A name was submitted: ' + this.state.value);
+      alert('A name was submitted: ' + this.state.name);
+    
       event.preventDefault();
     }
 ///* ---------------NAME------------- */
@@ -41,9 +42,8 @@ class CalenderRefresher extends React.Component {
       console.log(this.state.name);
     }
     handleSubmitName(event) {
-      alert('A name was submitted: ' + this.state.value);
-
-      
+      alert('A name was submitted: ' + this.state.name);
+      API.getUserByName(this.state.name)
 
 
 
@@ -67,7 +67,7 @@ class CalenderRefresher extends React.Component {
           <input type="submit" value="Submit" />
         </form>
         {/* ---------------NAME------------- */}
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmitName}>
         <h2>Personnel on the shift </h2>
           <label>
             Name:
@@ -75,8 +75,9 @@ class CalenderRefresher extends React.Component {
           </label>
           <input type="submit" value="Submit" />
         </form>
-        <form onSubmit={this.handleSubmit}>
+       
           {/* ---------Final Gen-------------- */}
+           <form onSubmit={this.handleSubmit}>
         <h2>Generate!</h2>
           <label>
             <div>Submit all   </div>

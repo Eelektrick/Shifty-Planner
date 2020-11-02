@@ -26,6 +26,16 @@ module.exports = {
   //       )
   //     .catch(err => res.status(422).json(err));
   // },
+  findByName: function(req, res) {
+    console.log("req.query.name "+req.query.name);
+    db.Personnel
+      .find( {name: req.query.name} )
+      .then(dbModel => 
+        res.json(dbModel)
+        )
+      .catch(err => res.status(422).json(err));
+  },
+
   findByAuthId: function(req, res) {
     console.log(req.query.authID);
    
