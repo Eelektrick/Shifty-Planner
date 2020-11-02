@@ -5,80 +5,73 @@ const moment = require("moment");
 
 //Seed Online MongoDB
 
-
 // Seed Local
 mongoose.connect(
-  process.env.MONGODB_URI ||
-  "mongodb://localhost/shifty-planner" ,{ useNewUrlParser: true }
+  process.env.MONGODB_URI || "mongodb://localhost/shifty-planner",
+  { useNewUrlParser: true }
 );
 
-var begin = moment().startOf('month').add(1, 'M');
+var begin = moment().startOf("month");
 
-const shiftSeed =[];
+const shiftSeed = [];
 for (var i = 0; i < begin.daysInMonth(); i++) {
-
   var j = i % 6;
 
   if (j === 0 || j === 1) {
-    shiftSeed[i]
-      = {
-      // 'generated_ID': 
-      'authID': 'auth0|5f9d8116b472680076ec6966',
-      'emailID': 'corey.post@mail.com',
-      'shift': 'A',
-      'start': moment(begin).add(i, 'days').hours('07').toDate(),
-      'end': moment(begin).add(i, 'days').hours('19').toDate(),
-      'traded': 1,
-      'name' : "Corey",
-      'ignoredLists' : []
-    }
+    shiftSeed[i] = {
+      // 'generated_ID':
+      authID: "auth0|5f9d8116b472680076ec6966",
+      emailID: "corey.post@mail.com",
+      shift: "A",
+      start: moment(begin).add(i, "days").hours("07").toDate(),
+      end: moment(begin).add(i, "days").hours("19").toDate(),
+      traded: 1,
+      name: "Corey",
+      ignoredLists: [],
+    };
   } else if (j === 2 || j === 3) {
-    shiftSeed[i]
-      = {
-      'authID': 'auth0|5f9d80efe12ecb0068a0d7ef',
-      'emailID': 'yakini.arumugakani@mail.com',
-      'shift': 'B',
-      'start': moment(begin).add(i, 'days').hours('07').toDate(),
-      'end': moment(begin).add(i, 'days').hours('19').toDate(),
-      'traded': 1,
-      'name' : "Yakini",
-      'ignoredLists' : []
-    }
+    shiftSeed[i] = {
+      authID: "auth0|5f9d80efe12ecb0068a0d7ef",
+      emailID: "yakini.arumugakani@mail.com",
+      shift: "B",
+      start: moment(begin).add(i, "days").hours("07").toDate(),
+      end: moment(begin).add(i, "days").hours("19").toDate(),
+      traded: 1,
+      name: "Yakini",
+      ignoredLists: [],
+    };
   } else if (j === 4 || j === 5) {
-    shiftSeed[i]  
-      = {
-      'authID': 'auth0|5f9d80a8e12ecb0068a0d7eb',
-      'emailID': 'atime.bennet@mail.com',
-      'shift': 'C',
-      'start': moment(begin).add(i, 'days').hours('07').toDate(),
-      'end': moment(begin).add(i, 'days').hours('19').toDate(),
-      'traded': 1,
-      'name' : "Atima",
-      'ignoredLists' : []
-    },
-    shiftSeed[i]  
-    = {
-    'authID': 'auth0|5f9d83219faf390069c6acae',
-    'emailID': 'sam.grelick@mail.com',
-    'shift': 'C',
-    'start': moment(begin).add(i, 'days').hours('07').toDate(),
-    'end': moment(begin).add(i, 'days').hours('19').toDate(),
-    'traded': 1,
-    'name' : "Sam",
-    'ignoredLists' : []
-  }
+    (shiftSeed[i] = {
+      authID: "auth0|5f9d80a8e12ecb0068a0d7eb",
+      emailID: "atime.bennet@mail.com",
+      shift: "C",
+      start: moment(begin).add(i, "days").hours("07").toDate(),
+      end: moment(begin).add(i, "days").hours("19").toDate(),
+      traded: 1,
+      name: "Atima",
+      ignoredLists: [],
+    }),
+      (shiftSeed[i] = {
+        authID: "auth0|5f9d83219faf390069c6acae",
+        emailID: "sam.grelick@mail.com",
+        shift: "C",
+        start: moment(begin).add(i, "days").hours("07").toDate(),
+        end: moment(begin).add(i, "days").hours("19").toDate(),
+        traded: 1,
+        name: "Sam",
+        ignoredLists: [],
+      });
   }
 }
 
 console.log(shiftSeed);
-db.Shift
-  .remove({})
+db.Shift.remove({})
   .then(() => db.Shift.collection.insertMany(shiftSeed))
-  .then(data => {
+  .then((data) => {
     console.log(data.result.n + " records inserted!");
     process.exit(0);
   })
-  .catch(err => {
+  .catch((err) => {
     console.error(err);
     process.exit(1);
   });

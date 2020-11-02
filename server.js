@@ -5,7 +5,31 @@ const path = require("path");
 const mongoose = require("mongoose");
 const routes = require("./routes");
 const app = express();
+// const nodemailer = require("nodemailer");
+const sendMail = require("./client/src/components/Email");
 const PORT = process.env.PORT || 3001;
+
+// let transporter = nodemailer.createTransport({
+//   service: 'gmail',
+//   auth: {
+//       user: "shiftyplanner@gmail.com",
+//       pass: "shiftyplanner2020"
+//   }
+// });
+
+// let mailOptions = {
+//   from:  "shiftyplanner@gmail.com",
+//   to: "nickzehn10@hotmail.com",
+//   subject: 'Nodemailer - Test',
+//   text: 'Wooohooo it works!!'
+// };
+
+// transporter.sendMail(mailOptions, (err, data) => {
+//   if (err) {
+//       return log('Error occurs');
+//   }
+//   return log('Email sent!!!');
+// });
 
 // Set static path
 app.use(express.static(path.join(__dirname, "client")));
@@ -35,6 +59,19 @@ app.post("/subscribe", (req, res) => {
     .sendNotification(subscription, payload)
     .catch((err) => console.error(err));
 });
+//email
+app.post("/email", (req, res) => {
+  const { subject, email, text } = req.body;
+  console.log("Data", req.body);
+
+  sendMail(email, subject, text, function (err, data) {
+    if (err) {
+      console.log("Email Error!");
+    } else {
+      res.json({ message: "Email sent!" });
+    }
+  });
+});
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 // app.use(cors())
@@ -47,7 +84,15 @@ if (process.env.NODE_ENV === "production") {
 app.use(routes);
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI|| "mongodb://localhost/shifty-planner",{useNewUrlParser: true, useUnifiedTopology: true,  useCreateIndex: true, useFindAndModify: false});
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost/shifty-planner",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  }
+);
 
 // Start the API server
 app.listen(PORT, function () {
