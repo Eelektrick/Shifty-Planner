@@ -12,9 +12,8 @@ function HomePage() {
   const [isOpen, setIsOpen] = useState(false);
   const [details, setDetails] = useState([]);
   const [events, setEvents] = useState([]);
+  const [dropDownVal, setDropDownVal] = useState();
   const { user } = useAuth0();
-  console.log(user);
-  console.log(user.sub);
   const userInfo = user;
   const authID = user.sub;
   const nickname = user.nickname.split(".").join(" ");
@@ -25,16 +24,14 @@ function HomePage() {
 
   useEffect(() => {
     API.getShiftByAuthId(authID).then((data) => {
-      console.log("Get data by Auth Id");
-      console.log(data.data);
       const dataArr = [data.data];
-      console.log(dataArr);
       setDetails(data.data);
     });
 
     API.getShifts(authID).then((data) => {
       const e = [];
       for (var i = 0; i < data.data.length; i++) {
+        //Retrieve the details whose traded = 2 and not their own traded details
         if (data.data[i].traded === 2 && data.data[i].authID !== authID) {
           e[i] = {
             shift: data.data[i].shift,
@@ -55,19 +52,45 @@ function HomePage() {
 
   const handleDelete = (id) => {
     const newList = events.filter((e) => e._id !== id);
-    //    this.setState({...events, events: newList}) ;
+    //this.setState({...events, events: newList}) ;
     setEvents(newList);
-    // Save this new list to DB or remove that particular Id details from db
-    // After refresh all the removed items still exist
     API.saveID(id, authID).then((data) => {});
   };
 
-  const saveDetails = () => {
+  const saveDetails = (event, details) => {
+    event.preventDefault();
+   
+    console.log(dropDownVal);
+    console.log(details);
+    const value =  dropDownVal.split("|");
+    const avdDetails = {
+      name : value[0],
+      authID: authID,
+      shift: value[1],
+      date: value[2],
+      time: value[3]
+
+    }
+    API.saveAvdDetails(details._id, avdDetails).then((data) => {});
+
+    const traded = 3;
+    API.updateShift(details._id, traded ).then((response) => {
+      console.log(response);
+    });
+
+
     handleClose();
   };
 
+  const handleChange = (event, value) => {
+    event.preventDefault();
+    setDropDownVal(value)
+  }
+
   const MyModal = (props) => {
+    // console.log(props.details);
     return (
+    
       <Modal
         className="modal-container"
         //   show={isOpen}
@@ -81,29 +104,36 @@ function HomePage() {
           <Modal.Body>
             <div>
               <Form>
+              
                 <Form.Group controlId="exampleForm.ControlSelect1">
                   <Form.Label>
                     {" "}
-                    Please select from your shift to swap with:
+                    Please select from your shift to swap with: 
                   </Form.Label>
-                  <Form.Control as="select">
-                    {details.map((detail) => (
+               
+                  <Form.Control as="select" onChange = {(e) => {handleChange(e, e.target.value)} } >
+                 
+                  {details.map((detail) => (
+                   
                       <option>
-                        {" "}
+                       
+                        {detail.name}
+                        {"|"}
                         {detail.shift}
-                        {"-"}
+                        {"|"}
                         {moment(detail.start).format("MMMM Do YYYY")}
-                        {"-"}
-                        {moment(detail.start).format(" HH:mm:ss ")} to{" "}
+                        {"|"}
+                        {moment(detail.start).format(" HH:mm:ss ")} -{" "}
                         {moment(detail.end).format("HH:mm:ss ")}
+                      
                       </option>
-                    ))}
-                  </Form.Control>
+                  ))}
+                    </Form.Control>
+                <Button type="submit" id="submit" onClick={(e) => {saveDetails(e, props.details)}} >
+                  Submit
+                </Button>   
                 </Form.Group>
 
-                <Button type="submit" id="submit" onClick={saveDetails}>
-                  Submit
-                </Button>
               </Form>
             </div>
           </Modal.Body>
@@ -132,6 +162,7 @@ function HomePage() {
         >
           <div className="row">
             {events.map((details) => (
+              <>
               <div className="card">
                 <div className="card-body">
                   <h5 class="card-title">Name : {details.name}</h5>
@@ -175,7 +206,7 @@ function HomePage() {
                   </button>
                   <button
                     type="button"
-                    onClick={() => this.handleDelete(details._id)}
+                    onClick={() => handleDelete(details._id)}
                     class="btn btn-dark"
                     id="btn2"
                   >
@@ -183,8 +214,10 @@ function HomePage() {
                   </button>
                 </div>
               </div>
+                <MyModal details={details} show={isOpen} onHide={() => setIsOpen(false)} />
+                </>
             ))}
-            <MyModal show={isOpen} onHide={() => setIsOpen(false)} />
+          
           </div>
         </div>
       </div>

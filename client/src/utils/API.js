@@ -21,14 +21,15 @@ export default {
     return axios.get("/api/shifts/" + id);
   },
    // Update the shift with the given id
-  updateShift: function(id, data) {
+  updateShift: function(id, traded) {
+    console.log("Traded" +traded);
      let config = {
       headers: {
         header1: "Test-Header",
       }
      }
  
-    return axios.put("/api/shifts/" + id, data, config).then(res =>{
+    return axios.put("/api/shifts/" + id, {traded}, config).then(res =>{
       console.log(res);
     });
   },
@@ -42,5 +43,8 @@ export default {
   },
   saveID: function(id, userId){
     return axios.put("/api/shifts/" +id+ '/ignore', {userId});
+  },
+  saveAvdDetails: function(id, avdDetails){
+    return axios.put("/api/shifts/" +id+ '/approve', {avdDetails});
   }
 };

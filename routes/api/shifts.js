@@ -10,6 +10,9 @@ router.route("/")
 router.route("/:id/ignore")
   .put(shiftController.saveID)
 
+router.route("/:id/approve")
+.put(shiftController.saveAvdDetails)
+
 router.route("/byAuth")
   .get(shiftController.findByAuthId)
 

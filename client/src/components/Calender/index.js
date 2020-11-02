@@ -131,7 +131,8 @@ class Calender extends Component {
     console.log("Handle Submit Events");
     console.log(this.state.cal_events);
 
-    API.updateShift(this.state.cal_events._id).then((response) => {
+    const traded = 2;
+    API.updateShift(this.state.cal_events._id, traded).then((response) => {
       console.log(response);
     });
 

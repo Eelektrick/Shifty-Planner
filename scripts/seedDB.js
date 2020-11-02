@@ -12,7 +12,9 @@ mongoose.connect(
   "mongodb://localhost/shifty-planner" ,{ useNewUrlParser: true }
 );
 
-var begin = moment().startOf('month').add(1, 'M');
+// var begin = moment().startOf('month').add(1, 'M');
+var begin = moment().startOf('month');
+
 
 const shiftSeed =[];
 for (var i = 0; i < begin.daysInMonth(); i++) {
@@ -30,6 +32,7 @@ for (var i = 0; i < begin.daysInMonth(); i++) {
       'end': moment(begin).add(i, 'days').hours('19').toDate(),
       'traded': 1,
       'name' : "Corey",
+      'approvedLists': [],
       'ignoredLists' : []
     }
   } else if (j === 2 || j === 3) {
@@ -42,6 +45,7 @@ for (var i = 0; i < begin.daysInMonth(); i++) {
       'end': moment(begin).add(i, 'days').hours('19').toDate(),
       'traded': 1,
       'name' : "Yakini",
+      'approvedLists': [],
       'ignoredLists' : []
     }
   } else if (j === 4 || j === 5) {
@@ -54,6 +58,7 @@ for (var i = 0; i < begin.daysInMonth(); i++) {
       'end': moment(begin).add(i, 'days').hours('19').toDate(),
       'traded': 1,
       'name' : "Atima",
+      'approvedLists': [],
       'ignoredLists' : []
     },
     shiftSeed[i]  
@@ -65,6 +70,7 @@ for (var i = 0; i < begin.daysInMonth(); i++) {
     'end': moment(begin).add(i, 'days').hours('19').toDate(),
     'traded': 1,
     'name' : "Sam",
+    'approvedLists': [],
     'ignoredLists' : []
   }
   }
