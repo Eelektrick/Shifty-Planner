@@ -48,7 +48,7 @@ export default {
 ///-----------------------END SHIFT ROUTES---------------------
 ///-----------------------START PERSONNEL ROUTES---------------------
 //Get Routes
-getUsers: function(userId) {
-  return axios.get("/api/Users", {params: { userId }});
+getUsers: function() {
+  return axios.get("/api/users");
 },
 };

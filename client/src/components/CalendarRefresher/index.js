@@ -43,7 +43,7 @@ class CalenderRefresher extends React.Component {
     handleSubmitName(event) {
       alert('A name was submitted: ' + this.state.value);
 
-      API.getUser
+      
 
 
 
