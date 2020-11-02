@@ -9,6 +9,7 @@ import API from "../../utils/API";
 import ReactNotification from "react-notifications-component";
 import { store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
+import emailjs from "emailjs-com";
 import "animate.css";
 // import { Footer } from "rsuite";
 import Footer from "../Footer";
@@ -51,6 +52,7 @@ class Calender extends Component {
       modalIsOpen: false,
       cal_events: [],
       events: [],
+      crewName: "",
     };
   }
 
@@ -58,6 +60,7 @@ class Calender extends Component {
     // console.log("mounted calander");
     // Modal.setAppElement("body");
 
+    emailjs.init("user_BCfmpqcEj5v3szKGPYNTP");
     API.getShifts().then((data) => {
       // console.log("My Data from db");
       // console.log(data.data);
@@ -112,21 +115,25 @@ class Calender extends Component {
     //set model to true
     // console.log("here");
     console.log(event);
-    console.log(moment(event.start).format('MMMM Do YYYY, h:mm:ss a'));
-    console.log(moment().format('MMMM Do YYYY, h:mm:ss a'));
+
+    console.log(moment(event.start).format("MMMM Do YYYY, h:mm:ss a"));
+    console.log(moment().format("MMMM Do YYYY, h:mm:ss a"));
     const authID = this.props.authID;
-    if(event.authID !== authID || 
-      moment(event.start).isBefore() ){
+    if (event.authID !== authID || moment(event.start).isBefore()) {
       return;
     }
     this.setState({
       modalIsOpen: true,
       cal_events: event,
+      crewName: event.name,
     });
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
+    let formData = {
+      name: this.state.crewName,
+    };
 
     console.log("Handle Submit Events");
     console.log(this.state.cal_events);
@@ -134,6 +141,15 @@ class Calender extends Component {
     API.updateShift(this.state.cal_events._id).then((response) => {
       console.log(response);
     });
+
+    emailjs.send("shiftyPlannerEmail", "template_clhajc8", formData).then(
+      function (response) {
+        console.log("SUCCESS!", response.status, response.text);
+      },
+      function (error) {
+        console.log("FAILED...", error);
+      }
+    );
 
     this.closeModal();
   };
@@ -160,11 +176,15 @@ class Calender extends Component {
           </Modal.Header>
           <Modal.Body>
             Shift :{" "}
-            <p style={{ color: "blue", fontWeight: "bold" }}>
+            <p style={{ color: "blue", fontWeight: "bold", fontSize: "17px" }}>
               {this.state.cal_events.shift}
             </p>
+            Date :{" "}
+            <p style={{ color: "blue", fontWeight: "bold", fontSize: "17px" }}>
+              {moment(this.state.cal_events.start).format("MMMM Do YYYY")}
+            </p>
             Time:{" "}
-            <p style={{ color: "blue", fontWeight: "bold" }}>
+            <p style={{ color: "blue", fontWeight: "bold", fontSize: "17px" }}>
               {moment(this.state.cal_events.start).format(" HH:mm:ss ")} -{" "}
               {moment(this.state.cal_events.end).format("HH:mm:ss ")}
             </p>{" "}
@@ -188,7 +208,17 @@ class Calender extends Component {
     // console.log(events);
     return (
       <div>
-         <div style={{color: "white", textAlign:"center", fontSize:"20px", marginBottom:"2%"}}> Welcome {this.props.nickname.split(".").join(" ")} !!</div>
+        <div
+          style={{
+            color: "white",
+            textAlign: "center",
+            fontSize: "20px",
+            marginBottom: "2%",
+          }}
+        >
+          {" "}
+          Welcome {this.props.nickname.split(".").join(" ")} !!
+        </div>
         <div
           className="container"
           style={{ backgroundColor: "rgba(255, 255, 255, 0.774)" }}
@@ -196,7 +226,7 @@ class Calender extends Component {
           <Calendar
             selectable
             events={this.state.events}
-            views= {["month"]}
+            views={["month"]}
             onSelectEvent={this.handleSelect}
             defaultView="month"
             defaultDate={new Date()}
