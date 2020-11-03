@@ -6,6 +6,9 @@ export default {
   // Gets all shifts
   getShifts: function(userId) {
     return axios.get("/api/shifts", {params: { userId }});
+  }, 
+  getAvdLists: function(userId) {
+    return axios.get("/api/shifts/byAvdLists", {params: { userId }});
   },
   getShiftByTrade: function() {
     return axios.get("/api/shifts/");
@@ -19,14 +22,15 @@ export default {
     return axios.get("/api/shifts/" + id);
   },
    // Update the shift with the given id
-  updateShift: function(id, data) {
+  updateShift: function(id, traded) {
+    console.log("Traded" +traded);
      let config = {
       headers: {
         header1: "Test-Header",
       }
      }
  
-    return axios.put("/api/shifts/" + id, data, config).then(res =>{
+    return axios.put("/api/shifts/" + id, {traded}, config).then(res =>{
       console.log(res);
     });
   },
@@ -41,27 +45,30 @@ export default {
   saveID: function(id, userId){
     return axios.put("/api/shifts/" +id+ '/ignore', {userId});
   },
+  saveAvdDetails: function(id, avdDetails){
+    return axios.put("/api/shifts/" +id+ '/approve', {avdDetails});
+  },
 ///-----------------------END SHIFT ROUTES---------------------
 ///-----------------------START PERSONNEL ROUTES---------------------
 //GET Routes
-getUsers: function() {
-  return axios.get("/api/users");
-},
-getUser: function(id) {
-  return axios.get("/api/users"+id);
-},
-getUserByName: function(name) {
-  console.log("UserByName hit "+name);
-  return axios.get("/api/users/byName", {params: { name }});
-},
-getUsersByShift: function(shift) {
-  console.log("UserByShift hit "+shift);
-  return axios.get("/api/users/byShift", {params: { shift }});
-},
+  getUsers: function() {
+    return axios.get("/api/users");
+  },
+  getUser: function(id) {
+    return axios.get("/api/users"+id);
+  },
+  getUserByName: function(name) {
+    console.log("UserByName hit "+name);
+    return axios.get("/api/users/byName", {params: { name }});
+  },
+  getUsersByShift: function(shift) {
+    console.log("UserByShift hit "+shift);
+    return axios.get("/api/users/byShift", {params: { shift }});
+  },
 
 
-//POST Routes
-createUser: function(personnelData) {
-  return axios.get("/api/users", personnelData);
-},
-};
+  //POST Routes
+  createUser: function(personnelData) {
+    return axios.get("/api/users", personnelData);
+  },
+  };

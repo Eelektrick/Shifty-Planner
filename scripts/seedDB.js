@@ -18,49 +18,57 @@ for (var i = 0; i < begin.daysInMonth(); i++) {
   var j = i % 6;
 
   if (j === 0 || j === 1) {
-    shiftSeed[i] = {
-      // 'generated_ID':
-      authID: "auth0|5f9d8116b472680076ec6966",
-      emailID: "corey.post@mail.com",
-      shift: "A",
-      start: moment(begin).add(i, "days").hours("07").toDate(),
-      end: moment(begin).add(i, "days").hours("19").toDate(),
-      traded: 1,
-      name: "Corey",
-      ignoredLists: [],
-    };
+    shiftSeed[i]
+      = {
+      // 'generated_ID': 
+      'authID': 'auth0|5f9d8116b472680076ec6966',
+      'emailID': 'corey.post@mail.com',
+      'shift': 'A',
+      'start': moment(begin).add(i, 'days').hours('07').toDate(),
+      'end': moment(begin).add(i, 'days').hours('19').toDate(),
+      'traded': 1,
+      'name' : "Corey",
+      'approvedLists': [],
+      'ignoredLists' : []
+    }
   } else if (j === 2 || j === 3) {
-    shiftSeed[i] = {
-      authID: "auth0|5f9d80efe12ecb0068a0d7ef",
-      emailID: "yakini.arumugakani@mail.com",
-      shift: "B",
-      start: moment(begin).add(i, "days").hours("07").toDate(),
-      end: moment(begin).add(i, "days").hours("19").toDate(),
-      traded: 1,
-      name: "Yakini",
-      ignoredLists: [],
-    };
+    shiftSeed[i]
+      = {
+      'authID': 'auth0|5f9d80efe12ecb0068a0d7ef',
+      'emailID': 'yakini.arumugakani@mail.com',
+      'shift': 'B',
+      'start': moment(begin).add(i, 'days').hours('07').toDate(),
+      'end': moment(begin).add(i, 'days').hours('19').toDate(),
+      'traded': 1,
+      'name' : "Yakini",
+      'approvedLists': [],
+      'ignoredLists' : []
+    }
   } else if (j === 4 || j === 5) {
-    (shiftSeed[i] = {
-      authID: "auth0|5f9d80a8e12ecb0068a0d7eb",
-      emailID: "atime.bennet@mail.com",
-      shift: "C",
-      start: moment(begin).add(i, "days").hours("07").toDate(),
-      end: moment(begin).add(i, "days").hours("19").toDate(),
-      traded: 1,
-      name: "Atima",
-      ignoredLists: [],
-    }),
-      (shiftSeed[i] = {
-        authID: "auth0|5f9d83219faf390069c6acae",
-        emailID: "sam.grelick@mail.com",
-        shift: "C",
-        start: moment(begin).add(i, "days").hours("07").toDate(),
-        end: moment(begin).add(i, "days").hours("19").toDate(),
-        traded: 1,
-        name: "Sam",
-        ignoredLists: [],
-      });
+    shiftSeed[i]  
+      = {
+      'authID': 'auth0|5f9d80a8e12ecb0068a0d7eb',
+      'emailID': 'atime.bennet@mail.com',
+      'shift': 'C',
+      'start': moment(begin).add(i, 'days').hours('07').toDate(),
+      'end': moment(begin).add(i, 'days').hours('19').toDate(),
+      'traded': 1,
+      'name' : "Atima",
+      'approvedLists': [],
+      'ignoredLists' : []
+    },
+    shiftSeed[i]  
+    = {
+    'authID': 'auth0|5f9d83219faf390069c6acae',
+    'emailID': 'sam.grelick@mail.com',
+    'shift': 'C',
+    'start': moment(begin).add(i, 'days').hours('07').toDate(),
+    'end': moment(begin).add(i, 'days').hours('19').toDate(),
+    'traded': 1,
+    'name' : "Sam",
+    'approvedLists': [],
+    'ignoredLists' : []
+  }
   }
 }
 

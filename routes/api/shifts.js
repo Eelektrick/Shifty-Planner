@@ -10,8 +10,14 @@ router.route("/")
 router.route("/:id/ignore")
   .put(shiftController.saveID)
 
+router.route("/:id/approve")
+.put(shiftController.saveAvdDetails)
+
 router.route("/byAuth")
   .get(shiftController.findByAuthId)
+
+router.route("/byAvdLists")
+  .get(shiftController.findAvdLists)
 
 // Matches with "/api/shifts/:id"    .get(shiftController.findById)
 router

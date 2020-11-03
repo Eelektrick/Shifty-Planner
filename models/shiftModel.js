@@ -55,6 +55,9 @@ const shiftModel = new mongoose.Schema
     name:{
         type:String
     },
+    approvedLists:{
+        type: Array
+    },
     ignoredLists:{
         type:[String]
     },
