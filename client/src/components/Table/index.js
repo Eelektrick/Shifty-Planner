@@ -9,13 +9,20 @@ function Table(props) {
 
   const [isOpen, setIsOpen] = useState(false);
   const [dropDownVal, setDropDownVal] = useState();
+  const [events, setEvents] = useState([]);
   const handleClose = () => setIsOpen(false);
   const { user } = useAuth0();
   const authID = user.sub;
+
+  // useEffect(() => {
+   
+  //   setEvents(props.events);
+  //   });
+
   const handleDelete = (id) => {
     const newList = props.events.filter((e) => e._id !== id);
     //this.setState({...events, events: newList}) ;
-    // setEvents(newList);
+    setEvents(newList);
     API.saveID(id, authID).then((data) => { });
   };
 
@@ -27,10 +34,10 @@ function Table(props) {
 
   const saveDetails = (event, details) => {
     event.preventDefault();
-    console.log("Details for saving");
-    console.log(dropDownVal);
-    console.log(details);
-    console.log(details._id);
+    // console.log("Details for saving");
+    // console.log(dropDownVal);
+    // console.log(details);
+    // console.log(details._id);
     const value = dropDownVal.split("|");
     const avdDetails = {
       name: value[0],
@@ -46,6 +53,7 @@ function Table(props) {
     API.updateShift(details._id, traded).then((response) => {
       console.log(response);
     });
+
     handleClose();
   }
 
@@ -74,6 +82,7 @@ function Table(props) {
 
                   <Form.Control as="select" onChange={(e) => { handleChange(e, e.target.value) }} >
 
+                  {/* props.modalDetails */}
                     {props.modalDetails.map((detail) => (
 
                       <option>
@@ -104,7 +113,7 @@ function Table(props) {
   };
 
   return (
-
+    setEvents(props.events),
     <div>
       <div style={{ color: "white", textAlign: "center", fontSize: "20px" }}> Welcome {props.name} !! </div>
       <div id="cover">

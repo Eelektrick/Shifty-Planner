@@ -48,6 +48,13 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  saveRejectID: function (req, res) {
+    // console.log(req.body);
+    db.Shift
+      .findOneAndUpdate({ authID: req.params.id }, { $push: { ignoredLists: req.body.userId } }, { new: true })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
   saveAvdDetails: function (req, res) {
     db.Shift
       .findOneAndUpdate({ _id: req.params.id }, { $push: { approvedLists: req.body.avdDetails } }, { new: true })
