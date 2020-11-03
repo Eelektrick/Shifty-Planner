@@ -14,10 +14,10 @@ function Table(props) {
   const { user } = useAuth0();
   const authID = user.sub;
 
-  // useEffect(() => {
+   useEffect(() => {
    
-  //   setEvents(props.events);
-  //   });
+     setEvents(props.events);
+     });
 
   const handleDelete = (id) => {
     const newList = props.events.filter((e) => e._id !== id);
@@ -113,7 +113,7 @@ function Table(props) {
   };
 
   return (
-    setEvents(props.events),
+   
     <div>
       <div style={{ color: "white", textAlign: "center", fontSize: "20px" }}> Welcome {props.name} !! </div>
       <div id="cover">
@@ -132,7 +132,7 @@ function Table(props) {
           style={{ height: "300px", overflow: "scroll", paddingBottom: "10px" }}
         >
           <div className="row">
-            {props.events.map((details) => (
+            {events.map((details) => (
               <>
                 <div className="card">
                   <div className="card-body">

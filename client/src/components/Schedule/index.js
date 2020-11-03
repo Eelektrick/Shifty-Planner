@@ -11,10 +11,10 @@ function Schedule(props) {
   // console.log("props.avdEvents");
   // console.log(props.avdEvents);
   // setavdEvents(props.avdEvents);
-  // useEffect(() => {
+   useEffect(() => {
    
-  //   setavdEvents(props.avdEvents);
-  //   });
+     setavdEvents(props.avdEvents);
+     });
 
   const handleReject = (id, authId) => {
     console.log(id);
@@ -50,7 +50,7 @@ function Schedule(props) {
          
           {/* {!avdEvents.length> 0 && setavdEvents(props.avdEvents)} */}
           
-            {props.avdEvents.map((details) => (
+            {avdEvents.map((details) => (
               <>
                 <div className="card">
                   <div className="card-body">
