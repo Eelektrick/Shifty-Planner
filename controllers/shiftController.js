@@ -12,7 +12,7 @@ module.exports = {
   },
   findAvdLists: function (req, res) {
     db.Shift
-      .find({ approvedLists: { $ne: req.query.userId }, traded: 3 })
+      .find({ approvedLists: { $ne: req.query.userId }, ignoredLists: { $ne: req.query.userId } ,traded: 3 })
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));

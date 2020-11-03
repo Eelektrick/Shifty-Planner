@@ -20,10 +20,12 @@ function Table(props) {
      });
 
   const handleDelete = (id) => {
+    console.log(id);
     const newList = props.events.filter((e) => e._id !== id);
     //this.setState({...events, events: newList}) ;
-    setEvents(newList);
+  
     API.saveID(id, authID).then((data) => { });
+    setEvents(newList);
   };
 
 
