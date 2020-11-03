@@ -1,6 +1,8 @@
 import axios from "axios";
 
 export default {
+
+  ///-----------------------START SHIFT ROUTES---------------------
   // Gets all shifts
   getShifts: function(userId) {
     return axios.get("/api/shifts", {params: { userId }});
@@ -8,12 +10,8 @@ export default {
   getShiftByTrade: function() {
     return axios.get("/api/shifts/");
   },
-  // getShiftByAuthId: function(authID) {
-  //   console.log(JSON.stringify(authID)+" FROM getShiftByAuthId AXIOS Call");
-  //   return axios.get("/api/shifts/byAuth" , {params: { authID }});
-  // },
+  //GET by users Auth ID
   getShiftByAuthId: function(authID) {
-    console.log(JSON.stringify(authID)+" FROM getShiftByAuthId AXIOS Call");
     return axios.get("/api/shifts/byAuth" , {params: { authID }});
   },
   // Gets the shift with the given id
@@ -42,5 +40,28 @@ export default {
   },
   saveID: function(id, userId){
     return axios.put("/api/shifts/" +id+ '/ignore', {userId});
-  }
+  },
+///-----------------------END SHIFT ROUTES---------------------
+///-----------------------START PERSONNEL ROUTES---------------------
+//GET Routes
+getUsers: function() {
+  return axios.get("/api/users");
+},
+getUser: function(id) {
+  return axios.get("/api/users"+id);
+},
+getUserByName: function(name) {
+  console.log("UserByName hit "+name);
+  return axios.get("/api/users/byName", {params: { name }});
+},
+getUsersByShift: function(shift) {
+  console.log("UserByShift hit "+shift);
+  return axios.get("/api/users/byShift", {params: { shift }});
+},
+
+
+//POST Routes
+createUser: function(personnelData) {
+  return axios.get("/api/users", personnelData);
+},
 };

@@ -10,7 +10,7 @@ const personnelModel = new mongoose.Schema
     
     //unique id for user
     authID: {
-        type: Number,
+        type: String,
         required: true,
         trim: true
     },
