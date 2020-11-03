@@ -16,12 +16,24 @@ function Schedule(props) {
      setavdEvents(props.avdEvents);
      });
 
-  const handleReject = (id, authId) => {
-    console.log(id);
-    const newList = props.avdEvents.filter((e) => e._id !== id);
+  // const handleReject = (id, authId) => {
+  //   console.log(id);
+  //   const newList = props.avdEvents.filter((e) => e.approvedPersonsAuthID !== authId);
+   
+  //   API.saveID(id, authId).then((data) => { });
+  //   setavdEvents(newList);
+  //   // API.getShifts(authId);
+
+  // };
+
+  const handleReject = (avdAuthid, myId) => {
+    // console.log(myId);
+    const newList = props.avdEvents.filter((e) => e.approvedPersonsAuthID !== avdAuthid);
+   
+    // API.saveID(id, authId).then((data) => { });
+    API.saveRejectID(avdAuthid, myId).then((data) => { });
     setavdEvents(newList);
-    API.saveID(id, authId).then((data) => { });
-    API.getShifts(authId);
+    // API.getShifts(authId);
 
   };
 
@@ -101,7 +113,8 @@ function Schedule(props) {
                   </button>
                     <button
                       type="button"
-                      onClick={() => handleReject(details.myId, details.approvedPersonsAuthID)}
+                      // onClick={() => handleReject(details.myId, details.approvedPersonsAuthID)}
+                      onClick={() => handleReject(details.approvedPersonsAuthID, details.myId)}
                       class="btn btn-dark"
                       id="btn2"
                     >
