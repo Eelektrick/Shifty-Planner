@@ -37,6 +37,21 @@ function Schedule(props) {
 
   };
 
+  const handleAccept = (details) => {
+
+    // API.saveRejectID(avdAuthid, myId).then((data) => { });
+    // setavdEvents(newList);
+    let theirDetails = {
+      authID: details.approvedPersonsAuthID,
+      shift: details.approvedPersonsShift,
+      traded: 4,
+      name : details.approvedPersonsName
+    }
+
+    API.swapMyDetails(details.myId, theirDetails);
+
+  };
+
   // {!avdEvents.length> 0 && setavdEvents(props.avdEvents)}
 
   return (
@@ -106,7 +121,7 @@ function Schedule(props) {
                     <button
                       type="button"
                       class="btn btn-dark mr-3"
-                      // onClick={}
+                      onClick={() => handleAccept(details)}
                       id="btn1"
                     >
                       Accept

@@ -87,7 +87,7 @@ function Table(props) {
                   {/* props.modalDetails */}
                     {props.modalDetails.map((detail) => (
 
-                      <option>
+                      <option value={detail.id}>
 
                         {detail.name}
                         {"|"}
