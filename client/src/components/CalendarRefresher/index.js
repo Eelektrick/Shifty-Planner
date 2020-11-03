@@ -1,7 +1,6 @@
 import React from "react";
 // import { Button, Form, Col } from "react-bootstrap";
 import API from "../../utils/API";
-import moment from "moment";
 
 class CalenderRefresher extends React.Component {
   constructor(props) {

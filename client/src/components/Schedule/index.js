@@ -1,7 +1,20 @@
 import React from "react";
 import "./style.css";
+import API from "../../utils/API";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function Schedule(props) {
+  const { user } = useAuth0();
+  const authID = user.sub;
+
+  const handleReject = (id) => {
+    console.log(id);
+    const newList = props.avdEvents.filter((e) => e._id !== id);
+    //this.setState({...events, events: newList}) ;
+    // setEvents(newList);
+    API.saveID(id, authID).then((data) => { });
+  };
+
   return (
     <div>
       <div id="cover">
@@ -73,11 +86,11 @@ function Schedule(props) {
                   </button>
                     <button
                       type="button"
-                      // onClick={}
+                      onClick={() => handleReject(details.myId)}
                       class="btn btn-dark"
                       id="btn2"
                     >
-                      Ignore
+                      Reject
                   </button>
                   </div>
                 </div>

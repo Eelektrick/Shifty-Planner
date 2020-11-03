@@ -163,7 +163,7 @@ function Table(props) {
                       onClick={() => setIsOpen(true)}
                       id="btn1"
                     >
-                      Accept
+                      Propose
                   </button>
                     <button
                       type="button"
