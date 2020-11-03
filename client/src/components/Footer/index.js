@@ -19,7 +19,7 @@ function Footer() {
                 <ul className="list-unstyled">
                   <li>
                     <a href="https://nasemso.org/">
-                      National Axxociation of State EMS Officials
+                      National Accociation of State EMS Officials
                     </a>
                   </li>
                 </ul>
