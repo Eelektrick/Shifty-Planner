@@ -46,6 +46,11 @@ p {
   font-family: "Kanit", "sans-serif";
 }
 
+#calendarCover {
+  margin-bottom: 40px;
+  margin-top: 40px;
+}
+
 #trade:hover {
   box-shadow: 0 5px 5px #666;
   background-color: #00449c;

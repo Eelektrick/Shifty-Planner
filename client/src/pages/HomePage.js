@@ -133,7 +133,6 @@ function HomePage() {
           </Tabs>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }
