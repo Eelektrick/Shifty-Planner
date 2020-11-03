@@ -6,14 +6,10 @@ import Example from "./pages/Example";
 import Scheduler from "./pages/Scheduler";
 import HomePage from "./pages/HomePage";
 import License from "./pages/License";
-//import Home from "./Home";
+import Footer from "./components/Footer";
 import { ProtectedRoute } from "./ProtectedRoute";
 
-
 function App() {
-
- 
-
   return (
     <Router>
       <div>
@@ -23,6 +19,7 @@ function App() {
         <ProtectedRoute exact path="/scheduler" component={Scheduler} />
         <ProtectedRoute exact path="/home" component={HomePage} />
         <ProtectedRoute exact path="/license" component={License} />
+        <Footer />
       </div>
     </Router>
   );

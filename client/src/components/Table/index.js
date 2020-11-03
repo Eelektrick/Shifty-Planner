@@ -4,9 +4,7 @@ import API from "../../utils/API";
 import moment from "moment";
 import { useAuth0 } from "@auth0/auth0-react";
 
-
 function Table(props) {
-
   const [isOpen, setIsOpen] = useState(false);
   const [dropDownVal, setDropDownVal] = useState();
   const [events, setEvents] = useState([]);
@@ -14,25 +12,23 @@ function Table(props) {
   const { user } = useAuth0();
   const authID = user.sub;
 
-   useEffect(() => {
-   
-     setEvents(props.events);
-     });
+  useEffect(() => {
+    setEvents(props.events);
+  });
 
   const handleDelete = (id) => {
     console.log(id);
     const newList = props.events.filter((e) => e._id !== id);
     //this.setState({...events, events: newList}) ;
-  
-    API.saveID(id, authID).then((data) => { });
+
+    API.saveID(id, authID).then((data) => {});
     setEvents(newList);
   };
 
-
   const handleChange = (event, value) => {
     event.preventDefault();
-    setDropDownVal(value)
-  }
+    setDropDownVal(value);
+  };
 
   const saveDetails = (event, details) => {
     event.preventDefault();
@@ -46,10 +42,9 @@ function Table(props) {
       authID: authID,
       shift: value[1],
       date: value[2],
-      time: value[3]
-
-    }
-    API.saveAvdDetails(details._id, avdDetails).then((data) => { });
+      time: value[3],
+    };
+    API.saveAvdDetails(details._id, avdDetails).then((data) => {});
 
     const traded = 3;
     API.updateShift(details._id, traded).then((response) => {
@@ -57,17 +52,12 @@ function Table(props) {
     });
 
     handleClose();
-  }
-
+  };
 
   const MyModal = (props) => {
     console.log(props.details);
     return (
-
-      <Modal
-        className="modal-container"
-        {...props}
-      >
+      <Modal className="modal-container" {...props}>
         <div>
           <Modal.Header closeButton>
             <Modal.Title>Details</Modal.Title>
@@ -75,20 +65,21 @@ function Table(props) {
           <Modal.Body>
             <div>
               <Form>
-
                 <Form.Group controlId="exampleForm.ControlSelect1">
                   <Form.Label>
                     {" "}
-                        Please select from your shift to swap with:
-                      </Form.Label>
+                    Please select from your shift to swap with:
+                  </Form.Label>
 
-                  <Form.Control as="select" onChange={(e) => { handleChange(e, e.target.value) }} >
-
-                  {/* props.modalDetails */}
+                  <Form.Control
+                    as="select"
+                    onChange={(e) => {
+                      handleChange(e, e.target.value);
+                    }}
+                  >
+                    {/* props.modalDetails */}
                     {props.modalDetails.map((detail) => (
-
                       <option>
-
                         {detail.name}
                         {"|"}
                         {detail.shift}
@@ -97,15 +88,19 @@ function Table(props) {
                         {"|"}
                         {moment(detail.start).format(" HH:mm:ss ")} -{" "}
                         {moment(detail.end).format("HH:mm:ss ")}
-
                       </option>
                     ))}
                   </Form.Control>
-                  <Button type="submit" id="submit" onClick={(e) => { saveDetails(e, props.tradePersonReqDetail) }} >
+                  <Button
+                    type="submit"
+                    id="submit"
+                    onClick={(e) => {
+                      saveDetails(e, props.tradePersonReqDetail);
+                    }}
+                  >
                     Submit
-                    </Button>
+                  </Button>
                 </Form.Group>
-
               </Form>
             </div>
           </Modal.Body>
@@ -115,9 +110,7 @@ function Table(props) {
   };
 
   return (
-   
     <div>
-      <div style={{ color: "white", textAlign: "center", fontSize: "20px" }}> Welcome {props.name} !! </div>
       <div id="cover">
         <h4
           style={{
@@ -131,7 +124,7 @@ function Table(props) {
 
         <div
           className="container"
-          style={{ height: "300px", overflow: "scroll", paddingBottom: "10px" }}
+          style={{ height: "400px", overflow: "scroll", paddingBottom: "10px" }}
         >
           <div className="row">
             {events.map((details) => (
@@ -175,7 +168,7 @@ function Table(props) {
                       id="btn1"
                     >
                       Propose
-                  </button>
+                    </button>
                     <button
                       type="button"
                       onClick={() => handleDelete(details._id)}
@@ -183,13 +176,17 @@ function Table(props) {
                       id="btn2"
                     >
                       Ignore
-                  </button>
+                    </button>
                   </div>
                 </div>
-                <MyModal modalDetails={props.details} tradePersonReqDetail={details} show={isOpen} onHide={() => setIsOpen(false)} />
+                <MyModal
+                  modalDetails={props.details}
+                  tradePersonReqDetail={details}
+                  show={isOpen}
+                  onHide={() => setIsOpen(false)}
+                />
               </>
             ))}
-
           </div>
         </div>
       </div>
@@ -198,4 +195,3 @@ function Table(props) {
 }
 
 export default Table;
-
