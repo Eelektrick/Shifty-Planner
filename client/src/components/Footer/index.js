@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.css";
+import image from "./firstressym.png";
 
 function Footer() {
   return (
@@ -9,50 +10,17 @@ function Footer() {
           <div className="row">
             <div className="col-md-3 col-sm-6">
               <div className="footer-pad">
-                <h4>Heading 1</h4>
-                <ul className="list-unstyled">
-                  <li>
-                    <a href="#"></a>
-                  </li>
-                  <li>
-                    <a href="#">Payment Center</a>
-                  </li>
-                  <li>
-                    <a href="#">Contact Directory</a>
-                  </li>
-                  <li>
-                    <a href="#">Forms</a>
-                  </li>
-                  <li>
-                    <a href="#">News and Updates</a>
-                  </li>
-                  <li>
-                    <a href="#">FAQs</a>
-                  </li>
-                </ul>
+                <img src={image} width="180" height="60" alt="firstReslogo" />
               </div>
             </div>
             <div className="col-md-3 col-sm-6">
               <div className="footer-pad">
-                <h4>Heading 2</h4>
+                <h4>Links</h4>
                 <ul className="list-unstyled">
                   <li>
-                    <a href="#">Website Tutorial</a>
-                  </li>
-                  <li>
-                    <a href="#">Accessibility</a>
-                  </li>
-                  <li>
-                    <a href="#">Disclaimer</a>
-                  </li>
-                  <li>
-                    <a href="#">Privacy Policy</a>
-                  </li>
-                  <li>
-                    <a href="#">FAQs</a>
-                  </li>
-                  <li>
-                    <a href="#">Webmaster</a>
+                    <a href="https://nasemso.org/">
+                      National Axxociation of State EMS Officials
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -77,19 +45,11 @@ function Footer() {
               </div>
             </div>
             <div className="col-md-3">
-              <h4>Follow Us</h4>
-              <ul className="social-network social-circle">
-                <li>
-                  <a href="#" className="icoFacebook" title="Facebook">
-                    <i className="fa fa-facebook"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="icoLinkedin" title="Linkedin">
-                    <i className="fa fa-linkedin"></i>
-                  </a>
-                </li>
-              </ul>
+              <h4>Contact Us</h4>
+
+              <a href="mailto: shiftyplanner@gmail.com">
+                shiftyplanner@gmail.com
+              </a>
             </div>
           </div>
           <div className="row">
