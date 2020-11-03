@@ -1,7 +1,7 @@
 import React from "react";
 // import { Button, Form, Col } from "react-bootstrap";
 import API from "../../utils/API";
-import moment from "moment";
+
 
 class CalenderRefresher extends React.Component {
   constructor(props) {
@@ -16,8 +16,11 @@ class CalenderRefresher extends React.Component {
       name: "",
       ignoredLists: [],
       selectedMonth: 0,
-      shift: "A"
+      shift: "A",
+      newShiftVar:[],
+      aPIres:""
     };
+ 
 
     this.handleChangeName = this.handleChangeName.bind(this);
     this.handleChangeMonth = this.handleChangeMonth.bind(this);
@@ -40,15 +43,50 @@ class CalenderRefresher extends React.Component {
 
     event.preventDefault();
   }
-  // /* -------------SHIFT----------- */
+
+
+  // /* -------------SHIFT----------------------------------- */////////////////////
   handleChangeShift(event) {
     console.log(event);
 
     event.preventDefault();
   }
+
   handleSubmitShift(event) {
     console.log(this.state.shift);
-    API.getUsersByShift(this.state.shift);
+    
+   API.getUsersByShift(this.state.shift).then(res =>{
+    
+    }).then(users =>{
+      console.log(users);
+    })
+ 
+  
+    // console.log(userByShift.);
+
+    // const newShift = [];
+
+    // for (var i = 0; i < data.data.length; i++) {
+    //   e[i] = {
+    //     shift: data.data[i].shift,
+    //     title: data.data[i].shift + "   " + data.data[i].name,
+    //     start: data.data[i].start,
+    //     end: data.data[i].end,
+    //     _id: data.data[i]._id,
+    //     authID: data.data[i].authID,
+    //     name: data.data[i].name,
+    //     traded: data.data[i].traded,
+    //   };
+    // }
+    // this.setState({ newShiftVar: newShift });
+
+    
+
+
+
+
+
+
     event.preventDefault();
   }
 
@@ -127,6 +165,7 @@ class CalenderRefresher extends React.Component {
           <input type="button" value="DO NOT PUSH THE BUTTON" />
         </form>
       </div>
+
     );
   }
 }
