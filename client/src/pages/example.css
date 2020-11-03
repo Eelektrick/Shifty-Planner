@@ -7,7 +7,7 @@ body {
   background-size: cover;
   background-attachment: fixed;
   background-position: center center;
-  font-family: "Poppins", sans-serif;
+  font-family: "Kanit", sans-serif;
 }
 
 Form {
@@ -18,6 +18,7 @@ Form {
   text-align: left;
   color: rgba(255, 255, 255, 0.699);
   margin-bottom: 20px;
+  font-family: "Kanit", "sans-serif";
 }
 
 .card {
@@ -33,6 +34,7 @@ p {
   margin-top: 0;
   margin-bottom: 0px;
   margin-top: 0px;
+  font-family: "Kanit", "sans-serif";
 }
 /* #table {
   background-color: rgba(255, 255, 255, 0.616);
@@ -57,6 +59,7 @@ p {
 #btn2 {
   border: none;
   outline: none;
+  font-family: "Kanit", "sans-serif";
 }
 
 #btn1:active,
@@ -82,9 +85,11 @@ p {
   box-shadow: 0 5px 5px #666;
   background-color: #00449c;
   border: none;
+  font-family: "Kanit", "sans-serif";
 }
 
 #submit:active {
+  font-family: "Kanit", "sans-serif";
   box-shadow: 0 5px 5px #666;
   background-color: #00449c;
   transform: translateY(3px);

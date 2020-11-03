@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./style.css";
 import { FaHome } from "react-icons/fa";
-import { GrSchedules } from "react-icons/gr";
+import { AiFillSchedule } from "react-icons/ai";
 import { AiOutlineSafetyCertificate } from "react-icons/ai";
 import image from "../Navbar/shiftyLogo3.png";
 import { Link } from "react-router-dom";
@@ -22,10 +22,15 @@ export default class Navbar extends Component {
   render() {
     const show = this.state.menu ? "show" : "";
     return (
-      <nav className="navbar navbar-expand-lg navbar-light sticky-top">
+      <nav className="navbar navbar-expand-lg navbar-dark sticky-top">
         <a className="navbar-brand" href="#" />
         <img src={image} width="70" height="60" alt="logo" />
-        <a className="navbar-brand" id="shifty" to="/">
+        <a
+          className="navbar-brand"
+          id="shifty"
+          to="/"
+          style={{ fontFamily: "Kanit, sans-serif", fontSize: "25px" }}
+        >
           Shifty Planner
         </a>
         <button
@@ -61,7 +66,8 @@ export default class Navbar extends Component {
                     : "nav-link"
                 }
               >
-                <GrSchedules style={{ color: "rgb(190, 147, 3)" }} /> Schedule
+                <AiFillSchedule style={{ color: "rgb(190, 147, 3)" }} />{" "}
+                Schedule
               </Link>
             </li>
             <li className="nav-item">
@@ -79,10 +85,11 @@ export default class Navbar extends Component {
                 />{" "}
                 License
               </Link>
-              <li className="nav-item">
-                <LogoutButton />
-              </li>
             </li>
+            <li className="nav-item">
+              <LogoutButton />
+            </li>
+
             <li className="nav-item">
               <a
                 className={

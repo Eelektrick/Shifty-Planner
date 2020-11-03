@@ -9,7 +9,6 @@ import Footer from "../components/Footer";
 import Table from "../components/Table";
 
 function HomePage() {
-
   const [isOpen, setIsOpen] = useState(false);
   const [details, setDetails] = useState([]);
   const [events, setEvents] = useState([]);

@@ -30,6 +30,7 @@
   color: #ffffff;
   background-color: #661974;
   border-color: #8c8c8c;
+  font-family: "Kanit", "sans-serif";
 }
 .rbc-event {
   background-color: white;
@@ -38,10 +39,11 @@
 .rbc-event:hover {
   background-color: rgb(172, 172, 172);
   font-weight: bold;
+  font-family: "Kanit", "sans-serif";
 }
 
 p {
-  font-size: 14px;
+  font-family: "Kanit", "sans-serif";
 }
 
 #trade:hover {

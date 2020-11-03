@@ -5,20 +5,16 @@ const moment = require("moment");
 
 //Seed Online MongoDB
 
-
 // Seed Local
 mongoose.connect(
-  process.env.MONGODB_URI ||
-  "mongodb://localhost/shifty-planner" ,{ useNewUrlParser: true }
+  process.env.MONGODB_URI || "mongodb://localhost/shifty-planner",
+  { useNewUrlParser: true }
 );
 
-// var begin = moment().startOf('month').add(1, 'M');
-var begin = moment().startOf('month');
+var begin = moment().startOf("month");
 
-
-const shiftSeed =[];
+const shiftSeed = [];
 for (var i = 0; i < begin.daysInMonth(); i++) {
-
   var j = i % 6;
 
   if (j === 0 || j === 1) {
@@ -77,14 +73,13 @@ for (var i = 0; i < begin.daysInMonth(); i++) {
 }
 
 console.log(shiftSeed);
-db.Shift
-  .remove({})
+db.Shift.remove({})
   .then(() => db.Shift.collection.insertMany(shiftSeed))
-  .then(data => {
+  .then((data) => {
     console.log(data.result.n + " records inserted!");
     process.exit(0);
   })
-  .catch(err => {
+  .catch((err) => {
     console.error(err);
     process.exit(1);
   });
