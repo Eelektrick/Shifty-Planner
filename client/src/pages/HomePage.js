@@ -30,7 +30,7 @@ function HomePage() {
       const e = [];
       for (var i = 0; i < data.data.length; i++) {
         //Retrieve the details whose traded = 2 and not their own traded details
-        if (data.data[i].traded === 2 && data.data[i].authID !== authID) {
+        if ((data.data[i].traded === 2 || data.data[i].traded === 3) && data.data[i].authID !== authID) {
           e[i] = {
             shift: data.data[i].shift,
             title: data.data[i].shift + "   " + data.data[i].name,

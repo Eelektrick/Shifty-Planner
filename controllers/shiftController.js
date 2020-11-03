@@ -3,93 +3,70 @@ const db = require("../models");
 
 // Defining methods for the shiftsController
 module.exports = {
-  findAll: function(req, res) {
-    // console.log(req.query.userId);
+  findAll: function (req, res) {
     db.Shift
-      .find({ignoredLists: { $ne: req.query.userId } } )
+      .find({ ignoredLists: { $ne: req.query.userId }, authID: req.query.userId })
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  findAvdLists: function(req,res){
+  findAvdLists: function (req, res) {
     db.Shift
-    .find({approvedLists: { $ne: req.query.userId } , traded : 3})
-    .sort({ date: -1 })
-    .then(dbModel => res.json(dbModel))
-    .catch(err => res.status(422).json(err));
-},
+      .find({ approvedLists: { $ne: req.query.userId }, traded: 3 })
+      .sort({ date: -1 })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
 
-  findById: function(req, res) {
+  findById: function (req, res) {
     db.Shift
       .findById(req.params.id)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  // findByAuthId: function(req, res) {
-  //   console.log(req.query.authID);
-  //   db.Shift
-  //     .find({authID: { $eq: req.query.authID } })
-  //     .sort({ date : -1 })
-  //     .then(dbModel => 
-  //       res.json(dbModel)
-  //       )
-  //     .catch(err => res.status(422).json(err));
-  // },
-  findByAuthId: function(req, res) {
+  findByAuthId: function (req, res) {
     console.log(req.query.authID);
-   
+
     db.Shift
-      .find( {authID: req.query.authID , traded: 1 } )
-      .sort({ date : -1 })
-      .then(dbModel => 
+      .find({ authID: req.query.authID, traded: 1 })
+      .sort({ date: -1 })
+      .then(dbModel =>
         res.json(dbModel)
-        )
+      )
       .catch(err => res.status(422).json(err));
   },
-  create: function(req, res) {
+  create: function (req, res) {
     db.Shift
       .create(req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  saveID: function(req, res) {
+  saveID: function (req, res) {
     // console.log(req.body);
     db.Shift
-      .findOneAndUpdate({ _id: req.params.id}, {$push:{ignoredLists: req.body.userId}} ,{new: true})
+      .findOneAndUpdate({ _id: req.params.id }, { $push: { ignoredLists: req.body.userId } }, { new: true })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  saveAvdDetails: function(req, res) {
-    // console.log('My details');
-    // console.log(req);
-    // const data = {
-    //   name : 
-
-    // }
+  saveAvdDetails: function (req, res) {
     db.Shift
-      .findOneAndUpdate({ _id: req.params.id}, {$push:{approvedLists: req.body.avdDetails}} ,{new: true})
+      .findOneAndUpdate({ _id: req.params.id }, { $push: { approvedLists: req.body.avdDetails } }, { new: true })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  update: function(req, res) {
+  update: function (req, res) {
     console.log('traded Info');
     console.log(req.body.traded);
     db.Shift
-      .findOneAndUpdate({ _id: req.params.id}, {traded: req.body.traded} ,{new: true})
+      .findOneAndUpdate({ _id: req.params.id }, { traded: req.body.traded }, { new: true })
       .then(json => {
         console.log("put request made");
         console.log(json);
         res.json(json);
       })
-    // db.Shift
-    //   .findOneAndUpdate(filter,  update , {
-    //     new: true,
-    //     upsert: true 
-    //   })
-   
-    .catch(err => res.status(422).json(err));
+      .catch(err => res.status(422).json(err));
   },
-  remove: function(req, res) {
+  remove: function (req, res) {
     db.Shift
       .findById({ _id: req.params.id })
       .then(dbModel => dbModel.remove())
