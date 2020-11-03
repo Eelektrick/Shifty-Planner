@@ -5,7 +5,7 @@ const db = require("../models");
 module.exports = {
   findAll: function (req, res) {
     db.Shift
-      .find({ ignoredLists: { $ne: req.query.userId }, authID: req.query.userId })
+      .find({ ignoredLists: { $ne: req.query.userId }})
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
@@ -45,6 +45,13 @@ module.exports = {
     // console.log(req.body);
     db.Shift
       .findOneAndUpdate({ _id: req.params.id }, { $push: { ignoredLists: req.body.userId } }, { new: true })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  saveRejectID: function (req, res) {
+    // console.log(req.body);
+    db.Shift
+      .findOneAndUpdate({ authID: req.params.id }, { $push: { ignoredLists: req.body.userId } }, { new: true })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

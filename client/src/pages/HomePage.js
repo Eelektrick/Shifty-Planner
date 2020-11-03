@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Button, Modal, Form } from "react-bootstrap";
 import API from "../utils/API";
 import moment from "moment";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -9,19 +8,19 @@ import Footer from "../components/Footer";
 import Table from "../components/Table";
 
 function HomePage() {
-  const [isOpen, setIsOpen] = useState(false);
+  
   const [details, setDetails] = useState([]);
   const [events, setEvents] = useState([]);
   const [avdEvents, setAvdEvents] = useState([]);
-  const [dropDownVal, setDropDownVal] = useState();
   const { user } = useAuth0();
-  const userInfo = user;
   const authID = user.sub;
+  // console.log("AuthId");
+  // console.log(authID);
   const nickname = user.nickname.split(".").join(" ");
 
   useEffect(() => {
     API.getShiftByAuthId(authID).then((data) => {
-      const dataArr = [data.data];
+      // const dataArr = [data.data];
       setDetails(data.data);
     });
 
@@ -29,7 +28,7 @@ function HomePage() {
       const e = [];
       for (var i = 0; i < data.data.length; i++) {
         //Retrieve the details whose traded = 2 and not their own traded details
-        if ((data.data[i].traded === 2 || data.data[i].traded === 3) && data.data[i].authID !== authID) {
+        if ((data.data[i].traded === 2 ) && data.data[i].authID !== authID) {
           e[i] = {
             shift: data.data[i].shift,
             title: data.data[i].shift + "   " + data.data[i].name,
@@ -44,6 +43,7 @@ function HomePage() {
       }
 
       setEvents(e);
+      console.log(e);
     });
 
     API.getAvdLists(authID).then((avdData) => {
@@ -53,13 +53,15 @@ function HomePage() {
       const e = [];
       for (var i = 0; i < avdData.data.length; i++) {
       //Retrieve their own traded details
+      for(var j= 0; j< avdData.data[i].approvedLists.length; j++){
        if (avdData.data[i].authID === authID) {
-          e[i] = {
-            approvedPersonsShift: avdData.data[i].approvedLists[i].shift,
-            approvedPersonsName: avdData.data[i].approvedLists[i].name,
-            approvedPersonsAuthID: avdData.data[i].approvedLists[i].authID,
-            approvedPersonsDate: avdData.data[i].approvedLists[i].date,
-            approvedPersonsTime: avdData.data[i].approvedLists[i].time,
+        e[i, j] = {
+
+            approvedPersonsShift: avdData.data[i].approvedLists[j].shift,
+            approvedPersonsName: avdData.data[i].approvedLists[j].name,
+            approvedPersonsAuthID: avdData.data[i].approvedLists[j].authID,
+            approvedPersonsDate: avdData.data[i].approvedLists[j].date,
+            approvedPersonsTime: avdData.data[i].approvedLists[j].time,
             myShift: avdData.data[i].shift,
             myName: avdData.data[i].name,
             myDate: moment(avdData.data[i].start).format("MMMM Do YYYY"),
@@ -67,9 +69,11 @@ function HomePage() {
             myAuthId:  avdData.data[i].authID,
             myTradeState : avdData.data[i].traded,
             myId :  avdData.data[i]._id
+            
           };
         }
       }
+    }
 
       setAvdEvents(e);
       console.log("Approved Events");

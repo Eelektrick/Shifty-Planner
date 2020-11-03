@@ -45,6 +45,9 @@ export default {
   saveID: function(id, userId){
     return axios.put("/api/shifts/" +id+ '/ignore', {userId});
   },
+  saveRejectID: function(authId, userId){
+    return axios.put("/api/shifts/" +authId+ '/reject', {userId});
+  },
   saveAvdDetails: function(id, avdDetails){
     return axios.put("/api/shifts/" +id+ '/approve', {avdDetails});
   },

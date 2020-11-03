@@ -1,8 +1,34 @@
-import React from "react";
+import React, { useState, useEffect} from "react";
 import "./style.css";
+import API from "../../utils/API";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function Schedule(props) {
+  const { user } = useAuth0();
+  const [avdEvents, setavdEvents] = useState([]);
+  const authID = user.sub;
+  // {!avdEvents.length> 0 && setavdEvents(props.avdEvents)}
+  // console.log("props.avdEvents");
+  // console.log(props.avdEvents);
+  // setavdEvents(props.avdEvents);
+   useEffect(() => {
+   
+     setavdEvents(props.avdEvents);
+     });
+
+  const handleReject = (id, authId) => {
+    console.log(id);
+    const newList = props.avdEvents.filter((e) => e._id !== id);
+    setavdEvents(newList);
+    API.saveID(id, authId).then((data) => { });
+    API.getShifts(authId);
+
+  };
+
+  // {!avdEvents.length> 0 && setavdEvents(props.avdEvents)}
+
   return (
+  
     <div>
       <div id="cover">
         <h4
@@ -21,8 +47,10 @@ function Schedule(props) {
           style={{ height: "300px", overflow: "scroll", paddingBottom: "10px" }}
         >
           <div className="row">
-
-            {props.avdEvents.map((details) => (
+         
+          {/* {!avdEvents.length> 0 && setavdEvents(props.avdEvents)} */}
+          
+            {avdEvents.map((details) => (
               <>
                 <div className="card">
                   <div className="card-body">
@@ -73,11 +101,11 @@ function Schedule(props) {
                   </button>
                     <button
                       type="button"
-                      // onClick={}
+                      onClick={() => handleReject(details.myId, details.approvedPersonsAuthID)}
                       class="btn btn-dark"
                       id="btn2"
                     >
-                      Ignore
+                      Reject
                   </button>
                   </div>
                 </div>

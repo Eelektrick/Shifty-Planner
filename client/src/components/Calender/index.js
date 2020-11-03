@@ -63,10 +63,10 @@ class Calender extends Component {
     emailjs.init("user_BCfmpqcEj5v3szKGPYNTP");
     API.getShifts().then((data) => {
       // console.log("My Data from db");
-      // console.log(data.data);
+    //  console.log(data.data);
       const e = [];
-      console.log("Props");
-      console.log(this.props);
+      // console.log("Props");
+      // console.log(this.props);
 
       for (var i = 0; i < data.data.length; i++) {
         e[i] = {
@@ -81,6 +81,7 @@ class Calender extends Component {
         };
       }
       this.setState({ events: e });
+      console.log(e);
     });
   }
 

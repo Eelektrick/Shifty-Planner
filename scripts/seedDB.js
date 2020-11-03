@@ -57,8 +57,7 @@ for (var i = 0; i < begin.daysInMonth(); i++) {
       'approvedLists': [],
       'ignoredLists' : []
     },
-    shiftSeed[i]  
-    = {
+    {
     'authID': 'auth0|5f9d83219faf390069c6acae',
     'emailID': 'sam.grelick@mail.com',
     'shift': 'C',
