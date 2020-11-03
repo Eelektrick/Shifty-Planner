@@ -10,10 +10,7 @@ export default {
   getShiftByTrade: function() {
     return axios.get("/api/shifts/");
   },
-  // getShiftByAuthId: function(authID) {
-  //   console.log(JSON.stringify(authID)+" FROM getShiftByAuthId AXIOS Call");
-  //   return axios.get("/api/shifts/byAuth" , {params: { authID }});
-  // },
+  //GET by users Auth ID
   getShiftByAuthId: function(authID) {
     return axios.get("/api/shifts/byAuth" , {params: { authID }});
   },
@@ -56,6 +53,10 @@ getUser: function(id) {
 getUserByName: function(name) {
   console.log("UserByName hit "+name);
   return axios.get("/api/users/byName", {params: { name }});
+},
+getUsersByShift: function(shift) {
+  console.log("UserByShift hit "+shift);
+  return axios.get("/api/users/byShift", {params: { shift }});
 },
 
 

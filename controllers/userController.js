@@ -16,23 +16,26 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  // findByAuthId: function(req, res) {
-  //   console.log(req.query.authID);
-  //   db.Personnel
-  //     .find({authID: { $eq: req.query.authID } })
-  //     .sort({ date : -1 })
-  //     .then(dbModel => 
-  //       res.json(dbModel)
-  //       )
-  //     .catch(err => res.status(422).json(err));
-  // },
+
   findByName: function(req, res) {
     console.log("req.query.name "+req.query.name);
     db.Personnel
       .find( {name: req.query.name} )
-      .then(dbModel => 
-        res.json(dbModel)
-        )
+      .then(dbModel =>{ 
+        console.log(dbModel)
+        return res.json(dbModel);
+        })
+      .catch(err => res.status(422).json(err));
+  },
+
+  findByShift: function(req, res) {
+    console.log("req.query.shift "+req.query.shift);
+    db.Personnel
+      .find( {shift: req.query.shift} )
+      .then(dbModel =>{ 
+        console.log(dbModel)
+        return res.json(dbModel);
+        })
       .catch(err => res.status(422).json(err));
   },
 

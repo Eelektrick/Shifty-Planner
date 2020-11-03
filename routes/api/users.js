@@ -16,6 +16,9 @@ router.route("/byAuth")
 router.route("/byName")
   .get(userController.findByName)
 
+router.route("/byShift")
+  .get(userController.findByShift)
+
 // Matches with "/api/users/:id"    .get(userController.findById)
 router
   .route("/:id")
