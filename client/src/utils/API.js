@@ -4,6 +4,9 @@ export default {
   // Gets all shifts
   getShifts: function(userId) {
     return axios.get("/api/shifts", {params: { userId }});
+  }, 
+  getAvdLists: function(userId) {
+    return axios.get("/api/shifts/byAvdLists", {params: { userId }});
   },
   getShiftByTrade: function() {
     return axios.get("/api/shifts/");

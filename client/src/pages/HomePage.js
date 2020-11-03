@@ -6,21 +6,19 @@ import { useAuth0 } from "@auth0/auth0-react";
 import "./example.css";
 import Schedule from "../components/Schedule";
 import Footer from "../components/Footer";
+import Table from "../components/Table";
 
 function HomePage() {
 
   const [isOpen, setIsOpen] = useState(false);
   const [details, setDetails] = useState([]);
   const [events, setEvents] = useState([]);
+  const [avdEvents, setAvdEvents] = useState([]);
   const [dropDownVal, setDropDownVal] = useState();
   const { user } = useAuth0();
   const userInfo = user;
   const authID = user.sub;
   const nickname = user.nickname.split(".").join(" ");
-  // const traded =1;
-  // }
-  const handleClose = () => setIsOpen(false);
-  // const handleShow = () =>  setIsOpen(true);
 
   useEffect(() => {
     API.getShiftByAuthId(authID).then((data) => {
@@ -36,8 +34,8 @@ function HomePage() {
           e[i] = {
             shift: data.data[i].shift,
             title: data.data[i].shift + "   " + data.data[i].name,
-            start: data.data[i].start,
-            end: data.data[i].end,
+            date:  moment(data.data[i].start).format("MMMM Do YYYY"),
+            time: moment(data.data[i].start).format(" HH:mm:ss")+ " - " + moment(data.data[i].end).format("HH:mm:ss"),
             _id: data.data[i]._id,
             authID: data.data[i].authID,
             name: data.data[i].name,
@@ -48,182 +46,49 @@ function HomePage() {
 
       setEvents(e);
     });
+
+    API.getAvdLists(authID).then((avdData) => {
+     console.log("Approved Data Response foe API.getAvdLists(authID) ");
+     console.log(avdData.data);
+
+      const e = [];
+      for (var i = 0; i < avdData.data.length; i++) {
+      //Retrieve their own traded details
+       if (avdData.data[i].authID === authID) {
+          e[i] = {
+            approvedPersonsShift: avdData.data[i].approvedLists[i].shift,
+            approvedPersonsName: avdData.data[i].approvedLists[i].name,
+            approvedPersonsAuthID: avdData.data[i].approvedLists[i].authID,
+            approvedPersonsDate: avdData.data[i].approvedLists[i].date,
+            approvedPersonsTime: avdData.data[i].approvedLists[i].time,
+            myShift: avdData.data[i].shift,
+            myName: avdData.data[i].name,
+            myDate: moment(avdData.data[i].start).format("MMMM Do YYYY"),
+            myTime: moment(avdData.data[i].start).format(" HH:mm:ss")+ " - " + moment(avdData.data[i].end).format("HH:mm:ss"),
+            myAuthId:  avdData.data[i].authID,
+            myTradeState : avdData.data[i].traded,
+            myId :  avdData.data[i]._id
+          };
+        }
+      }
+
+      setAvdEvents(e);
+      console.log("Approved Events");
+      console.log(e);
+    });
+   
   }, []);
 
-  const handleDelete = (id) => {
-    const newList = events.filter((e) => e._id !== id);
-    //this.setState({...events, events: newList}) ;
-    setEvents(newList);
-    API.saveID(id, authID).then((data) => {});
-  };
-
-  const saveDetails = (event, details) => {
-    event.preventDefault();
-   
-    console.log(dropDownVal);
-    console.log(details);
-    const value =  dropDownVal.split("|");
-    const avdDetails = {
-      name : value[0],
-      authID: authID,
-      shift: value[1],
-      date: value[2],
-      time: value[3]
-
-    }
-    API.saveAvdDetails(details._id, avdDetails).then((data) => {});
-
-    const traded = 3;
-    API.updateShift(details._id, traded ).then((response) => {
-      console.log(response);
-    });
-
-
-    handleClose();
-  };
-
-  const handleChange = (event, value) => {
-    event.preventDefault();
-    setDropDownVal(value)
-  }
-
-  const MyModal = (props) => {
-    // console.log(props.details);
-    return (
-    
-      <Modal
-        className="modal-container"
-        //   show={isOpen}
-        //   onHide={() => setIsOpen(false)}
-        {...props}
-      >
-        <div>
-          <Modal.Header closeButton>
-            <Modal.Title>Details</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <div>
-              <Form>
-              
-                <Form.Group controlId="exampleForm.ControlSelect1">
-                  <Form.Label>
-                    {" "}
-                    Please select from your shift to swap with: 
-                  </Form.Label>
-               
-                  <Form.Control as="select" onChange = {(e) => {handleChange(e, e.target.value)} } >
-                 
-                  {details.map((detail) => (
-                   
-                      <option>
-                       
-                        {detail.name}
-                        {"|"}
-                        {detail.shift}
-                        {"|"}
-                        {moment(detail.start).format("MMMM Do YYYY")}
-                        {"|"}
-                        {moment(detail.start).format(" HH:mm:ss ")} -{" "}
-                        {moment(detail.end).format("HH:mm:ss ")}
-                      
-                      </option>
-                  ))}
-                    </Form.Control>
-                <Button type="submit" id="submit" onClick={(e) => {saveDetails(e, props.details)}} >
-                  Submit
-                </Button>   
-                </Form.Group>
-
-              </Form>
-            </div>
-          </Modal.Body>
-        </div>
-      </Modal>
-    );
-  };
-
+  const title1= "Trade Shifts";
+  const title2= "Accepted Shifts";
   return (
-    <div>
-      <div style={{color:"white", textAlign:"center", fontSize:"20px"}}> Welcome {nickname} !! </div>
-      <div id="cover">
-        <h4
-          style={{
-            textAlign: "left",
-            color: "black",
-            fontSize: "22px",
-          }}
-        >
-          Trade Shifts
-        </h4>
-
-        <div
-          className="container"
-          style={{ height: "300px", overflow: "scroll", paddingBottom: "10px" }}
-        >
-          <div className="row">
-            {events.map((details) => (
-              <>
-              <div className="card">
-                <div className="card-body">
-                  <h5 class="card-title">Name : {details.name}</h5>
-                  <h6 className="card-subtitle mb-2 text-muted">
-                    Shift : {details.shift}
-                  </h6>
-                  <div className="card-text">
-                    <ul class="list-group list-group-flush">
-                      <li class="list-group-item">
-                        Date:{" "}
-                        <div
-                          style={{
-                            color: "rgb(233, 173, 7)",
-                            fontWeight: "bold",
-                          }}
-                        >
-                          {moment(details.start).format("MMMM Do YYYY")}
-                        </div>
-                      </li>
-                      <li class="list-group-item">
-                        Time :{" "}
-                        <div
-                          style={{
-                            color: "rgb(233, 173, 7)",
-                            fontWeight: "bold",
-                          }}
-                        >
-                          {moment(details.start).format(" HH:mm:ss")} -{" "}
-                          {moment(details.end).format("HH:mm:ss")}
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                  <button
-                    type="button"
-                    class="btn btn-dark mr-3"
-                    onClick={() => setIsOpen(true)}
-                    id="btn1"
-                  >
-                    Accept
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => handleDelete(details._id)}
-                    class="btn btn-dark"
-                    id="btn2"
-                  >
-                    Ignore
-                  </button>
-                </div>
-              </div>
-                <MyModal details={details} show={isOpen} onHide={() => setIsOpen(false)} />
-                </>
-            ))}
-          
-          </div>
-        </div>
-      </div>
-      <Schedule />
+   
+    <>
+      <Table name={nickname} title={title1} events={events} details={details}/>
+     
+      <Schedule name={nickname} title={title2} avdEvents={avdEvents}/>
       <Footer />
-    </div>
+      </>
   );
 }
 
