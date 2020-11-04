@@ -16,7 +16,7 @@ class CalenderRefresher extends React.Component {
       name: "",
       ignoredLists: [],
       selectedMonth: 0,
-      shift: "A",
+      shift: "C",
       newShiftVar: [],
       aPIres: "",
       shiftsToBeAdded: [],
@@ -47,8 +47,6 @@ class CalenderRefresher extends React.Component {
 
   // /* -------------SHIFT----------------------------------- */////////////////////
   handleChangeShift(event) {
-    
-
     event.preventDefault();
   }
 
@@ -66,12 +64,14 @@ class CalenderRefresher extends React.Component {
         let begin = moment().startOf("month");
         let shift = [];
         for (var i = 0; i < begin.daysInMonth(); i++) {
+        let j = i % 6;
 
         switch (this.state.shift) {
+
           case "A":
-            for (let e = 0; e < userByShift.length; e++) {
+          for (let e = 0; e < userByShift.length; e++) {
           // console.log("A");
-          var j = i % 6;
+          
           if (j === 0 || j === 1) {
             shift.push({
               // 'generated_ID': 
@@ -87,14 +87,52 @@ class CalenderRefresher extends React.Component {
             })}
             
           }
+          console.log(shift);
+          break;
           // console.log("shift");
           // console.log(shift);
             
           case "B":
-            
+            for (let e = 0; e < userByShift.length; e++) {
+              console.log("B");
+              if (j === 2 || j === 3) {
+                shift.push({
+                  // 'generated_ID': 
+                  'authID': userByShift[e].authID,
+                  'emailID': userByShift[e].emailID,
+                  'shift': 'B',
+                  'start': moment(begin).add(i, 'days').hours('07').toDate(),
+                  'end': moment(begin).add(i, 'days').hours('19').toDate(),
+                  'traded': 1,
+                  'name' : userByShift[e].name,
+                  'approvedLists': [],
+                  'ignoredLists' : []
+                })}
+                
+              }
+              
+              break;
+              
           case "C":
-            
-        }}
+            for (let e = 0; e < userByShift.length; e++) {
+            if (j === 4 || j === 5) {
+              shift.push({
+                // 'generated_ID': 
+                'authID': userByShift[e].authID,
+                'emailID': userByShift[e].emailID,
+                'shift': userByShift[e].shift,
+                'start': moment(begin).add(i, 'days').hours('07').toDate(),
+                'end': moment(begin).add(i, 'days').hours('19').toDate(),
+                'traded': 1,
+                'name' : userByShift[e].name,
+                'approvedLists': [],
+                'ignoredLists' : []
+              })}}
+            break;
+            default: console.log("No shift found");
+        }
+        
+      }
 
         this.setState({ newShiftVar: shift });
         console.log(this.state.newShiftVar);
@@ -118,7 +156,7 @@ class CalenderRefresher extends React.Component {
   ///* ---------Final Gen-------------- */
   handleGenerate() {
     API.saveShift(this.state.newShiftVar)
-    
+
   }
   //---------------------------------------------------
   render() {
