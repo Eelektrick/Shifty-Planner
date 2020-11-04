@@ -65,6 +65,7 @@ function HomePage() {
               approvedPersonsAuthID: avdData.data[i].approvedLists[j].authID,
               approvedPersonsDate: avdData.data[i].approvedLists[j].date,
               approvedPersonsTime: avdData.data[i].approvedLists[j].time,
+              approvedPersonsId: avdData.data[i].approvedLists[j].id,
               myShift: avdData.data[i].shift,
               myName: avdData.data[i].name,
               myDate: moment(avdData.data[i].start).format("MMMM Do YYYY"),

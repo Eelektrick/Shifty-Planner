@@ -21,7 +21,8 @@ let allViews = Object.keys(Views).map((k) => Views[k]);
 
 const eventStyleGetter = (events, start, end, isSelected) => {
   // var backgroundColor = '#' + events.hexColor;
-
+console.log("events");
+console.log(events);
   var style = {
     // backgroundColor: backgroundColor,
     borderRadius: "0px",
@@ -59,6 +60,8 @@ class Calender extends Component {
   componentDidMount() {
     // console.log("mounted calander");
     // Modal.setAppElement("body");
+    // const { user } = useAuth0();
+    // const authID = user.sub;
 
     emailjs.init("user_BCfmpqcEj5v3szKGPYNTP");
     API.getShifts().then((data) => {
@@ -113,15 +116,11 @@ class Calender extends Component {
   };
 
   handleSelect = (event) => {
-    //set model to true
-    // console.log("here");
-    console.log(event);
 
-    console.log(moment(event.start).format("MMMM Do YYYY, h:mm:ss a"));
-    console.log(moment().format("MMMM Do YYYY, h:mm:ss a"));
     const authID = this.props.authID;
-    if (event.authID !== authID || moment(event.start).isBefore()) {
-      return;
+    if (event.authID !== authID || event.traded !== 1 || moment(event.start).isBefore()) {
+      alert('Sorry...You cannot make a trade for this!!!');
+      return ;
     }
     this.setState({
       modalIsOpen: true,
@@ -152,7 +151,7 @@ class Calender extends Component {
         console.log("FAILED...", error);
       }
     );
-
+    
     this.closeModal();
   };
 

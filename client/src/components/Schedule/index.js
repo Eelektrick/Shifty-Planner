@@ -7,26 +7,12 @@ function Schedule(props) {
   const { user } = useAuth0();
   const [avdEvents, setavdEvents] = useState([]);
   const authID = user.sub;
-  // {!avdEvents.length> 0 && setavdEvents(props.avdEvents)}
-  // console.log("props.avdEvents");
-  // console.log(props.avdEvents);
-  // setavdEvents(props.avdEvents);
   useEffect(() => {
     setavdEvents(props.avdEvents);
   });
 
-  // const handleReject = (id, authId) => {
-  //   console.log(id);
-  //   const newList = props.avdEvents.filter((e) => e.approvedPersonsAuthID !== authId);
-
-  //   API.saveID(id, authId).then((data) => { });
-  //   setavdEvents(newList);
-  //   // API.getShifts(authId);
-
-  // };
-
   const handleReject = (avdAuthid, myId) => {
-    // console.log(myId);
+
     const newList = props.avdEvents.filter(
       (e) => e.approvedPersonsAuthID !== avdAuthid
     );
@@ -35,6 +21,32 @@ function Schedule(props) {
     API.saveRejectID(avdAuthid, myId).then((data) => {});
     setavdEvents(newList);
     // API.getShifts(authId);
+  };
+
+  const handleAccept = (details) => {
+    console.log("details");
+    console.log(details);
+    // API.saveRejectID(avdAuthid, myId).then((data) => { });
+    // setavdEvents(newList);
+    let theirDetails = {
+      authID: details.approvedPersonsAuthID,
+      shift: details.approvedPersonsShift,
+      traded: 4,
+      name : details.approvedPersonsName
+    }
+
+    let myDetails={
+      authID: details.myAuthId,
+      shift: details.myShift,
+      traded: 4,
+      name : details.myName
+
+    }
+
+    API.swapMyDetails(details.myId, theirDetails);
+    API.swapMyDetails(details.approvedPersonsId, myDetails);
+
+
   };
 
   // {!avdEvents.length> 0 && setavdEvents(props.avdEvents)}
@@ -127,8 +139,12 @@ function Schedule(props) {
                     </div>
                     <button
                       type="button"
+
                       className="btn btn-dark mr-3"
                       // onClick={}
+
+                      class="btn btn-dark mr-3"
+                      onClick={() => handleAccept(details)}
                       id="btn1"
                     >
                       Accept
