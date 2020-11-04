@@ -6,8 +6,12 @@ const moment = require("moment");
 //Seed Online MongoDB
 
 // Seed Local
+// mongoose.connect(
+//   process.env.MONGODB_URI || "mongodb://localhost/shifty-planner",
+//   { useNewUrlParser: true }
+// );
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/shifty-planner",
+  process.env.MONGODB_URI || "mongodb+srv://admin:35w7Hq$9mzJq@cluster0.7zk9f.mongodb.net/shifty-planner?retryWrites=true&w=majority",
   { useNewUrlParser: true }
 );
 

@@ -1,7 +1,7 @@
 import React from "react";
 // import { Button, Form, Col } from "react-bootstrap";
 import API from "../../utils/API";
-
+import moment from "moment";
 
 class CalenderRefresher extends React.Component {
   constructor(props) {
@@ -17,10 +17,10 @@ class CalenderRefresher extends React.Component {
       ignoredLists: [],
       selectedMonth: 0,
       shift: "A",
-      newShiftVar:[],
-      aPIres:""
+      newShiftVar: [],
+      aPIres: "",
+      shiftsToBeAdded: ["Test"],
     };
- 
 
     this.handleChangeName = this.handleChangeName.bind(this);
     this.handleChangeMonth = this.handleChangeMonth.bind(this);
@@ -29,8 +29,8 @@ class CalenderRefresher extends React.Component {
     this.handleSubmitMonth = this.handleSubmitMonth.bind(this);
     this.handleSubmitShift = this.handleSubmitShift.bind(this);
   }
-   // /* -------------Month----------- */
-   handleChangeMonth(event) {
+  // /* -------------Month----------- */
+  handleChangeMonth(event) {
     console.log(event);
     console.log(this.state.selectedMonth);
     this.setState({ selectedMonth: event.target.selectedMonth });
@@ -44,48 +44,54 @@ class CalenderRefresher extends React.Component {
     event.preventDefault();
   }
 
-
   // /* -------------SHIFT----------------------------------- */////////////////////
   handleChangeShift(event) {
-    console.log(event);
+    
 
     event.preventDefault();
   }
 
   handleSubmitShift(event) {
-    console.log(this.state.shift);
-    
-   API.getUsersByShift(this.state.shift).then(res =>{
-    
-    }).then(users =>{
-      console.log(users);
-    })
- 
-  
-    // console.log(userByShift.);
-
-    // const newShift = [];
-
-    // for (var i = 0; i < data.data.length; i++) {
-    //   e[i] = {
-    //     shift: data.data[i].shift,
-    //     title: data.data[i].shift + "   " + data.data[i].name,
-    //     start: data.data[i].start,
-    //     end: data.data[i].end,
-    //     _id: data.data[i]._id,
-    //     authID: data.data[i].authID,
-    //     name: data.data[i].name,
-    //     traded: data.data[i].traded,
-    //   };
-    // }
-    // this.setState({ newShiftVar: newShift });
-
     
 
+    API.getUsersByShift(this.state.shift)
+      .then((res) => {
+        this.setState({ aPIres: res });
+       
+      })
+      .then(() => {
+        let userByShift = this.state.aPIres.data;
+        console.log(userByShift[0]);
 
+        if (this.state.shift === "A") {
+          console.log(true);
+        }
 
+        switch (this.state.shift) {
+          case "A":
+            return "A";
+          case "B":
+            return "B";
+          case "C":
+            return "C";
+        }
 
-
+        const newShift = [];
+        let begin = moment().startOf("month");
+        for (var i = 0; i < 2; i++) {
+          newShift[i] = {
+            shift: userByShift[i].shift,
+            start: moment(begin).add(i, "days").hours("07").toDate(),
+            end: moment(begin).add(i, "days").hours("19").toDate(),
+            _id: userByShift[i]._id,
+            authID: userByShift[i].authID,
+            name: userByShift[i].name,
+            traded: userByShift[i].traded,
+          };
+        }
+        this.setState({ newShiftVar: newShift });
+        console.log(this.state.newShiftVar);
+      });
 
     event.preventDefault();
   }
@@ -104,9 +110,10 @@ class CalenderRefresher extends React.Component {
   }
   ///* ---------Final Gen-------------- */
   handleSubmit() {
-    alert("WHY DID YOU PUSH THE BUTTON");
+    console.log("WHY DID YOU PUSH THE BUTTON");
 
-    
+    API.saveShift(this.state.shiftsToBeAdded)
+
 
   }
   //---------------------------------------------------
@@ -162,10 +169,9 @@ class CalenderRefresher extends React.Component {
           <label>
             <div>Submit all </div>
           </label>
-          <input type="button" value="DO NOT PUSH THE BUTTON" />
+          <input type="submit" value="DO NOT PUSH THE BUTTON" />
         </form>
       </div>
-
     );
   }
 }
