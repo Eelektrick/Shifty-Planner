@@ -16,13 +16,7 @@ function HomePage() {
   // console.log("AuthId");
   // console.log(authID);
   const nickname = user.nickname.split(".").join(" ");
-
-  useEffect(() => {
-    API.getShiftByAuthId(authID).then((data) => {
-      // const dataArr = [data.data];
-      setDetails(data.data);
-    });
-
+  const reload = () => {
     API.getShifts(authID).then((data) => {
       const e = [];
       for (var i = 0; i < data.data.length; i++) {
@@ -83,6 +77,19 @@ function HomePage() {
       console.log("Approved Events");
       console.log(e);
     });
+  }
+
+  useEffect(() => {
+    API.getShiftByAuthId(authID).then((data) => {
+      // const dataArr = [data.data];
+      setDetails(data.data);
+     
+    });
+
+    reload();
+    
+
+    
   }, []);
 
   const title1 = "Trade Shifts";
@@ -110,6 +117,7 @@ function HomePage() {
                   title={title1}
                   events={events}
                   details={details}
+                  reload={reload}
                 />
               </div>
             </Tab>
@@ -123,6 +131,7 @@ function HomePage() {
                   name={nickname}
                   title={title2}
                   avdEvents={avdEvents}
+                  reload={reload}
                 />
               </div>
             </Tab>

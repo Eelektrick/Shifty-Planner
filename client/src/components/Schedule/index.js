@@ -12,15 +12,18 @@ function Schedule(props) {
   });
 
   const handleReject = (avdAuthid, myId) => {
+    console.log('props.avdEvents')
+    console.log(props.avdEvents)
+     const newList = props.avdEvents.filter(
+       (e) => e._id !== myId
+     );
 
-    const newList = props.avdEvents.filter(
-      (e) => e.approvedPersonsAuthID !== avdAuthid
-    );
-
-    // API.saveID(id, authId).then((data) => { });
-    API.saveRejectID(avdAuthid, myId).then((data) => {});
-    setavdEvents(newList);
-    // API.getShifts(authId);
+    API.saveID(myId, avdAuthid).then((data) => { 
+      // API.saveRejectID(avdAuthid, myId).then((data) => {});
+      setavdEvents(newList);
+      // API.getShifts(authId);
+      props.reload();
+    });
   };
 
   const handleAccept = (details) => {
@@ -43,8 +46,13 @@ function Schedule(props) {
 
     }
 
-    API.swapMyDetails(details.myId, theirDetails);
-    API.swapMyDetails(details.approvedPersonsId, myDetails);
+    
+    API.swapMyDetails(details.approvedPersonsId, myDetails).then(resp =>{
+      API.swapMyDetails(details.myId, theirDetails).then(response=>{
+        props.reload();
+      });
+     
+    });
   };
 
   // {!avdEvents.length> 0 && setavdEvents(props.avdEvents)}
