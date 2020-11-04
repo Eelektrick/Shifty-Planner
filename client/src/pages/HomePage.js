@@ -38,6 +38,10 @@ function HomePage() {
         }
       }
 
+      // e.filter(data => {
+
+
+      // })
       setEvents(e);
       console.log(e);
     });

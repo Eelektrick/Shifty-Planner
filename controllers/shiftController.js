@@ -62,8 +62,8 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   update: function (req, res) {
-    console.log('traded Info');
-    console.log(req.body.traded);
+    // console.log('traded Info');
+    // console.log(req.body.traded);
     db.Shift
       .findOneAndUpdate({ _id: req.params.id }, { traded: req.body.traded }, { new: true })
       .then(json => {
@@ -74,23 +74,8 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   multiUpdateMyDetails: function (req, res) {
-    // console.log('traded Info');
-    // console.log(req.body.traded);
-  //   db.Shift
-  //     .findOneAndUpdate({ _id: req.params.id },
-  //       {traded: req.body.traded },
-  //       {authID :  req.body.authID},
-  //       {shift :  req.body.shift},
-  //       {name: req.body.name },
-  //       { new: true })
-  //     .then(json => {
-  //       console.log("put request made");
-  //       console.log(json);
-  //       res.json(json);
-  //     })
-  //     .catch(err => res.status(422).json(err));
-  // },
-console.log(req.body.theirDetails.traded);
+    
+  // console.log(req.body.theirDetails.traded);
   db.Shift
   .updateMany(
     { _id: req.params.id },
@@ -99,18 +84,24 @@ console.log(req.body.theirDetails.traded);
       
     ]
  ) .then(json => {
-  console.log("put request made");
-  console.log(json);
+  // console.log("put request made");
+  // console.log(json);
   res.json(json);
 })
 .catch(err => res.status(422).json(err));
 },
 
-  remove: function (req, res) {
+removefromAvd: function (req, res) {
     db.Shift
-      .findById({ _id: req.params.id })
-      .then(dbModel => dbModel.remove())
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
+    .update(
+      { _id: req.params.id },
+      { $pull: { approvedLists: { authID: req.body.userId} } }
+    ).then(json => {
+      // console.log("put request made");
+      // console.log(json);
+      res.json(json);
+    })
+    .catch(err => res.status(422).json(err));
+    }
   }
-};
+

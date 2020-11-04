@@ -58,6 +58,9 @@ export default {
   saveID: function(id, userId){
     return axios.put("/api/shifts/" +id+ '/ignore', {userId});
   },
+  removefromAvd: function(id,userId){
+    return axios.put("/api/shifts/" +id+ '/remove', {userId});
+  },
   saveRejectID: function(authId, userId){
     return axios.put("/api/shifts/" +authId+ '/reject', {userId});
   },

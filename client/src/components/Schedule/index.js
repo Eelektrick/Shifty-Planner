@@ -22,7 +22,10 @@ function Schedule(props) {
       // API.saveRejectID(avdAuthid, myId).then((data) => {});
       setavdEvents(newList);
       // API.getShifts(authId);
-      props.reload();
+      API.removefromAvd(myId, avdAuthid).then((data) => { 
+        props.reload();
+        
+      })
     });
   };
 
@@ -43,9 +46,7 @@ function Schedule(props) {
       shift: details.myShift,
       traded: 4,
       name : details.myName
-
     }
-
     
     API.swapMyDetails(details.approvedPersonsId, myDetails).then(resp =>{
       API.swapMyDetails(details.myId, theirDetails).then(response=>{
