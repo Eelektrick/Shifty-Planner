@@ -4,10 +4,8 @@ import moment from "moment";
 import { useAuth0 } from "@auth0/auth0-react";
 import "./example.css";
 import Schedule from "../components/Schedule";
-import Footer from "../components/Footer";
 import Table from "../components/Table";
 import { Tabs, Tab } from "react-bootstrap";
-// import Table from "../Table";
 
 function HomePage() {
   const [details, setDetails] = useState([]);

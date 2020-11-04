@@ -12,7 +12,6 @@ const LogoutButton = () => {
 
   return (
     <a
-      // href=" https://scheduling.auth0.com/v2/logout?returnTo=https://shifty-planner.herokuapp.com/&client_id=TaNNdVgbilHR0s6eTd3aT1Gi7jhXKa5Z"
       onClick={() => logoutWithRedirect()}
       style={{ color: "rgb(190, 147, 3)" }}
       className="nav-link"

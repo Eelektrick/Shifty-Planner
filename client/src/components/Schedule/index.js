@@ -45,12 +45,9 @@ function Schedule(props) {
 
     API.swapMyDetails(details.myId, theirDetails);
     API.swapMyDetails(details.approvedPersonsId, myDetails);
-
-
   };
 
   // {!avdEvents.length> 0 && setavdEvents(props.avdEvents)}
-
   return (
     <div>
       <div id="cover">
