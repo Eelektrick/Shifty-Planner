@@ -5,48 +5,46 @@
   position: absolute;
   border: none;
   bottom: 10%;
-  color: #fff;
+  color: #FFF;
   font-size: 24px;
   cursor: pointer;
   font-family: FontAwesome;
   outline: none;
 }
 
-.back {
-  top: 50%;
-  left: 20%;
-  background: #43a047;
+.pass {
+  left: 1%;
+  background: #E53935;
 }
 
-.back::after {
-  content: "\f0a8";
+.pass::after {
+  content: "\f165";
 }
 
-.next {
-  top: 50%;
-  right: 20%;
-  background: #43a047;
+.pick {
+  right: 1%;
+  background: #43A047;
 }
 
-.next::after {
-  content: "\f0a9";
+.pick::after {
+  content: "\f164";
 }
 
-.next:hover::after,
-.back:hover::after {
-  animation: iconBounce 0.57s 1;
+.pick:hover::after, .pass:hover::after {
+  animation: iconBounce .57s 1;
 }
 
 @keyframes iconBounce {
   0% {
     font-size: 24px;
   }
-
-  50% {
+  
+   50% {
     font-size: 28px;
   }
-
+  
   100% {
     font-size: 24px;
   }
+
 }

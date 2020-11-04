@@ -21,7 +21,8 @@ let allViews = Object.keys(Views).map((k) => Views[k]);
 
 const eventStyleGetter = (events, start, end, isSelected) => {
   // var backgroundColor = '#' + events.hexColor;
-
+console.log("events");
+console.log(events);
   var style = {
     // backgroundColor: backgroundColor,
     borderRadius: "0px",
@@ -59,14 +60,16 @@ class Calender extends Component {
   componentDidMount() {
     // console.log("mounted calander");
     // Modal.setAppElement("body");
+    // const { user } = useAuth0();
+    // const authID = user.sub;
 
     emailjs.init("user_BCfmpqcEj5v3szKGPYNTP");
     API.getShifts().then((data) => {
       // console.log("My Data from db");
-      // console.log(data.data);
+      //  console.log(data.data);
       const e = [];
-      console.log("Props");
-      console.log(this.props);
+      // console.log("Props");
+      // console.log(this.props);
 
       for (var i = 0; i < data.data.length; i++) {
         e[i] = {
@@ -81,6 +84,7 @@ class Calender extends Component {
         };
       }
       this.setState({ events: e });
+      console.log(e);
     });
   }
 
@@ -112,15 +116,11 @@ class Calender extends Component {
   };
 
   handleSelect = (event) => {
-    //set model to true
-    // console.log("here");
-    console.log(event);
 
-    console.log(moment(event.start).format("MMMM Do YYYY, h:mm:ss a"));
-    console.log(moment().format("MMMM Do YYYY, h:mm:ss a"));
     const authID = this.props.authID;
-    if (event.authID !== authID || moment(event.start).isBefore()) {
-      return;
+    if (event.authID !== authID || event.traded !== 1 || moment(event.start).isBefore()) {
+      alert('Sorry...You cannot make a trade for this!!!');
+      return ;
     }
     this.setState({
       modalIsOpen: true,
@@ -138,7 +138,8 @@ class Calender extends Component {
     console.log("Handle Submit Events");
     console.log(this.state.cal_events);
 
-    API.updateShift(this.state.cal_events._id).then((response) => {
+    const traded = 2;
+    API.updateShift(this.state.cal_events._id, traded).then((response) => {
       console.log(response);
     });
 
@@ -150,7 +151,7 @@ class Calender extends Component {
         console.log("FAILED...", error);
       }
     );
-
+    
     this.closeModal();
   };
 
@@ -207,15 +208,8 @@ class Calender extends Component {
   render() {
     // console.log(events);
     return (
-      <div>
-        <div
-          style={{
-            color: "white",
-            textAlign: "center",
-            fontSize: "20px",
-            marginBottom: "2%",
-          }}
-        >
+      <div id="calendarCover">
+        <div id="welcome">
           {" "}
           Welcome {this.props.nickname.split(".").join(" ")} !!
         </div>
@@ -237,9 +231,6 @@ class Calender extends Component {
           {/* <button onClick={this.openModal}>Open Modal</button> */}
           {/* {this.renderModal()}  show={this.state.modalIsOpen} onHide={() => this.closeModal}*/}
           {this.renderModal()}
-        </div>
-        <div className="row" style={{ paddingTop: "20px" }}>
-          <Footer />
         </div>
       </div>
     );
