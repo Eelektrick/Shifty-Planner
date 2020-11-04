@@ -19,7 +19,7 @@ class CalenderRefresher extends React.Component {
       shift: "A",
       newShiftVar: [],
       aPIres: "",
-      shiftsToBeAdded: ["Test"],
+      shiftsToBeAdded: [],
     };
 
     this.handleChangeName = this.handleChangeName.bind(this);
@@ -28,6 +28,7 @@ class CalenderRefresher extends React.Component {
     this.handleSubmitName = this.handleSubmitName.bind(this);
     this.handleSubmitMonth = this.handleSubmitMonth.bind(this);
     this.handleSubmitShift = this.handleSubmitShift.bind(this);
+    this.handleGenerate = this.handleGenerate.bind(this);
   }
   // /* -------------Month----------- */
   handleChangeMonth(event) {
@@ -63,21 +64,25 @@ class CalenderRefresher extends React.Component {
         let userByShift = this.state.aPIres.data;
         console.log(userByShift[0]);
 
-        if (this.state.shift === "A") {
-          console.log(true);
-        }
+
+        let begin = moment().startOf("month");
+        console.log(begin);
 
         switch (this.state.shift) {
           case "A":
-            return "A";
+          let days = moment(begin).daysInMonth()
+          console.log(days);
+          
+
+            
           case "B":
-            return "B";
+            
           case "C":
-            return "C";
+            
         }
 
         const newShift = [];
-        let begin = moment().startOf("month");
+      
         for (var i = 0; i < 2; i++) {
           newShift[i] = {
             shift: userByShift[i].shift,
@@ -109,11 +114,10 @@ class CalenderRefresher extends React.Component {
     event.preventDefault();
   }
   ///* ---------Final Gen-------------- */
-  handleSubmit() {
-    console.log("WHY DID YOU PUSH THE BUTTON");
+  handleGenerate() {
+    console.log(this.state.shiftsToBeAdded[0]);
 
-    API.saveShift(this.state.shiftsToBeAdded)
-
+    // API.saveShift(this.state.shiftsToBeAdded[0])
 
   }
   //---------------------------------------------------
@@ -164,10 +168,10 @@ class CalenderRefresher extends React.Component {
         </form>
 
         {/* ---------Final Gen-------------- */}
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleGenerate}>
           <h2>Generate!</h2>
           <label>
-            <div>Submit all </div>
+            <div>Submit all</div>
           </label>
           <input type="submit" value="DO NOT PUSH THE BUTTON" />
         </form>

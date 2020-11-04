@@ -36,9 +36,13 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function (req, res) {
+    console.log("POST made it to server")
     db.Shift
       .create(req.body)
-      .then(dbModel => res.json(dbModel))
+      .then(dbModel => {
+        console.log(dbModelb);
+        res.json(dbModel)
+      })
       .catch(err => res.status(422).json(err));
   },
   saveID: function (req, res) {

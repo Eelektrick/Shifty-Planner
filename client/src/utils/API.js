@@ -53,6 +53,7 @@ export default {
   },
   // Saves a shift to the database
   saveShift: function(shiftData) {
+    console.log("Save shift hit");
     return axios.post("/api/shifts", shiftData);
   },
   saveID: function(id, userId){
