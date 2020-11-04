@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./style.css";
 import { FaHome } from "react-icons/fa";
 import { AiFillSchedule } from "react-icons/ai";
-import { AiOutlineSafetyCertificate } from "react-icons/ai";
 import image from "../Navbar/shiftyLogo3.png";
 import { Link } from "react-router-dom";
 import LogoutButton from "../LogoutButton";
@@ -14,9 +13,16 @@ export default class Navbar extends Component {
       menu: false,
     };
     this.toggleMenu = this.toggleMenu.bind(this);
+    this.closeNavbar = this.closeNavbar.bind(this);
   }
   toggleMenu() {
     this.setState({ menu: !this.state.menu });
+  }
+
+  closeNavbar() {
+    if (this.state.collapsed !== true) {
+      this.toggleMenu();
+    }
   }
 
   render() {
@@ -44,6 +50,7 @@ export default class Navbar extends Component {
           <ul className="navbar-nav ml-auto">
             <li className="nav-item ">
               <Link
+                onClick={this.closeNavbar}
                 style={{ color: "rgb(190, 147, 3)" }}
                 to="/"
                 className={
@@ -58,6 +65,7 @@ export default class Navbar extends Component {
             </li>
             <li className="nav-item">
               <Link
+                onClick={this.closeNavbar}
                 style={{ color: "rgb(190, 147, 3)" }}
                 to="/scheduler"
                 className={
@@ -72,7 +80,7 @@ export default class Navbar extends Component {
             </li>
 
             <li className="nav-item">
-              <LogoutButton />
+              <LogoutButton onClick={this.closeNavbar} />
             </li>
 
             <li className="nav-item">

@@ -127,6 +127,19 @@ function HomePage() {
                 />
               </div>
             </Tab>
+            <Tab
+              eventKey="Today"
+              title="Today Schedule"
+              style={{ fontFamily: "Kanit, sans-serif" }}
+            >
+              <div>
+                <Schedule
+                  name={nickname}
+                  title={title2}
+                  avdEvents={avdEvents}
+                />
+              </div>
+            </Tab>
           </Tabs>
         </div>
       </div>
