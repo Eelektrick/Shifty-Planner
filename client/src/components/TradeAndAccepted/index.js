@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-
-// import "./App.css";
 import { Tabs, Tab } from "react-bootstrap";
 import Table from "../Table";
 
