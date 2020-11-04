@@ -65,7 +65,7 @@ class Calender extends Component {
     emailjs.init("user_BCfmpqcEj5v3szKGPYNTP");
     API.getShifts().then((data) => {
       // console.log("My Data from db");
-    //  console.log(data.data);
+      //  console.log(data.data);
       const e = [];
       // console.log("Props");
       // console.log(this.props);
@@ -150,7 +150,7 @@ class Calender extends Component {
         console.log("FAILED...", error);
       }
     );
-
+    
     this.closeModal();
   };
 
@@ -207,13 +207,13 @@ class Calender extends Component {
   render() {
     // console.log(events);
     return (
-      <div>
+      <div id="calendarCover">
         <div
           style={{
             color: "white",
             textAlign: "center",
             fontSize: "20px",
-            marginBottom: "2%",
+            marginBottom: "10px",
           }}
         >
           {" "}
@@ -237,9 +237,6 @@ class Calender extends Component {
           {/* <button onClick={this.openModal}>Open Modal</button> */}
           {/* {this.renderModal()}  show={this.state.modalIsOpen} onHide={() => this.closeModal}*/}
           {this.renderModal()}
-        </div>
-        <div className="row" style={{ paddingTop: "20px" }}>
-          <Footer />
         </div>
       </div>
     );
