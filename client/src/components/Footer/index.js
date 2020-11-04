@@ -15,38 +15,38 @@ function Footer() {
             </div>
             <div className="col-md-3 col-sm-6">
               <div className="footer-pad">
-                <h4>Links</h4>
+                <h4>National Links</h4>
                 <ul className="list-unstyled">
                   <li>
-                    <a href="https://nasemso.org/">
-                      National Accociation of State EMS Officials
-                    </a>
+                    <a href="https://nasemso.org/">National Accociation of State EMS Officials</a>
+                  </li>
+                  <li>
+                    <a href="https://www.nremt.org/">National Registry of EMTs</a>
                   </li>
                 </ul>
               </div>
             </div>
             <div className="col-md-3 col-sm-6">
               <div className="footer-pad">
-                <h4>Heading 3</h4>
+                <h4>Local Links</h4>
                 <ul className="list-unstyled">
                   <li>
-                    <a href="#">Police Department</a>
+                    <a href="https://www.spanishfork.org/departments/public_safety/police.php">Police Department</a>
                   </li>
                   <li>
-                    <a href="#">Fire</a>
+                    <a href="https://www.spanishfork.org/departments/public_safety/fire.php">Fire</a>
                   </li>
                   <li>
-                    <a href="#">Mayor and City Council</a>
+                    <a href="https://www.spanishfork.org/government/mayor_and_city_council/index.php">Mayor and City Council</a>
                   </li>
                   <li>
-                    <a href="#"></a>
+                    <a href="https://www.spanishfork.org/departments/public_safety/ambulance.php">EMT</a>
                   </li>
                 </ul>
               </div>
             </div>
             <div className="col-md-3">
               <h4>Contact Us</h4>
-
               <a href="mailto: shiftyplanner@gmail.com">
                 shiftyplanner@gmail.com
               </a>
