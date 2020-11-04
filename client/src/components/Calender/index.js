@@ -21,7 +21,8 @@ let allViews = Object.keys(Views).map((k) => Views[k]);
 
 const eventStyleGetter = (events, start, end, isSelected) => {
   // var backgroundColor = '#' + events.hexColor;
-
+console.log("events");
+console.log(events);
   var style = {
     // backgroundColor: backgroundColor,
     borderRadius: "0px",
