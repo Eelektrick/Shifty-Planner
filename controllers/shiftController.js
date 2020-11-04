@@ -73,6 +73,39 @@ module.exports = {
       })
       .catch(err => res.status(422).json(err));
   },
+  multiUpdateMyDetails: function (req, res) {
+    // console.log('traded Info');
+    // console.log(req.body.traded);
+  //   db.Shift
+  //     .findOneAndUpdate({ _id: req.params.id },
+  //       {traded: req.body.traded },
+  //       {authID :  req.body.authID},
+  //       {shift :  req.body.shift},
+  //       {name: req.body.name },
+  //       { new: true })
+  //     .then(json => {
+  //       console.log("put request made");
+  //       console.log(json);
+  //       res.json(json);
+  //     })
+  //     .catch(err => res.status(422).json(err));
+  // },
+console.log(req.body.theirDetails.traded);
+  db.Shift
+  .updateMany(
+    { _id: req.params.id },
+    [
+       { $set: {  traded: req.body.theirDetails.traded , authID :  req.body.theirDetails.authID, shift :  req.body.theirDetails.shift, name: req.body.theirDetails.name   }}
+      
+    ]
+ ) .then(json => {
+  console.log("put request made");
+  console.log(json);
+  res.json(json);
+})
+.catch(err => res.status(422).json(err));
+},
+
   remove: function (req, res) {
     db.Shift
       .findById({ _id: req.params.id })

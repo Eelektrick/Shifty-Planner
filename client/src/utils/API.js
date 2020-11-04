@@ -34,6 +34,19 @@ export default {
       console.log(res);
     });
   },
+  swapMyDetails: function(id, theirDetails) {
+    
+     let config = {
+      headers: {
+        header1: "Test-Header",
+      }
+     }
+ 
+    return axios.put("/api/shifts/" + id+ "/multiUpdate", {theirDetails}, config).then(res =>{
+      console.log(res);
+    });
+  },
+
   // Deletes the shift with the given id
   deleteShift: function(id) {
     return axios.delete("/api/shifts/" + id);
@@ -51,6 +64,7 @@ export default {
   saveAvdDetails: function(id, avdDetails){
     return axios.put("/api/shifts/" +id+ '/approve', {avdDetails});
   },
+ 
 ///-----------------------END SHIFT ROUTES---------------------
 ///-----------------------START PERSONNEL ROUTES---------------------
 //GET Routes

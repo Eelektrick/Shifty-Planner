@@ -6,7 +6,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 function Table(props) {
   const [isOpen, setIsOpen] = useState(false);
-  const [dropDownVal, setDropDownVal] = useState();
+  const [dropDownVal, setDropDownVal] = useState(' ');
   const [events, setEvents] = useState([]);
   const handleClose = () => setIsOpen(false);
   const { user } = useAuth0();
@@ -33,17 +33,22 @@ function Table(props) {
   const saveDetails = (event, details) => {
     event.preventDefault();
     // console.log("Details for saving");
-    // console.log(dropDownVal);
-    // console.log(details);
-    // console.log(details._id);
+    console.log("dropDownVal");
+     console.log(dropDownVal);
+    //  console.log(details);
+    //  console.log(details._id);
+
     const value = dropDownVal.split("|");
     const avdDetails = {
-      name: value[0],
+      id: value[0],
+      name: value[1],
       authID: authID,
-      shift: value[1],
-      date: value[2],
-      time: value[3],
+      shift: value[2],
+      date: value[3],
+      time: value[4],
     };
+    console.log("avdDetails");
+    console.log(avdDetails);
     API.saveAvdDetails(details._id, avdDetails).then((data) => {});
 
     const traded = 3;
@@ -55,7 +60,7 @@ function Table(props) {
   };
 
   const MyModal = (props) => {
-    console.log(props.details);
+    // console.log(props.details);
     return (
       <Modal className="modal-container" {...props}>
         <div>
@@ -72,14 +77,17 @@ function Table(props) {
                   </Form.Label>
 
                   <Form.Control
-                    as="select"
+                    as="select" value = {dropDownVal}
                     onChange={(e) => {
                       handleChange(e, e.target.value);
                     }}
                   >
                     {/* props.modalDetails */}
-                    {props.modalDetails.map((detail) => (
+                    {props.modaldetails.map((detail) => (
+
                       <option>
+                        {detail._id}
+                        {"|"}
                         {detail.name}
                         {"|"}
                         {detail.shift}
@@ -95,7 +103,7 @@ function Table(props) {
                     type="submit"
                     id="submit"
                     onClick={(e) => {
-                      saveDetails(e, props.tradePersonReqDetail);
+                      saveDetails(e, props.tradepersonreqdetail);
                     }}
                   >
                     Submit
@@ -180,8 +188,8 @@ function Table(props) {
                   </div>
                 </div>
                 <MyModal
-                  modalDetails={props.details}
-                  tradePersonReqDetail={details}
+                  modaldetails={props.details}
+                  tradepersonreqdetail={details}
                   show={isOpen}
                   onHide={() => setIsOpen(false)}
                 />
