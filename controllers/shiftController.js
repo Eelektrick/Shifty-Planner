@@ -40,10 +40,13 @@ module.exports = {
     db.Shift
       .create(req.body)
       .then(dbModel => {
-        console.log(dbModelb);
+        console.log(dbModel);
         res.json(dbModel)
       })
-      .catch(err => res.status(422).json(err));
+      // .catch(err => res.status(422).json(err));
+      .catch(err => {
+        console.error(err);
+    });
   },
   saveID: function (req, res) {
     // console.log(req.body);
