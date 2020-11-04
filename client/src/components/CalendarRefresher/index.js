@@ -62,39 +62,56 @@ class CalenderRefresher extends React.Component {
       })
       .then(() => {
         let userByShift = this.state.aPIres.data;
-        console.log(userByShift[0]);
+        console.log(userByShift);
 
 
         let begin = moment().startOf("month");
-        console.log(begin);
+
+        let shift = [];
+        for (var i = 0; i < begin.daysInMonth(); i++) {
 
         switch (this.state.shift) {
           case "A":
-          let days = moment(begin).daysInMonth()
-          console.log(days);
-          
+            for (let e = 0; e < userByShift.length; e++) {
+          console.log("A");
+          var j = i % 6;
+          if (j === 0 || j === 1) {
+            shift[i]
+              = {
+              // 'generated_ID': 
+              'authID': userByShift[e].authID,
+              'shift': 'A',
+              'start': moment(begin).add(i, 'days').hours('07').toDate(),
+              'end': moment(begin).add(i, 'days').hours('19').toDate(),
+              'traded': 1,
+              'name' : userByShift[e].name,
+              'approvedLists': [],
+              'ignoredLists' : []
+            }}
+            console.log(shift);
+          }
 
             
           case "B":
             
           case "C":
             
-        }
+        }}
 
-        const newShift = [];
+        // const newShift = [];
       
-        for (var i = 0; i < 2; i++) {
-          newShift[i] = {
-            shift: userByShift[i].shift,
-            start: moment(begin).add(i, "days").hours("07").toDate(),
-            end: moment(begin).add(i, "days").hours("19").toDate(),
-            _id: userByShift[i]._id,
-            authID: userByShift[i].authID,
-            name: userByShift[i].name,
-            traded: userByShift[i].traded,
-          };
-        }
-        this.setState({ newShiftVar: newShift });
+        // for (var i = 0; i < 2; i++) {
+        //   newShift[i] = {
+        //     shift: userByShift[i].shift,
+        //     start: moment(begin).add(i, "days").hours("07").toDate(),
+        //     end: moment(begin).add(i, "days").hours("19").toDate(),
+        //     _id: userByShift[i]._id,
+        //     authID: userByShift[i].authID,
+        //     name: userByShift[i].name,
+        //     traded: userByShift[i].traded,
+        //   };
+        // }
+        this.setState({ newShiftVar: shift });
         console.log(this.state.newShiftVar);
       });
 
