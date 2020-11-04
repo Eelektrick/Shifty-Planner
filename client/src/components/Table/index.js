@@ -91,7 +91,7 @@ function Table(props) {
                     {/* props.modalDetails */}
                     {props.modaldetails.map((detail) => (
 
-                      <option value= {detail._id+"|"+detail.name+"|"+detail.shift+"|"+moment(detail.start).format("MMMM Do YYYY")+"|"+
+                      <option key = {detail._id} value= {detail._id+"|"+detail.name+"|"+detail.shift+"|"+moment(detail.start).format("MMMM Do YYYY")+"|"+
                          moment(detail.start).format(" HH:mm:ss ")+"-"+moment(detail.end).format("HH:mm:ss ")}>
                     
                         {detail.name}

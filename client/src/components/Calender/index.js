@@ -21,8 +21,8 @@ let allViews = Object.keys(Views).map((k) => Views[k]);
 
 const eventStyleGetter = (events, start, end, isSelected) => {
   // var backgroundColor = '#' + events.hexColor;
-console.log("events");
-console.log(events);
+// console.log("events");
+// console.log(events);
   var style = {
     // backgroundColor: backgroundColor,
     borderRadius: "0px",
@@ -58,19 +58,10 @@ class Calender extends Component {
   }
 
   componentDidMount() {
-    // console.log("mounted calander");
-    // Modal.setAppElement("body");
-    // const { user } = useAuth0();
-    // const authID = user.sub;
-
+  
     emailjs.init("user_BCfmpqcEj5v3szKGPYNTP");
     API.getShifts().then((data) => {
-      // console.log("My Data from db");
-      //  console.log(data.data);
       const e = [];
-      // console.log("Props");
-      // console.log(this.props);
-
       for (var i = 0; i < data.data.length; i++) {
         e[i] = {
           shift: data.data[i].shift,
@@ -84,7 +75,7 @@ class Calender extends Component {
         };
       }
       this.setState({ events: e });
-      console.log(e);
+      // console.log(e);
     });
   }
 

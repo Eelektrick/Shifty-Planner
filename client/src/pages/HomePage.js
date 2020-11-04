@@ -11,13 +11,17 @@ function HomePage() {
   const [details, setDetails] = useState([]);
   const [events, setEvents] = useState([]);
   const [avdEvents, setAvdEvents] = useState([]);
+  const [key, setKey] = useState("home");
   const { user } = useAuth0();
   const authID = user.sub;
   // console.log("AuthId");
   // console.log(authID);
+  const title1 = "Trade Shifts";
+  const title2 = "Accepted Shifts";
   const nickname = user.nickname.split(".").join(" ");
   const reload = () => {
     API.getShifts(authID).then((data) => {
+     
       const e = [];
       for (var i = 0; i < data.data.length; i++) {
         //Retrieve the details whose traded = 2 and not their own traded details
@@ -43,12 +47,13 @@ function HomePage() {
 
       // })
       setEvents(e);
+      console.log("API.getShifts(authID)");
       console.log(e);
     });
 
     API.getAvdLists(authID).then((avdData) => {
-      console.log("Approved Data Response foe API.getAvdLists(authID) ");
-      console.log(avdData.data);
+      // console.log("Approved Data Response foe API.getAvdLists(authID) ");
+      // console.log(avdData.data);
 
       const e = [];
       for (var i = 0; i < avdData.data.length; i++) {
@@ -78,8 +83,8 @@ function HomePage() {
       }
 
       setAvdEvents(e);
-      console.log("Approved Events");
-      console.log(e);
+      // console.log("Approved Events");
+      // console.log(e);
     });
   }
 
@@ -91,14 +96,10 @@ function HomePage() {
     });
 
     reload();
-    
 
-    
   }, []);
 
-  const title1 = "Trade Shifts";
-  const title2 = "Accepted Shifts";
-  const [key, setKey] = useState("home");
+ 
   return (
     <div>
       <div id="welcome"> Welcome {nickname} !! </div>
