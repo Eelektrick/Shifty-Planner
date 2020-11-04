@@ -23,6 +23,8 @@ function Table(props) {
 
     API.saveID(id, authID).then((data) => {});
     setEvents(newList);
+    setIsOpen(false);
+    props.reload();
   };
 
   const handleChange = (event, value) => {
@@ -49,7 +51,11 @@ function Table(props) {
     };
     console.log("avdDetails");
     console.log(avdDetails);
-    API.saveAvdDetails(details._id, avdDetails).then((data) => {});
+    API.saveAvdDetails(details._id, avdDetails).then((data) => {
+      setIsOpen(false);
+      props.reload();
+ 
+    });
 
     const traded = 3;
     API.updateShift(details._id, traded).then((response) => {
@@ -85,15 +91,15 @@ function Table(props) {
                     {/* props.modalDetails */}
                     {props.modaldetails.map((detail) => (
 
-                      <option>
-                        {detail._id}
-                        {"|"}
+                      <option value= {detail._id+"|"+detail.name+"|"+detail.shift+"|"+moment(detail.start).format("MMMM Do YYYY")+"|"+
+                         moment(detail.start).format(" HH:mm:ss ")+"-"+moment(detail.end).format("HH:mm:ss ")}>
+                    
                         {detail.name}
-                        {"|"}
+                        {" "}
                         {detail.shift}
-                        {"|"}
+                        {" "}
                         {moment(detail.start).format("MMMM Do YYYY")}
-                        {"|"}
+                        {" "}
                         {moment(detail.start).format(" HH:mm:ss ")} -{" "}
                         {moment(detail.end).format("HH:mm:ss ")}
                       </option>
