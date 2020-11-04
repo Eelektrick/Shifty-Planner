@@ -15,7 +15,6 @@ function License() {
             </Container>
         </div>
     )
-
 }
 
 export default License;

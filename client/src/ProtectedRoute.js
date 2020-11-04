@@ -5,12 +5,12 @@ import { Route } from 'react-router-dom';
 export const ProtectedRoute = ({
   component,
   ...args
-    }) => (
-    <Route
-        component={withAuthenticationRequired(component, {
-        // If using a Hash Router, you need to pass the hash fragment as `returnTo`
-        // returnTo: () => window.location.hash.substr(1),
-        })}
-        {...args}
-    />
+}) => (
+  <Route
+    component={withAuthenticationRequired(component, {
+    // If using a Hash Router, you need to pass the hash fragment as `returnTo`
+    // returnTo: () => window.location.hash.substr(1),
+    })}
+    {...args}
+  />
 );

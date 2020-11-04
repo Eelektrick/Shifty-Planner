@@ -12,15 +12,18 @@ function Schedule(props) {
   });
 
   const handleReject = (avdAuthid, myId) => {
+    console.log('props.avdEvents')
+    console.log(props.avdEvents)
+     const newList = props.avdEvents.filter(
+       (e) => e._id !== myId
+     );
 
-    const newList = props.avdEvents.filter(
-      (e) => e.approvedPersonsAuthID !== avdAuthid
-    );
-
-    // API.saveID(id, authId).then((data) => { });
-    API.saveRejectID(avdAuthid, myId).then((data) => {});
-    setavdEvents(newList);
-    // API.getShifts(authId);
+    API.saveID(myId, avdAuthid).then((data) => { 
+      // API.saveRejectID(avdAuthid, myId).then((data) => {});
+      setavdEvents(newList);
+      // API.getShifts(authId);
+      props.reload();
+    });
   };
 
   const handleAccept = (details) => {
@@ -43,14 +46,16 @@ function Schedule(props) {
 
     }
 
-    API.swapMyDetails(details.myId, theirDetails);
-    API.swapMyDetails(details.approvedPersonsId, myDetails);
-
-
+    
+    API.swapMyDetails(details.approvedPersonsId, myDetails).then(resp =>{
+      API.swapMyDetails(details.myId, theirDetails).then(response=>{
+        props.reload();
+      });
+     
+    });
   };
 
   // {!avdEvents.length> 0 && setavdEvents(props.avdEvents)}
-
   return (
     <div>
       <div id="cover">
@@ -80,8 +85,8 @@ function Schedule(props) {
                       {" "}
                       Shift : {details.myShift}{" "}
                     </h6>
-                    <ul class="list-group list-group-flush">
-                      <li class="list-group-item">
+                    <ul className="list-group list-group-flush">
+                      <li className="list-group-item">
                         Date :{" "}
                         <div
                           style={{
@@ -92,7 +97,7 @@ function Schedule(props) {
                           {details.myDate}
                         </div>{" "}
                       </li>
-                      <li class="list-group-item">
+                      <li className="list-group-item">
                         Time :{" "}
                         <div
                           style={{
@@ -105,15 +110,15 @@ function Schedule(props) {
                       </li>
                     </ul>
                     <br />
-                    <h6 class="card-title">
+                    <h6 className="card-title">
                       {details.approvedPersonsName}'s Shift Details :
                     </h6>
                     <h6 className="card-subtitle mb-2 text-muted">
                       Shift : {details.approvedPersonsShift}
                     </h6>
                     <div className="card-text">
-                      <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
+                      <ul className="list-group list-group-flush">
+                        <li className="list-group-item">
                           Date:{" "}
                           <div
                             style={{
@@ -124,7 +129,7 @@ function Schedule(props) {
                             {details.approvedPersonsDate}
                           </div>
                         </li>
-                        <li class="list-group-item">
+                        <li className="list-group-item">
                           Time :{" "}
                           <div
                             style={{
@@ -139,6 +144,10 @@ function Schedule(props) {
                     </div>
                     <button
                       type="button"
+
+                      className="btn btn-dark mr-3"
+                      // onClick={}
+
                       class="btn btn-dark mr-3"
                       onClick={() => handleAccept(details)}
                       id="btn1"
@@ -154,7 +163,7 @@ function Schedule(props) {
                           details.myId
                         )
                       }
-                      class="btn btn-dark"
+                      className="btn btn-dark"
                       id="btn2"
                     >
                       Reject
