@@ -68,8 +68,8 @@ function Schedule(props) {
                       {" "}
                       Shift : {details.myShift}{" "}
                     </h6>
-                    <ul class="list-group list-group-flush">
-                      <li class="list-group-item">
+                    <ul className="list-group list-group-flush">
+                      <li className="list-group-item">
                         Date :{" "}
                         <div
                           style={{
@@ -80,7 +80,7 @@ function Schedule(props) {
                           {details.myDate}
                         </div>{" "}
                       </li>
-                      <li class="list-group-item">
+                      <li className="list-group-item">
                         Time :{" "}
                         <div
                           style={{
@@ -93,15 +93,15 @@ function Schedule(props) {
                       </li>
                     </ul>
                     <br />
-                    <h6 class="card-title">
+                    <h6 className="card-title">
                       {details.approvedPersonsName}'s Shift Details :
                     </h6>
                     <h6 className="card-subtitle mb-2 text-muted">
                       Shift : {details.approvedPersonsShift}
                     </h6>
                     <div className="card-text">
-                      <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
+                      <ul className="list-group list-group-flush">
+                        <li className="list-group-item">
                           Date:{" "}
                           <div
                             style={{
@@ -112,7 +112,7 @@ function Schedule(props) {
                             {details.approvedPersonsDate}
                           </div>
                         </li>
-                        <li class="list-group-item">
+                        <li className="list-group-item">
                           Time :{" "}
                           <div
                             style={{
@@ -127,7 +127,7 @@ function Schedule(props) {
                     </div>
                     <button
                       type="button"
-                      class="btn btn-dark mr-3"
+                      className="btn btn-dark mr-3"
                       // onClick={}
                       id="btn1"
                     >
@@ -142,7 +142,7 @@ function Schedule(props) {
                           details.myId
                         )
                       }
-                      class="btn btn-dark"
+                      className="btn btn-dark"
                       id="btn2"
                     >
                       Reject
