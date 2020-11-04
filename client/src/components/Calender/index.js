@@ -11,23 +11,17 @@ import { store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 import emailjs from "emailjs-com";
 import "animate.css";
-// import { Footer } from "rsuite";
-import Footer from "../Footer";
 
 const localizer = momentLocalizer(moment);
-// const useStyles = makeStyles(styles);
 
 let allViews = Object.keys(Views).map((k) => Views[k]);
 
 const eventStyleGetter = (events, start, end, isSelected) => {
-  // var backgroundColor = '#' + events.hexColor;
-console.log("events");
-console.log(events);
   var style = {
     // backgroundColor: backgroundColor,
-    borderRadius: "0px",
     // opacity: 0.8,
     // color: 'black',
+    borderRadius: "0px",
     border: "0px",
     display: "block",
   };
@@ -44,7 +38,7 @@ console.log(events);
   };
 };
 
-const dayPropGetter = (Date) => {};
+const dayPropGetter = (Date) => { };
 
 class Calender extends Component {
   constructor() {
@@ -58,19 +52,10 @@ class Calender extends Component {
   }
 
   componentDidMount() {
-    // console.log("mounted calander");
-    // Modal.setAppElement("body");
-    // const { user } = useAuth0();
-    // const authID = user.sub;
 
     emailjs.init("user_BCfmpqcEj5v3szKGPYNTP");
     API.getShifts().then((data) => {
-      // console.log("My Data from db");
-      //  console.log(data.data);
       const e = [];
-      // console.log("Props");
-      // console.log(this.props);
-
       for (var i = 0; i < data.data.length; i++) {
         e[i] = {
           shift: data.data[i].shift,
@@ -84,7 +69,7 @@ class Calender extends Component {
         };
       }
       this.setState({ events: e });
-      console.log(e);
+      // console.log(e);
     });
   }
 
@@ -120,7 +105,7 @@ class Calender extends Component {
     const authID = this.props.authID;
     if (event.authID !== authID || event.traded !== 1 || moment(event.start).isBefore()) {
       alert('Sorry...You cannot make a trade for this!!!');
-      return ;
+      return;
     }
     this.setState({
       modalIsOpen: true,
@@ -134,24 +119,22 @@ class Calender extends Component {
     let formData = {
       name: this.state.crewName,
     };
-
-    console.log("Handle Submit Events");
-    console.log(this.state.cal_events);
-
+    // console.log("Handle Submit Events");
+    // console.log(this.state.cal_events);
     const traded = 2;
     API.updateShift(this.state.cal_events._id, traded).then((response) => {
-      console.log(response);
+      // console.log(response);
     });
 
-    emailjs.send("shiftyPlannerEmail", "template_clhajc8", formData).then(
-      function (response) {
-        console.log("SUCCESS!", response.status, response.text);
-      },
-      function (error) {
-        console.log("FAILED...", error);
-      }
-    );
-    
+    // emailjs.send("shiftyPlannerEmail", "template_clhajc8", formData).then(
+    //   function (response) {
+    //     console.log("SUCCESS!", response.status, response.text);
+    //   },
+    //   function (error) {
+    //     console.log("FAILED...", error);
+    //   }
+    // );
+
     this.closeModal();
   };
 
@@ -159,10 +142,6 @@ class Calender extends Component {
     this.setState({
       modalIsOpen: false,
     });
-
-  // handleShow = () => this.setState({
-  //   modalIsOpen: true
-  // });
 
   renderModal(props) {
     return (
@@ -206,7 +185,6 @@ class Calender extends Component {
   }
 
   render() {
-    // console.log(events);
     return (
       <div id="calendarCover">
         <div id="welcome">
