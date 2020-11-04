@@ -9,7 +9,4 @@ function example(params) {
   )
 }
 
-
 export default example;
-
-

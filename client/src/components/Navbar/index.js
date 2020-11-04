@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./style.css";
 import { FaHome } from "react-icons/fa";
 import { AiFillSchedule } from "react-icons/ai";
-import { AiOutlineSafetyCertificate } from "react-icons/ai";
 import image from "../Navbar/shiftyLogo3.png";
 import { Link } from "react-router-dom";
 import LogoutButton from "../LogoutButton";

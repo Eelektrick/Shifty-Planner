@@ -88,4 +88,4 @@ export default {
   createUser: function(personnelData) {
     return axios.get("/api/users", personnelData);
   },
-  };
+};
