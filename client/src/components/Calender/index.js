@@ -208,14 +208,7 @@ class Calender extends Component {
     // console.log(events);
     return (
       <div id="calendarCover">
-        <div
-          style={{
-            color: "white",
-            textAlign: "center",
-            fontSize: "20px",
-            marginBottom: "10px",
-          }}
-        >
+        <div id="welcome">
           {" "}
           Welcome {this.props.nickname.split(".").join(" ")} !!
         </div>

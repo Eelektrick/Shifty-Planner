@@ -92,20 +92,17 @@ function HomePage() {
   const [key, setKey] = useState("home");
   return (
     <div>
-      <div style={{ color: "white", textAlign: "center", fontSize: "20px" }}>
-        {" "}
-        Welcome {nickname} !!{" "}
-      </div>
+      <div id="welcome"> Welcome {nickname} !! </div>
       <div className="container">
         <div className="tabs">
           <div className="col sm-12"></div>
           <Tabs
-            id="controlled-tab-example"
-            activeKey={key}
+            defaultActiveKey="Trade"
+            transition={false}
             onSelect={(k) => setKey(k)}
           >
             <Tab
-              eventKey="Trade Shifts"
+              eventKey="Trade"
               title="Trade Shifts"
               style={{ fontFamily: "Kanit, sans-serif" }}
             >
@@ -119,7 +116,7 @@ function HomePage() {
               </div>
             </Tab>
             <Tab
-              eventKey="Accepted Shifts"
+              eventKey="Accepted"
               title="Accepted Shifts"
               style={{ fontFamily: "Kanit, sans-serif" }}
             >
