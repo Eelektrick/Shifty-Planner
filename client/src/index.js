@@ -14,6 +14,8 @@ ReactDOM.render(
         domain={domain}
         clientId={clientId}
         redirectUri={window.location.origin}
+        audience="https://shifty-planner.herokuapp.com/"
+        scope="create:schedule"
     >
     <BrowserRouter>
     <App />

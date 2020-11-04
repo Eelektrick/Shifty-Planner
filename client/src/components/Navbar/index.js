@@ -79,6 +79,21 @@ export default class Navbar extends Component {
               </Link>
             </li>
 
+            {this.props.isAdmin&&<li className="nav-item">
+            <Link
+                onClick={this.closeNavbar}
+                style={{ color: "rgb(190, 147, 3)" }}
+                to="/admin"
+                className={
+                  window.location.pathname === "/admin"
+                    ? "nav-link active"
+                    : "nav-link"
+                }
+              >
+                Admin
+              </Link>
+            </li>}
+
             <li className="nav-item">
               <LogoutButton onClick={this.closeNavbar} />
             </li>
