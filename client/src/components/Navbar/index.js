@@ -70,22 +70,7 @@ export default class Navbar extends Component {
                 Schedule
               </Link>
             </li>
-            <li className="nav-item">
-              <Link
-                style={{ color: "rgb(190, 147, 3)" }}
-                to="/license"
-                className={
-                  window.location.pathname === "/license"
-                    ? "nav-link active"
-                    : "nav-link"
-                }
-              >
-                <AiOutlineSafetyCertificate
-                  style={{ color: "rgb(190, 147, 3)" }}
-                />{" "}
-                License
-              </Link>
-            </li>
+
             <li className="nav-item">
               <LogoutButton />
             </li>

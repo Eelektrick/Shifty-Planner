@@ -139,13 +139,13 @@ function Table(props) {
               <>
                 <div className="card">
                   <div className="card-body">
-                    <h5 class="card-title">Name : {details.name}</h5>
+                    <h5 className="card-title">Name : {details.name}</h5>
                     <h6 className="card-subtitle mb-2 text-muted">
                       Shift : {details.shift}
                     </h6>
                     <div className="card-text">
-                      <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
+                      <ul className="list-group list-group-flush">
+                        <li className="list-group-item">
                           Date:{" "}
                           <div
                             style={{
@@ -156,7 +156,7 @@ function Table(props) {
                             {details.date}
                           </div>
                         </li>
-                        <li class="list-group-item">
+                        <li className="list-group-item">
                           Time :{" "}
                           <div
                             style={{
@@ -171,7 +171,7 @@ function Table(props) {
                     </div>
                     <button
                       type="button"
-                      class="btn btn-dark mr-3"
+                      className="btn btn-dark mr-3"
                       onClick={() => setIsOpen(true)}
                       id="btn1"
                     >
@@ -180,7 +180,7 @@ function Table(props) {
                     <button
                       type="button"
                       onClick={() => handleDelete(details._id)}
-                      class="btn btn-dark"
+                      className="btn btn-dark"
                       id="btn2"
                     >
                       Ignore
