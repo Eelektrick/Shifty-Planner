@@ -28,6 +28,19 @@ module.exports = {
       )
       .catch(err => res.status(422).json(err));
   },
+  create: function (req, res) {
+    console.log("POST made it to server")
+    db.Shift
+      .create(req.body)
+      .then(dbModel => {
+        console.log(dbModel);
+        res.json(dbModel)
+      })
+      // .catch(err => res.status(422).json(err));
+      .catch(err => {
+        console.error(err);
+    });
+  },
   saveID: function (req, res) {
     db.Shift
       .findOneAndUpdate({ _id: req.params.id }, { $push: { ignoredLists: req.body.userId } }, { new: true })
