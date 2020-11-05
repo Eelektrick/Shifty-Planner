@@ -13,16 +13,14 @@ function Schedule(props) {
   // console.log("props.avdEvents");
   // console.log(props.avdEvents);
   const handleReject = (avdAuthid, myId) => {
-    const newList = props.avdEvents.filter(
-      (e) => e._id !== myId
-    );
+    const newList = props.avdEvents.filter((e) => e._id !== myId);
 
     API.saveID(myId, avdAuthid).then((data) => {
       setavdEvents(newList);
       API.removefromAvd(myId, avdAuthid).then((data) => {
         API.updateShift(myId, 1);
         props.reload();
-      })
+      });
     });
   };
 
@@ -32,21 +30,20 @@ function Schedule(props) {
       authID: details.approvedPersonsAuthID,
       shift: details.approvedPersonsShift,
       traded: 4,
-      name: details.approvedPersonsName
-    }
+      name: details.approvedPersonsName,
+    };
 
     let myDetails = {
       authID: details.myAuthId,
       shift: details.myShift,
       traded: 4,
-      name: details.myName
-    }
+      name: details.myName,
+    };
 
-    API.swapMyDetails(details.approvedPersonsId, myDetails).then(resp => {
-      API.swapMyDetails(details.myId, theirDetails).then(response => {
+    API.swapMyDetails(details.approvedPersonsId, myDetails).then((resp) => {
+      API.swapMyDetails(details.myId, theirDetails).then((response) => {
         props.reload();
       });
-
     });
   };
 
@@ -135,11 +132,11 @@ function Schedule(props) {
                         </li>
                       </ul>
                     </div>
+
                     <button
                       type="button"
-
                       className="btn btn-dark mr-3"
-                      class="btn btn-dark mr-3"
+                      className="btn btn-dark mr-3"
                       onClick={() => handleAccept(details)}
                       id="btn1"
                     >

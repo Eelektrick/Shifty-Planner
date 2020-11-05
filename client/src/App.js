@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Example from "./pages/Example";
@@ -13,22 +13,22 @@ import jwt_decode from "jwt-decode";
 function App() {
   const { isAuthenticated, getAccessTokenSilently } = useAuth0();
   const [isAdmin, setIsAdmin] = useState(false);
-  useEffect(()=>{
-    (async ()=>{
-      try{
+  useEffect(() => {
+    (async () => {
+      try {
         const token = await getAccessTokenSilently({
-          audience:"https://shifty-planner.herokuapp.com/",
-          scope:"create:schedule"});
-          const decoded = jwt_decode(token);
-          console.log(decoded);
-          const role = decoded["https://shifty-planner.com/roles"][0]
-          setIsAdmin(role==="supervisor");
-      }
-      catch(e){
+          audience: "https://shifty-planner.herokuapp.com/",
+          scope: "create:schedule",
+        });
+        const decoded = jwt_decode(token);
+        console.log(decoded);
+        const role = decoded["https://shifty-planner.com/roles"][0];
+        setIsAdmin(role === "supervisor");
+      } catch (e) {
         console.log(e);
       }
     })();
-  },[isAuthenticated])
+  }, [isAuthenticated]);
   return (
     <Router>
       <div>

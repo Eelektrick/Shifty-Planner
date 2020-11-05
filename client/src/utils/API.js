@@ -46,6 +46,16 @@ export default {
       console.log(res);
     });
   },
+
+  // Deletes the shift with the given id
+  deleteShift: function(id) {
+    return axios.delete("/api/shifts/" + id);
+  },
+  // Saves a shift to the database
+  saveShift: function(shiftData) {
+    console.log("Save shift hit");
+    return axios.post("/api/shifts", shiftData);
+  },
   saveID: function(id, userId){
     return axios.put("/api/shifts/" +id+ '/ignore', {userId});
   },
