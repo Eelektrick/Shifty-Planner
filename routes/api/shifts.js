@@ -4,6 +4,7 @@ const shiftController = require("../../controllers/shiftController");
 // Matches with "/api/shifts"
 router.route("/")
   .get(shiftController.findAll)
+  .post(shiftController.create);
   
 router.route("/:id/ignore")
   .put(shiftController.saveID)
