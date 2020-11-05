@@ -6,7 +6,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 function Table(props) {
   const [isOpen, setIsOpen] = useState(false);
-  const [dropDownVal, setDropDownVal] = useState(' ');
+  const [dropDownVal, setDropDownVal] = useState(" ");
   const [events, setEvents] = useState([]);
   const handleClose = () => setIsOpen(false);
   const { user } = useAuth0();
@@ -18,7 +18,7 @@ function Table(props) {
 
   const handleDelete = (id) => {
     const newList = props.events.filter((e) => e._id !== id);
-    API.saveID(id, authID).then((data) => { });
+    API.saveID(id, authID).then((data) => {});
     setEvents(newList);
     setIsOpen(false);
     props.reload();
@@ -45,7 +45,6 @@ function Table(props) {
     API.saveAvdDetails(details._id, avdDetails).then((data) => {
       setIsOpen(false);
       props.reload();
-
     });
     const traded = 3;
     API.updateShift(details._id, traded);
@@ -70,22 +69,31 @@ function Table(props) {
                   </Form.Label>
 
                   <Form.Control
-                    as="select" value={dropDownVal}
+                    as="select"
+                    value={dropDownVal}
                     onChange={(e) => {
                       handleChange(e, e.target.value);
                     }}
                   >
                     {props.modaldetails.map((detail) => (
-
-                      <option key={detail.id} value={detail._id + "|" + detail.name + "|" + detail.shift + "|" + moment(detail.start).format("MMMM Do YYYY") + "|" +
-                        moment(detail.start).format(" HH:mm:ss ") + "-" + moment(detail.end).format("HH:mm:ss ")}>
-
-                        {detail.name}
-                        {" "}
-                        {detail.shift}
-                        {" "}
-                        {moment(detail.start).format("MMMM Do YYYY")}
-                        {" "}
+                      <option
+                        key={detail.id}
+                        value={
+                          detail._id +
+                          "|" +
+                          detail.name +
+                          "|" +
+                          detail.shift +
+                          "|" +
+                          moment(detail.start).format("MMMM Do YYYY") +
+                          "|" +
+                          moment(detail.start).format(" HH:mm:ss ") +
+                          "-" +
+                          moment(detail.end).format("HH:mm:ss ")
+                        }
+                      >
+                        {detail.name} {detail.shift}{" "}
+                        {moment(detail.start).format("MMMM Do YYYY")}{" "}
                         {moment(detail.start).format(" HH:mm:ss ")} -{" "}
                         {moment(detail.end).format("HH:mm:ss ")}
                       </option>

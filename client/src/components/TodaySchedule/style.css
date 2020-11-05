@@ -1,0 +1,12 @@
+#head {
+  background-color: white;
+}
+
+#infoHead {
+  font-size: 16px;
+}
+
+#info {
+  color: rgb(233, 173, 7);
+  font-weight: bold;
+}
