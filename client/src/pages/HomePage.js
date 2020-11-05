@@ -6,8 +6,9 @@ import "./example.css";
 import Schedule from "../components/Schedule";
 import Table from "../components/Table";
 import { Tabs, Tab } from "react-bootstrap";
+import TodaySchedule from "../components/TodaySchedule";
 
-function HomePage() {
+function HomePage(props) {
   const [details, setDetails] = useState([]);
   const [events, setEvents] = useState([]);
   const [avdEvents, setAvdEvents] = useState([]);
@@ -128,13 +129,10 @@ function HomePage() {
               eventKey="Today"
               title="Today Schedule"
               style={{ fontFamily: "Kanit, sans-serif" }}
+            
             >
               <div>
-                <Schedule
-                  name={nickname}
-                  title={title2}
-                  avdEvents={avdEvents}
-                />
+               <TodaySchedule />
               </div>
             </Tab>
           </Tabs>

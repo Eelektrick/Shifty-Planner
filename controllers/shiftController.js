@@ -18,10 +18,22 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findByAuthId: function (req, res) {
-    console.log(req.query.authID);
+    // console.log(req.query.authID);
 
     db.Shift
       .find({ authID: req.query.authID, traded: 1 })
+      .sort({ date: -1 })
+      .then(dbModel =>
+        res.json(dbModel)
+      )
+      .catch(err => res.status(422).json(err));
+  },
+  findByDate: function (req, res) {
+    // console.log(req.query.authID);
+    
+    db.Shift
+    // "dt" : {"$gte": ISODate("2013-10-01T00:00:00.000Z")}  '2020-11-04T14:00:00.000+00:00'
+      .find( {start: { $eq: req.query.start } } )
       .sort({ date: -1 })
       .then(dbModel =>
         res.json(dbModel)

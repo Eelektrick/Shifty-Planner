@@ -18,6 +18,9 @@ router.route("/:id/approve")
 router.route("/byAuth")
   .get(shiftController.findByAuthId)
 
+router.route("/byDate/:uuid")
+.get(shiftController.findByDate)
+
 router.route("/byAvdLists")
   .get(shiftController.findAvdLists)
 
