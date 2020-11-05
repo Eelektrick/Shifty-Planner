@@ -16,10 +16,13 @@ class CalenderRefresher extends React.Component {
       name: "",
       ignoredLists: [],
       selectedMonth: 0,
-      shift: "C",
+      selectedYear:0,
+      shift: "",
       newShiftVar: [],
       aPIres: "",
       shiftsToBeAdded: [],
+      year:0,
+      month:0
     };
 
     this.handleChangeName = this.handleChangeName.bind(this);
@@ -33,35 +36,54 @@ class CalenderRefresher extends React.Component {
   // /* -------------Month----------- */
   handleChangeMonth(event) {
     console.log(event);
-    console.log(this.state.selectedMonth);
-    this.setState({ selectedMonth: event.target.selectedMonth });
-    console.log(this.state.selectedMonth);
+    // this.setState({ selectedMonth: event.target.value });
+    this.setState({ selectedMonth: event.target.value }, () => {
+      console.log(this.state.selectedMonth);
+  })
+
     event.preventDefault();
   }
   handleSubmitMonth(event) {
-    this.setState({ selectedMonth: event.target.selectedMonth });
-    console.log(this.state.selectedMonth);
-
+    console.log(this.state.selectedMonth );
+    // this.setState({ selectedMonth: event.target.value });
+   let selectedDate = moment(this.state.selectedMonth)
+   this.setState({ month: selectedDate.get("month") }, () => {
+    console.log(this.state.month);
+})
+this.setState({ year: selectedDate.get("year") }, () => {
+  console.log(this.state.year);
+})
     event.preventDefault();
   }
 
   // /* -------------SHIFT----------------------------------- */////////////////////
   handleChangeShift(event) {
+    this.setState({ shift: event.target.value  });
+
+
+
+
     event.preventDefault();
+
+
+
   }
 
   handleSubmitShift(event) {
     
-
+ 
     API.getUsersByShift(this.state.shift)
       .then((res) => {
         this.setState({ aPIres: res });
        
       })
       .then(() => {
+        console.log(this.state.month);
+        console.log(this.state.year);
         let userByShift = this.state.aPIres.data;
-        console.log(userByShift);
-        let begin = moment().startOf("month");
+        let yearMonth = moment().set({'year': 2020, 'month': this.state.selectedMonth});
+        let begin = moment(yearMonth).startOf("month");
+        console.log(begin);
         let shift = [];
         for (var i = 0; i < begin.daysInMonth(); i++) {
         let j = i % 6;
@@ -163,7 +185,7 @@ class CalenderRefresher extends React.Component {
     return (
       <div>
         {/* -------------Month----------- */}
-        {/* <form onSubmit={this.handleSubmitMonth}>
+        <form onSubmit={this.handleSubmitMonth}>
           <h2>Date to be made</h2>
           <label>
             Month:
@@ -171,13 +193,13 @@ class CalenderRefresher extends React.Component {
               type="month"
               id="start"
               name="start"
-              min="2018-03"
+             
               value={this.state.selectedMonth}
               onChange={this.handleChangeMonth}
             />
           </label>
           <input type="submit" value="Submit" />
-        </form> */}
+        </form>
         {/* -------------SHIFT----------- */}
         <form onSubmit={this.handleSubmitShift}>
           <h2>Shift to be made</h2>
