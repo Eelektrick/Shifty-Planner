@@ -12,6 +12,7 @@ const LogoutButton = () => {
 
   return (
     <a
+      href="/#"
       onClick={() => logoutWithRedirect()}
       style={{ color: "rgb(190, 147, 3)" }}
       className="nav-link"

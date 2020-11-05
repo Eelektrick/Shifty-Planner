@@ -83,7 +83,7 @@ function HomePage(props) {
       setDetails(data.data);
     });
     reload();
-  }, []);
+  }, [props]);
 
   return (
     <div>
@@ -103,6 +103,7 @@ function HomePage(props) {
             >
               <div>
                 <Table
+                  key={nickname}
                   name={nickname}
                   title={title1}
                   events={events}
@@ -118,6 +119,7 @@ function HomePage(props) {
             >
               <div>
                 <Schedule
+                  key={nickname}
                   name={nickname}
                   title={title2}
                   avdEvents={avdEvents}

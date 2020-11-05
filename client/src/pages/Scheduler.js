@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
-import API from "../utils/API";
-import CardContainer from "../components/CardContainer";
+import React, { useEffect } from "react";
 import Calender from "../components/Calender";
 import Row from "../components/Row";
 import Col from "../components/Col";
 import Container from "../components/Container";
+import CardContainer from "../components/CardContainer";
 import { useAuth0 } from "@auth0/auth0-react";
 
 function Scheduler() {
 
   const { user } = useAuth0();
-  console.log(user);
+  // console.log(user);
   // console.log(user.sub);
   const authID = (user || {}).sub;
   const nickname = (user || {}).nickname;

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Calendar, Views } from "react-big-calendar";
+import { Calendar } from "react-big-calendar";
 import { momentLocalizer } from "react-big-calendar";
 import { Button, Modal } from "react-bootstrap";
 import moment from "moment";
@@ -12,10 +12,10 @@ import "react-notifications-component/dist/theme.css";
 import emailjs from "emailjs-com";
 import "animate.css";
 import {Notification} from 'rsuite';
-import HomePage from '../../pages/HomePage';
+import { FaTintSlash } from "react-icons/fa";
 const localizer = momentLocalizer(moment);
 
-let allViews = Object.keys(Views).map((k) => Views[k]);
+// let allViews = Object.keys(Views).map((k) => Views[k]);
 
 let name= "";
 const eventStyleGetter = (events, start, end, isSelected) => {
@@ -189,7 +189,7 @@ class Calender extends Component {
             Trade
           </Button>
         </Modal.Footer>
-        <ReactNotification />
+        {/* <ReactNotification /> */}
       </Modal>
     );
   }
