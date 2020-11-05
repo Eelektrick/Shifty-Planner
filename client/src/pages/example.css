@@ -82,11 +82,13 @@ p {
   box-shadow: 0 5px 5px #666;
   background-color: #249e05;
   border: none;
+  transform: scale(1.1);
 }
 #btn2:hover {
   box-shadow: 0 5px 5px #666;
   background-color: #c90d06;
   border: none;
+  transform: scale(1.1);
 }
 
 #submit:hover {
@@ -94,6 +96,7 @@ p {
   background-color: #00449c;
   border: none;
   font-family: "Kanit", "sans-serif";
+  transform: scale(1.1);
 }
 
 #submit:active {

@@ -99,6 +99,7 @@ function Table(props) {
                       </option>
                     ))}
                   </Form.Control>
+                  <br />
                   <Button
                     type="submit"
                     id="submit"
