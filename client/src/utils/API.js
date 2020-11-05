@@ -10,26 +10,18 @@ export default {
   getAvdLists: function(userId) {
     return axios.get("/api/shifts/byAvdLists", {params: { userId }});
   },
-  getShiftByTrade: function() {
-    return axios.get("/api/shifts/");
-  },
   //GET by users Auth ID
   getShiftByAuthId: function(authID) {
     return axios.get("/api/shifts/byAuth" , {params: { authID }});
   },
-  // Gets the shift with the given id
-  getShift: function(id) {
-    return axios.get("/api/shifts/" + id);
-  },
-   // Update the shift with the given id
+  // Update the shift with the given id
   updateShift: function(id, traded) {
-    console.log("Traded" +traded);
+    // console.log("Traded" +traded);
      let config = {
       headers: {
         header1: "Test-Header",
       }
      }
- 
     return axios.put("/api/shifts/" + id, {traded}, config).then(res =>{
       console.log(res);
     });
@@ -59,8 +51,8 @@ export default {
   saveID: function(id, userId){
     return axios.put("/api/shifts/" +id+ '/ignore', {userId});
   },
-  saveRejectID: function(authId, userId){
-    return axios.put("/api/shifts/" +authId+ '/reject', {userId});
+  removefromAvd: function(id,userId){
+    return axios.put("/api/shifts/" +id+ '/remove', {userId});
   },
   saveAvdDetails: function(id, avdDetails){
     return axios.put("/api/shifts/" +id+ '/approve', {avdDetails});
@@ -83,7 +75,6 @@ export default {
     console.log("UserByShift hit "+shift);
     return axios.get("/api/users/byShift", {params: { shift }});
   },
-
 
   //POST Routes
   createUser: function(personnelData) {

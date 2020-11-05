@@ -17,11 +17,8 @@ function Table(props) {
   });
 
   const handleDelete = (id) => {
-    console.log(id);
     const newList = props.events.filter((e) => e._id !== id);
-    //this.setState({...events, events: newList}) ;
-
-    API.saveID(id, authID).then((data) => {});
+    API.saveID(id, authID).then((data) => { });
     setEvents(newList);
     setIsOpen(false);
     props.reload();
@@ -34,12 +31,6 @@ function Table(props) {
 
   const saveDetails = (event, details) => {
     event.preventDefault();
-    // console.log("Details for saving");
-    console.log("dropDownVal");
-     console.log(dropDownVal);
-    //  console.log(details);
-    //  console.log(details._id);
-
     const value = dropDownVal.split("|");
     const avdDetails = {
       id: value[0],
@@ -49,24 +40,20 @@ function Table(props) {
       date: value[3],
       time: value[4],
     };
-    console.log("avdDetails");
-    console.log(avdDetails);
+    // console.log("avdDetails");
+    // console.log(avdDetails);
     API.saveAvdDetails(details._id, avdDetails).then((data) => {
       setIsOpen(false);
       props.reload();
- 
-    });
 
-    const traded = 3;
-    API.updateShift(details._id, traded).then((response) => {
-      console.log(response);
     });
+    const traded = 3;
+    API.updateShift(details._id, traded);
 
     handleClose();
   };
 
   const MyModal = (props) => {
-    // console.log(props.details);
     return (
       <Modal className="modal-container" {...props}>
         <div>
@@ -83,17 +70,16 @@ function Table(props) {
                   </Form.Label>
 
                   <Form.Control
-                    as="select" value = {dropDownVal}
+                    as="select" value={dropDownVal}
                     onChange={(e) => {
                       handleChange(e, e.target.value);
                     }}
                   >
-                    {/* props.modalDetails */}
                     {props.modaldetails.map((detail) => (
 
-                      <option value= {detail._id+"|"+detail.name+"|"+detail.shift+"|"+moment(detail.start).format("MMMM Do YYYY")+"|"+
-                         moment(detail.start).format(" HH:mm:ss ")+"-"+moment(detail.end).format("HH:mm:ss ")}>
-                    
+                      <option key={detail.id} value={detail._id + "|" + detail.name + "|" + detail.shift + "|" + moment(detail.start).format("MMMM Do YYYY") + "|" +
+                        moment(detail.start).format(" HH:mm:ss ") + "-" + moment(detail.end).format("HH:mm:ss ")}>
+
                         {detail.name}
                         {" "}
                         {detail.shift}
