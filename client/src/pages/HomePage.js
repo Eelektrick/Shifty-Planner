@@ -20,7 +20,6 @@ function HomePage(props) {
   const nickname = user.nickname.split(".").join(" ");
   const reload = () => {
     API.getShifts(authID).then((data) => {
-
       const e = [];
       for (var i = 0; i < data.data.length; i++) {
         //Retrieve the details whose traded = 2 and not their own traded details
@@ -51,7 +50,6 @@ function HomePage(props) {
       for (var i = 0; i < avdData.data.length; i++) {
         //Retrieve their own traded details
         for (var j = 0; j < avdData.data[i].approvedLists.length; j++) {
-
           e[i] = {
             approvedPersonsShift: avdData.data[i].approvedLists[j].shift,
             approvedPersonsName: avdData.data[i].approvedLists[j].name,
@@ -76,7 +74,7 @@ function HomePage(props) {
       //  console.log("Approved Events in HomePage");
       //  console.log(e);
     });
-  }
+  };
 
   useEffect(() => {
     API.getShiftByAuthId(authID).then((data) => {
@@ -92,10 +90,19 @@ function HomePage(props) {
         <div className="tabs">
           <div className="col sm-12"></div>
           <Tabs
-            defaultActiveKey="Trade"
+            defaultActiveKey="Today"
             transition={false}
             onSelect={(k) => setKey(k)}
           >
+            <Tab
+              eventKey="Today"
+              title="Today's Schedule"
+              style={{ fontFamily: "Kanit, sans-serif" }}
+            >
+              <div>
+                <TodaySchedule />
+              </div>
+            </Tab>
             <Tab
               eventKey="Trade"
               title="Trade Shifts"
@@ -123,16 +130,6 @@ function HomePage(props) {
                   avdEvents={avdEvents}
                   reload={reload}
                 />
-              </div>
-            </Tab>
-            <Tab
-              eventKey="Today"
-              title="Today Schedule"
-              style={{ fontFamily: "Kanit, sans-serif" }}
-            
-            >
-              <div>
-               <TodaySchedule />
               </div>
             </Tab>
           </Tabs>
