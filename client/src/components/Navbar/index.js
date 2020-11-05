@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./style.css";
 import { FaHome } from "react-icons/fa";
+import { RiAdminLine } from "react-icons/ri";
 import { AiFillSchedule } from "react-icons/ai";
 import image from "../Navbar/shiftyLogo3.png";
 import { Link } from "react-router-dom";
@@ -80,20 +81,22 @@ export default class Navbar extends Component {
               </Link>
             </li>
 
-            {this.props.isAdmin&&<li className="nav-item">
-            <Link
-                onClick={this.closeNavbar}
-                style={{ color: "rgb(190, 147, 3)" }}
-                to="/admin"
-                className={
-                  window.location.pathname === "/admin"
-                    ? "nav-link active"
-                    : "nav-link"
-                }
-              >
-                Admin
-              </Link>
-            </li>}
+            {this.props.isAdmin && (
+              <li className="nav-item">
+                <Link
+                  onClick={this.closeNavbar}
+                  style={{ color: "rgb(190, 147, 3)" }}
+                  to="/admin"
+                  className={
+                    window.location.pathname === "/admin"
+                      ? "nav-link active"
+                      : "nav-link"
+                  }
+                >
+                  <RiAdminLine /> Admin
+                </Link>
+              </li>
+            )}
 
             <li className="nav-item">
               <LogoutButton onClick={this.closeNavbar} />

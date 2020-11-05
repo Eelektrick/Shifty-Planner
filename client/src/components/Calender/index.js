@@ -11,24 +11,23 @@ import { store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 import emailjs from "emailjs-com";
 import "animate.css";
-import {Notification} from 'rsuite';
-import { FaTintSlash } from "react-icons/fa";
+import { Notification } from "rsuite";
+import HomePage from "../../pages/HomePage";
 const localizer = momentLocalizer(moment);
 
 // let allViews = Object.keys(Views).map((k) => Views[k]);
 
-let name= "";
+let name = "";
 const eventStyleGetter = (events, start, end, isSelected) => {
   // console.log(events.start);
   // console.log(events);
-  if(moment(events.start).format("MMMM Do YYYY")=== moment().format("MMMM Do YYYY")){
-
+  if (
+    moment(events.start).format("MMMM Do YYYY") ===
+    moment().format("MMMM Do YYYY")
+  ) {
     name = events.name;
   }
   var style = {
-    // backgroundColor: backgroundColor,
-    // opacity: 0.8,
-    // color: 'black',
     borderRadius: "0px",
     border: "0px",
     display: "block",
@@ -48,7 +47,7 @@ const eventStyleGetter = (events, start, end, isSelected) => {
 
 console.log("name");
 console.log(name);
-const dayPropGetter = (Date) => { };
+const dayPropGetter = (Date) => {};
 
 class Calender extends Component {
   constructor() {
@@ -62,7 +61,6 @@ class Calender extends Component {
   }
 
   componentDidMount() {
-
     emailjs.init("user_BCfmpqcEj5v3szKGPYNTP");
     API.getShifts().then((data) => {
       const e = [];
@@ -83,14 +81,13 @@ class Calender extends Component {
     });
   }
 
-   openNotfication() {
-     Notification.open({
-       title: 'Notification',
-       description:
-         'Your shift trade successful done!! It will be notified to others too..'
-
-     });
-   }
+  openNotfication() {
+    Notification.open({
+      title: "Notification",
+      description:
+        "Your shift trade successful done!! It will be notified to others too..",
+    });
+  }
 
   handleOnclickTread = (event) => {
     event.preventDefault();
@@ -111,10 +108,13 @@ class Calender extends Component {
   };
 
   handleSelect = (event) => {
-
     const authID = this.props.authID;
-    if (event.authID !== authID || event.traded !== 1 || moment(event.start).isBefore()) {
-      alert('Sorry...You cannot make a trade for this!!!');
+    if (
+      event.authID !== authID ||
+      event.traded !== 1 ||
+      moment(event.start).isBefore()
+    ) {
+      alert("Sorry...You cannot make a trade for this!!!");
       return;
     }
     this.setState({
@@ -136,14 +136,14 @@ class Calender extends Component {
       // console.log(response);
     });
 
-    // emailjs.send("shiftyPlannerEmail", "template_clhajc8", formData).then(
-    //   function (response) {
-    //     console.log("SUCCESS!", response.status, response.text);
-    //   },
-    //   function (error) {
-    //     console.log("FAILED...", error);
-    //   }
-    // );
+    emailjs.send("shiftyPlannerEmail", "template_clhajc8", formData).then(
+      function (response) {
+        console.log("SUCCESS!", response.status, response.text);
+      },
+      function (error) {
+        console.log("FAILED...", error);
+      }
+    );
 
     this.closeModal();
   };
@@ -196,7 +196,6 @@ class Calender extends Component {
 
   render() {
     return (
-    
       <div id="calendarCover">
         <div id="welcome">
           {" "}
@@ -222,7 +221,6 @@ class Calender extends Component {
           {this.renderModal()}
         </div>
       </div>
-     
     );
   }
 }
