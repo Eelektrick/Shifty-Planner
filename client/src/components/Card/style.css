@@ -18,3 +18,8 @@
   left: 25%;
   top: 25%;
 }
+.card:hover {
+  box-shadow: 8px 8px 5px rgb(153, 153, 153);
+  transform: scale(1.1);
+  cursor: pointer;
+}
