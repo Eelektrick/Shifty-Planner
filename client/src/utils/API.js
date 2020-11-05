@@ -10,6 +10,14 @@ export default {
   getAvdLists: function(userId) {
     return axios.get("/api/shifts/byAvdLists", {params: { userId }});
   },
+  getShiftByDate: function(start, uuid){
+    let config = {
+      headers: {
+        header1: "Test-Header",
+      }
+     }
+    return axios.get("/api/shifts/byDate/" +uuid,  {params: { start }});
+  },
   //GET by users Auth ID
   getShiftByAuthId: function(authID) {
     return axios.get("/api/shifts/byAuth" , {params: { authID }});

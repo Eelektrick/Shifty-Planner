@@ -11,12 +11,20 @@ import { store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 import emailjs from "emailjs-com";
 import "animate.css";
-
+import {Notification} from 'rsuite';
+import HomePage from '../../pages/HomePage';
 const localizer = momentLocalizer(moment);
 
 let allViews = Object.keys(Views).map((k) => Views[k]);
 
+let name= "";
 const eventStyleGetter = (events, start, end, isSelected) => {
+  // console.log(events.start);
+  // console.log(events);
+  if(moment(events.start).format("MMMM Do YYYY")=== moment().format("MMMM Do YYYY")){
+
+    name = events.name;
+  }
   var style = {
     // backgroundColor: backgroundColor,
     // opacity: 0.8,
@@ -38,6 +46,8 @@ const eventStyleGetter = (events, start, end, isSelected) => {
   };
 };
 
+console.log("name");
+console.log(name);
 const dayPropGetter = (Date) => { };
 
 class Calender extends Component {
@@ -73,14 +83,14 @@ class Calender extends Component {
     });
   }
 
-  // openNotfication() {
-  //   Notification.open({
-  //     title: 'Notification',
-  //     description:
-  //       'Your shift trade successful done!! It will be notified to others too..'
+   openNotfication() {
+     Notification.open({
+       title: 'Notification',
+       description:
+         'Your shift trade successful done!! It will be notified to others too..'
 
-  //   });
-  // }
+     });
+   }
 
   handleOnclickTread = (event) => {
     event.preventDefault();
@@ -186,6 +196,7 @@ class Calender extends Component {
 
   render() {
     return (
+    
       <div id="calendarCover">
         <div id="welcome">
           {" "}
@@ -211,6 +222,7 @@ class Calender extends Component {
           {this.renderModal()}
         </div>
       </div>
+     
     );
   }
 }
