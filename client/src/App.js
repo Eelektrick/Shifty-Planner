@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Example from "./pages/Example";
+import Admin from "./pages/Admin";
 import Scheduler from "./pages/Scheduler";
 import HomePage from "./pages/HomePage";
 import License from "./pages/License";
@@ -35,6 +36,7 @@ function App() {
         <Navbar isAdmin={isAdmin} />
         <ProtectedRoute exact path="/" component={HomePage} />
         <ProtectedRoute exact path="/example" component={Example} />
+        <ProtectedRoute exact path="/admin" component={Admin} />
         <ProtectedRoute exact path="/scheduler" component={Scheduler} />
         <ProtectedRoute exact path="/home" component={HomePage} />
         <ProtectedRoute exact path="/license" component={License} />
