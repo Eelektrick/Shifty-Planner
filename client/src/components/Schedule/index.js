@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "./style.css";
 import API from "../../utils/API";
-import { useAuth0 } from "@auth0/auth0-react";
+// import { useAuth0 } from "@auth0/auth0-react";
 
 function Schedule(props) {
-  const { user } = useAuth0();
+ 
   const [avdEvents, setavdEvents] = useState([]);
+  // const { user } = useAuth0();
   // const authID = user.sub;
   useEffect(() => {
     setavdEvents(props.avdEvents);
-  });
+  }, [props]);
   // console.log("props.avdEvents");
   // console.log(props.avdEvents);
   const handleReject = (avdAuthid, myId) => {
@@ -66,7 +67,7 @@ function Schedule(props) {
           style={{ height: "500px", overflow: "scroll", paddingBottom: "10px" }}
         >
           <div className="row">
-            {avdEvents.map((details) => (
+            {avdEvents.map((details, index) => (
               <>
                 <div className="card" id="acceptedCard">
                   <div className="card-header">
@@ -76,7 +77,7 @@ function Schedule(props) {
                       Shift : {details.myShift}{" "}
                     </h6>
                     <ul className="list-group list-group-flush">
-                      <li className="list-group-item">
+                      <li key= '1' className="list-group-item">
                         Date :{" "}
                         <div
                           style={{
@@ -87,7 +88,7 @@ function Schedule(props) {
                           {details.myDate}
                         </div>{" "}
                       </li>
-                      <li className="list-group-item">
+                      <li key= '2' className="list-group-item">
                         Time :{" "}
                         <div
                           style={{
@@ -108,7 +109,7 @@ function Schedule(props) {
                     </h6>
                     <div className="card-text">
                       <ul className="list-group list-group-flush">
-                        <li className="list-group-item">
+                        <li key='3' className="list-group-item">
                           Date:{" "}
                           <div
                             style={{
@@ -119,7 +120,7 @@ function Schedule(props) {
                             {details.approvedPersonsDate}
                           </div>
                         </li>
-                        <li className="list-group-item">
+                        <li key = '4' className="list-group-item">
                           Time :{" "}
                           <div
                             style={{

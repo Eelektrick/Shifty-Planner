@@ -14,7 +14,7 @@ function Table(props) {
 
   useEffect(() => {
     setEvents(props.events);
-  });
+  }, [props]);
 
   const handleDelete = (id) => {
     const newList = props.events.filter((e) => e._id !== id);
@@ -136,7 +136,7 @@ function Table(props) {
           style={{ height: "400px", overflow: "scroll", paddingBottom: "10px" }}
         >
           <div className="row">
-            {events.map((details) => (
+            {events.map((details, index) => (
               <>
                 <div className="card">
                   <div className="card-body">
@@ -146,7 +146,7 @@ function Table(props) {
                     </h6>
                     <div className="card-text">
                       <ul className="list-group list-group-flush">
-                        <li className="list-group-item">
+                        <li key = '1' className="list-group-item">
                           Date:{" "}
                           <div
                             style={{
@@ -157,7 +157,7 @@ function Table(props) {
                             {details.date}
                           </div>
                         </li>
-                        <li className="list-group-item">
+                        <li key = '2' className="list-group-item">
                           Time :{" "}
                           <div
                             style={{

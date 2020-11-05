@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Calendar, Views } from "react-big-calendar";
+import { Calendar } from "react-big-calendar";
 import { momentLocalizer } from "react-big-calendar";
 import { Button, Modal } from "react-bootstrap";
 import moment from "moment";
@@ -15,7 +15,7 @@ import { Notification } from "rsuite";
 import HomePage from "../../pages/HomePage";
 const localizer = momentLocalizer(moment);
 
-let allViews = Object.keys(Views).map((k) => Views[k]);
+// let allViews = Object.keys(Views).map((k) => Views[k]);
 
 let name = "";
 const eventStyleGetter = (events, start, end, isSelected) => {
@@ -136,14 +136,14 @@ class Calender extends Component {
       // console.log(response);
     });
 
-    // emailjs.send("shiftyPlannerEmail", "template_clhajc8", formData).then(
-    //   function (response) {
-    //     console.log("SUCCESS!", response.status, response.text);
-    //   },
-    //   function (error) {
-    //     console.log("FAILED...", error);
-    //   }
-    // );
+    emailjs.send("shiftyPlannerEmail", "template_clhajc8", formData).then(
+      function (response) {
+        console.log("SUCCESS!", response.status, response.text);
+      },
+      function (error) {
+        console.log("FAILED...", error);
+      }
+    );
 
     this.closeModal();
   };
@@ -189,7 +189,7 @@ class Calender extends Component {
             Trade
           </Button>
         </Modal.Footer>
-        <ReactNotification />
+        {/* <ReactNotification /> */}
       </Modal>
     );
   }

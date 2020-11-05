@@ -30,9 +30,10 @@ export default class Navbar extends Component {
     const show = this.state.menu ? "show" : "";
     return (
       <nav className="navbar navbar-expand-lg navbar-dark sticky-top">
-        <a className="navbar-brand" href="#" />
+        <a href="/#" className="navbar-brand" />
         <img src={image} width="70" height="60" alt="logo" />
         <a
+          href="/#"
           className="navbar-brand"
           id="shifty"
           to="/"
@@ -102,7 +103,8 @@ export default class Navbar extends Component {
             </li>
 
             <li className="nav-item">
-              <a
+              <a 
+                href="/#"
                 className={
                   window.location.pathname === "/contact"
                     ? "nav-link active"
