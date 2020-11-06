@@ -1,0 +1,16 @@
+#submit1 {
+  border: none;
+  outline: none;
+  font-family: "Kanit", "sans-serif";
+  margin: 10px;
+  padding: 8px;
+  background-color: rgb(1, 136, 177);
+  border-radius: 10px;
+}
+
+#submit1:hover {
+  box-shadow: 0 5px 5px #666;
+  background-color: #036674;
+  border: none;
+  transform: scale(1.05);
+}
