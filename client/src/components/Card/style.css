@@ -4,7 +4,7 @@
   background-clip: content-box;
   border: 6px solid white;
   min-height: 280px;
-  width: 600px;
+  width: 230px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   position: relative;
   margin: 0 auto;
@@ -20,6 +20,6 @@
 }
 .card:hover {
   box-shadow: 8px 8px 5px rgb(153, 153, 153);
-  transform: scale(1.1);
+  transform: scale(1.05);
   cursor: pointer;
 }

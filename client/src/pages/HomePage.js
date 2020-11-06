@@ -81,7 +81,7 @@ function HomePage(props) {
       setDetails(data.data);
     });
     reload();
-  }, [props]);
+  }, [authID]);
 
   return (
     <div>
@@ -110,7 +110,7 @@ function HomePage(props) {
             >
               <div>
                 <Table
-                  key={nickname}
+                  key={title1}
                   name={nickname}
                   title={title1}
                   events={events}
@@ -126,7 +126,7 @@ function HomePage(props) {
             >
               <div>
                 <Schedule
-                  key={nickname}
+                  key={title2}
                   name={nickname}
                   title={title2}
                   avdEvents={avdEvents}

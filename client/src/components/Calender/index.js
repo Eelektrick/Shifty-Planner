@@ -6,21 +6,19 @@ import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./style.css";
 import API from "../../utils/API";
-import ReactNotification from "react-notifications-component";
-import { store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 import emailjs from "emailjs-com";
 import "animate.css";
-import { Notification } from "rsuite";
-import HomePage from "../../pages/HomePage";
+// import { Notification } from "rsuite";
+// import HomePage from "../../pages/HomePage";
+// import ReactNotification from "react-notifications-component";
+// import { store } from "react-notifications-component";
 const localizer = momentLocalizer(moment);
 
 // let allViews = Object.keys(Views).map((k) => Views[k]);
 
 let name = "";
 const eventStyleGetter = (events, start, end, isSelected) => {
-  // console.log(events.start);
-  // console.log(events);
   if (
     moment(events.start).format("MMMM Do YYYY") ===
     moment().format("MMMM Do YYYY")
@@ -81,31 +79,31 @@ class Calender extends Component {
     });
   }
 
-  openNotfication() {
-    Notification.open({
-      title: "Notification",
-      description:
-        "Your shift trade successful done!! It will be notified to others too..",
-    });
-  }
+  // openNotfication() {
+  //   Notification.open({
+  //     title: "Notification",
+  //     description:
+  //       "Your shift trade successful done!! It will be notified to others too..",
+  //   });
+  // }
 
-  handleOnclickTread = (event) => {
-    event.preventDefault();
-    store.addNotification({
-      title: "Trade schedule",
-      message: "Your schedule is now ready to be trade!",
-      type: "info",
-      container: "top-right",
-      insert: "Top",
-      animationIn: ["animate__animated", "animate__flipInY"],
-      animationOut: ["animate__animated", "animate__flipOutY"],
-      dismiss: {
-        duration: 5000,
-        showIcon: true,
-        onScreen: true,
-      },
-    });
-  };
+  // handleOnclickTread = (event) => {
+  //   event.preventDefault();
+  //   store.addNotification({
+  //     title: "Trade schedule",
+  //     message: "Your schedule is now ready to be trade!",
+  //     type: "info",
+  //     container: "center",
+  //     insert: "Center",
+  //     animationIn: ["animate__animated", "animate__flipInY"],
+  //     animationOut: ["animate__animated", "animate__flipOutY"],
+  //     dismiss: {
+  //       duration: 5000,
+  //       showIcon: true,
+  //       onScreen: true,
+  //     },
+  //   });
+  // };
 
   handleSelect = (event) => {
     const authID = this.props.authID;
@@ -144,7 +142,6 @@ class Calender extends Component {
         console.log("FAILED...", error);
       }
     );
-
     this.closeModal();
   };
 
@@ -185,11 +182,12 @@ class Calender extends Component {
           <Button variant="secondary" id="close" onClick={this.closeModal}>
             Close
           </Button>
-          <Button variant="primary" id="trade" onClick={this.handleSubmit}>
+          <Button variant="primary" id="trade" onClick={this.handleSubmit} >
             Trade
           </Button>
+          {/* <ReactNotification />  */}
         </Modal.Footer>
-        {/* <ReactNotification /> */}
+      
       </Modal>
     );
   }

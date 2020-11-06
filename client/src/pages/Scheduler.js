@@ -25,7 +25,6 @@ function Scheduler() {
       <Row>
         <Col size="md-12">
         {/* Pass props to the card container */}
-       
         <Calender authID= {authID} nickname = {nickname} />
         </Col>
       </Row>
