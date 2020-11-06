@@ -30,7 +30,6 @@ export default class Navbar extends Component {
     const show = this.state.menu ? "show" : "";
     return (
       <nav className="navbar navbar-expand-lg navbar-dark sticky-top">
-        <a href="/#" className="navbar-brand" />
         <img src={image} width="70" height="60" alt="logo" />
         <a
           href="/#"
@@ -100,19 +99,6 @@ export default class Navbar extends Component {
 
             <li className="nav-item">
               <LogoutButton onClick={this.closeNavbar} />
-            </li>
-
-            <li className="nav-item">
-              <a 
-                href="/#"
-                className={
-                  window.location.pathname === "/contact"
-                    ? "nav-link active"
-                    : "nav-link"
-                }
-                target="_blank"
-                rel="noopener noreferrer"
-              ></a>
             </li>
           </ul>
         </div>

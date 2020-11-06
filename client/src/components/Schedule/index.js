@@ -137,7 +137,6 @@ function Schedule(props) {
                     <button
                       type="button"
                       className="btn btn-dark mr-3"
-                      className="btn btn-dark mr-3"
                       onClick={() => handleAccept(details)}
                       id="btn1"
                     >
