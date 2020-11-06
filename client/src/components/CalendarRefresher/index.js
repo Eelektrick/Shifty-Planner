@@ -2,6 +2,7 @@ import React from "react";
 // import { Button, Form, Col } from "react-bootstrap";
 import API from "../../utils/API";
 import moment from "moment";
+import "./style.css";
 
 class CalenderRefresher extends React.Component {
   constructor(props) {
@@ -71,7 +72,6 @@ class CalenderRefresher extends React.Component {
         this.setState({ aPIres: res });
       })
       .then(() => {
-
         let userByShift = this.state.aPIres.data;
         let yearMonth = moment().set({
           year: 2020,
@@ -178,24 +178,40 @@ class CalenderRefresher extends React.Component {
   //---------------------------------------------------
   render() {
     return (
-      <div>
-        {/* -------------Month----------- */}
-        <form onSubmit={this.handleSubmitMonth}>
-          <h3>Select Month:</h3>
-          <label>
-            Month:
+      <div className="container">
+        <div className="card-header">
+          {/* -------------Month----------- */}
+          <form onSubmit={this.handleSubmitMonth}>
+            <h5
+              style={{
+                color: "white",
+                marginBottom: "20px",
+                fontSize: "22px",
+                fontFamily: "Kanit, sans-serif",
+              }}
+            >
+              Select Month:
+            </h5>
+            <label>
+              Month:
+              <input
+                type="month"
+                id="start"
+                name="start"
+                value={this.state.selectedMonth}
+                onChange={this.handleChangeMonth}
+                style={{ marginLeft: "10px" }}
+              />
+            </label>
             <input
-              type="month"
-              id="start"
-              name="start"
-              value={this.state.selectedMonth}
-              onChange={this.handleChangeMonth}
+              type="submit"
+              value="Submit"
+              id="submit1"
+              style={{ marginLeft: "10px" }}
             />
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
-        {/* -------------SHIFT----------- */}
-        {/* <form  > */}
+          </form>
+          {/* -------------SHIFT----------- */}
+          {/* <form  > */}
           {/* <h2>Shift to be made</h2>
           <label>
             Shift:
@@ -208,42 +224,48 @@ class CalenderRefresher extends React.Component {
           <input type="submit" value="Submit" />
         </form> */}
 
-        <form onSubmit={this.handleSubmitShift}>
-          <h3>Please select Shift:</h3>
-          <input
-            type="radio"
-            id="A"
-            name="shift"
-            value="A"
-
-            onChange={this.handleChangeShift}
-          />
-          <label>A</label>
-          <br />
-          <input
-            type="radio"
-            id="B"
-            name="shift"
-            value="B"
-      
-            onChange={this.handleChangeShift}
-          />
-          <label>B</label>
-          <br />
-          <input
-            type="radio"
-            id="C"
-            name="shift"
-            value="C"
-      
-            onChange={this.handleChangeShift}
-          />
-          <label>C</label>
-          <br/>
-          <input type="submit" value="Submit" />
-        </form>
-        {/* ---------------NAME------------- */}
-        {/* <form onSubmit={this.handleSubmitName}>
+          <form onSubmit={this.handleSubmitShift}>
+            <h5
+              style={{
+                color: "white",
+                marginBottom: "20px",
+                fontSize: "22px",
+                fontFamily: "Kanit, sans-serif",
+              }}
+            >
+              Please select Shift:
+            </h5>
+            <input
+              type="radio"
+              id="A"
+              name="shift"
+              value="A"
+              onChange={this.handleChangeShift}
+            />
+            <label> A</label>
+            <br />
+            <input
+              type="radio"
+              id="B"
+              name="shift"
+              value="B"
+              onChange={this.handleChangeShift}
+            />
+            <label> B</label>
+            <br />
+            <input
+              type="radio"
+              id="C"
+              name="shift"
+              value="C"
+              onChange={this.handleChangeShift}
+            />
+            <label> C</label>
+            <br />
+            <input type="submit" value="Submit" id="submit1" />
+          </form>
+          {/* ---------------NAME------------- */}
+          {/* <form onSubmit={this.handleSubmitName}>
           <h2>Personnel on the shift </h2>
           <label>
             Name:
@@ -256,13 +278,14 @@ class CalenderRefresher extends React.Component {
           <input type="submit" value="Submit" />
         </form> */}
 
-        {/* ---------Final Gen-------------- */}
-        <form onSubmit={this.handleGenerate}>
-          <br/>
-          <h3>Generate!</h3>
-          <input type="submit" value="Generate Shifts" />
-        </form>
-        <br/>
+          {/* ---------Final Gen-------------- */}
+          <form onSubmit={this.handleGenerate}>
+            <br />
+            <h5>Please click below to generate the shift!</h5>
+            <input type="submit" value="Generate Shifts" id="submit1" />
+          </form>
+          <br />
+        </div>
       </div>
     );
   }
