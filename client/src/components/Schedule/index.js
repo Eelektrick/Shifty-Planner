@@ -15,9 +15,8 @@ function Schedule(props) {
   // console.log(props.avdEvents);
   const handleReject = (avdAuthid, myId) => {
     const newList = props.avdEvents.filter((e) => e._id !== myId);
-
+    setavdEvents(newList);
     API.saveID(myId, avdAuthid).then((data) => {
-      setavdEvents(newList);
       API.removefromAvd(myId, avdAuthid).then((data) => {
         // API.updateShift(myId, 1);
         props.reload();
