@@ -21,9 +21,10 @@ function HomePage(props) {
   const reload = () => {
     API.getShifts(authID).then((data) => {
       const e = [];
+
       for (var i = 0; i < data.data.length; i++) {
         //Retrieve the details whose traded = 2 and not their own traded details
-        if (data.data[i].traded === 2 && data.data[i].authID !== authID) {
+        if ((data.data[i].traded === 2 || data.data[i].traded === 3) && data.data[i].authID !== authID) {
           e[i] = {
             shift: data.data[i].shift,
             title: data.data[i].shift + "   " + data.data[i].name,
@@ -40,39 +41,71 @@ function HomePage(props) {
         }
       }
       setEvents(e);
+      console.log("Events in HomePage");
+       console.log(e);
     });
 
     API.getAvdLists(authID).then((avdData) => {
-      // console.log("Approved Data Response foe API.getAvdLists(authID) ");
-      // console.log(avdData.data);
+       console.log("Approved Data Response foe API.getAvdLists(authID) ");
+       console.log(avdData.data);
 
-      const e = [];
+      let e = [];
+
+
+      // let result = avdData.data.map(o => {
+      //   myShift: o.shift;
+      //    myName: o.name;
+      //    myDate: moment(o.start).format("MMMM Do YYYY");
+      //    myTime:
+      //      moment(o.start).format(" HH:mm:ss") +
+      //      " - " +
+      //      moment(o.end).format("HH:mm:ss");
+      //    myAuthId: o.authID;
+      //    myTradeState: o.traded;
+      //    myId: o._id;
+      //   o = Object.assign({}, o); //To clone the obj. Will not affect the original array
+      //   o.approvedLists = o.approvedLists.map(v => 
+          
+      //       approvedPersonsShift: v.shift;
+      //       approvedPersonsName:v.name;
+      //       approvedPersonsAuthID: v.authID;
+      //       approvedPersonsDate: v.date;
+      //       approvedPersonsTime: v.time;
+      //       approvedPersonsId: v.id;
+        
+      //     };
+      //   };
+      //   return o;
+      // });
+
       for (var i = 0; i < avdData.data.length; i++) {
-        //Retrieve their own traded details
+      // Retrieve their own traded details
         for (var j = 0; j < avdData.data[i].approvedLists.length; j++) {
-          e[i] = {
-            approvedPersonsShift: avdData.data[i].approvedLists[j].shift,
-            approvedPersonsName: avdData.data[i].approvedLists[j].name,
-            approvedPersonsAuthID: avdData.data[i].approvedLists[j].authID,
-            approvedPersonsDate: avdData.data[i].approvedLists[j].date,
-            approvedPersonsTime: avdData.data[i].approvedLists[j].time,
-            approvedPersonsId: avdData.data[i].approvedLists[j].id,
-            myShift: avdData.data[i].shift,
-            myName: avdData.data[i].name,
-            myDate: moment(avdData.data[i].start).format("MMMM Do YYYY"),
-            myTime:
-              moment(avdData.data[i].start).format(" HH:mm:ss") +
-              " - " +
-              moment(avdData.data[i].end).format("HH:mm:ss"),
-            myAuthId: avdData.data[i].authID,
-            myTradeState: avdData.data[i].traded,
-            myId: avdData.data[i]._id,
-          };
-        }
-      }
+       
+         e.push( {
+           myShift: avdData.data[i].shift,
+           myName: avdData.data[i].name,
+           myDate: moment(avdData.data[i].start).format("MMMM Do YYYY"),
+           myTime:
+             moment(avdData.data[i].start).format(" HH:mm:ss") +
+             " - " +
+             moment(avdData.data[i].end).format("HH:mm:ss"),
+           myAuthId: avdData.data[i].authID,
+           myTradeState: avdData.data[i].traded,
+           myId: avdData.data[i]._id,
+           approvedPersonsShift: avdData.data[i].approvedLists[j].shift,
+           approvedPersonsName: avdData.data[i].approvedLists[j].name,
+           approvedPersonsAuthID: avdData.data[i].approvedLists[j].authID,
+           approvedPersonsDate: avdData.data[i].approvedLists[j].date,
+           approvedPersonsTime: avdData.data[i].approvedLists[j].time,
+           approvedPersonsId: avdData.data[i].approvedLists[j].id,
+         } );
+       }
+       }
+   
       setAvdEvents(e);
-      //  console.log("Approved Events in HomePage");
-      //  console.log(e);
+       console.log("Approved Events in HomePage");
+       console.log(e);
     });
   };
 

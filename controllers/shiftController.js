@@ -5,7 +5,8 @@ const db = require("../models");
 module.exports = {
   findAll: function (req, res) {
     db.Shift
-      .find({ ignoredLists: { $ne: req.query.userId }})
+      // .find( { ignoredLists: { $ne: req.query.userId }} , {"acceptedLists.authID" : { $ne: req.query.userId } } )
+      .find( { $and:  [ { ignoredLists: { $ne: req.query.userId } }, { "approvedLists.authID" : { $ne: req.query.userId } } ] } )
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));

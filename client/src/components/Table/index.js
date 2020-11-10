@@ -6,6 +6,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 function Table(props) {
   const [isOpen, setIsOpen] = useState(false);
+  const [modalDetails, setModalDetails] = useState(" ");
   const [dropDownVal, setDropDownVal] = useState(" ");
   const [events, setEvents] = useState([]);
   const handleClose = () => setIsOpen(false);
@@ -29,7 +30,13 @@ function Table(props) {
     setDropDownVal(value);
   };
 
-  const saveDetails = (event, details) => {
+
+  const handleOpen = (id) =>{
+    setIsOpen(true);
+    setModalDetails(id);
+  }
+
+  const saveDetails = (event, id) => {
     event.preventDefault();
     const value = dropDownVal.split("|");
     const avdDetails = {
@@ -40,21 +47,23 @@ function Table(props) {
       date: value[3],
       time: value[4],
     };
-    // console.log("avdDetails");
-    // console.log(avdDetails);
-    API.saveAvdDetails(details._id, avdDetails).then((data) => {
+     console.log("avdDetails");
+     console.log(avdDetails);
+     console.log(id);
+
+     
+    API.saveAvdDetails(id, avdDetails).then((data) => {
       setIsOpen(false);
       props.reload();
     });
     const traded = 3;
-    API.updateShift(details._id, traded);
-
+    API.updateShift(id, traded);
     handleClose();
   };
 
   const MyModal = (props) => {
     return (
-      <Modal className="modal-container" {...props}>
+      <Modal {...props} className="modal-container">
         <div>
           <Modal.Header closeButton>
             <Modal.Title>Details</Modal.Title>
@@ -77,7 +86,7 @@ function Table(props) {
                   >
                     {props.modaldetails.map((detail) => (
                       <option
-                        key={detail.id}
+                        key={detail._id}
                         value={
                           detail._id +
                           "|" +
@@ -136,7 +145,7 @@ function Table(props) {
           style={{ height: "400px", overflow: "scroll", paddingBottom: "10px" }}
         >
           <div className="row">
-            {events.map((details, index) => (
+            {events.map(details => (
               <>
                 <div className="card">
                   <div className="card-body">
@@ -146,7 +155,7 @@ function Table(props) {
                     </h6>
                     <div className="card-text">
                       <ul className="list-group list-group-flush">
-                        <li key = '1' className="list-group-item">
+                        <li className="list-group-item">
                           Date:{" "}
                           <div
                             style={{
@@ -157,7 +166,7 @@ function Table(props) {
                             {details.date}
                           </div>
                         </li>
-                        <li key = '2' className="list-group-item">
+                        <li className="list-group-item">
                           Time :{" "}
                           <div
                             style={{
@@ -173,11 +182,18 @@ function Table(props) {
                     <button
                       type="button"
                       className="btn btn-dark mr-3"
-                      onClick={() => setIsOpen(true)}
+                      onClick={() => handleOpen(details._id)}
                       id="btn1"
                     >
                       Propose
                     </button>
+                    <MyModal
+                    //drop own details
+                      modaldetails={props.details}
+                      tradepersonreqdetail={modalDetails}
+                      show={isOpen}
+                      onHide={() => setIsOpen(false)}
+                    />
                     <button
                       type="button"
                       onClick={() => handleDelete(details._id)}
@@ -188,12 +204,7 @@ function Table(props) {
                     </button>
                   </div>
                 </div>
-                <MyModal
-                  modaldetails={props.details}
-                  tradepersonreqdetail={details}
-                  show={isOpen}
-                  onHide={() => setIsOpen(false)}
-                />
+               
               </>
             ))}
           </div>
