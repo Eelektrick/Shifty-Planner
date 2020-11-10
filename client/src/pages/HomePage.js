@@ -41,42 +41,15 @@ function HomePage(props) {
         }
       }
       setEvents(e);
-      console.log("Events in HomePage");
-       console.log(e);
+      // console.log("Events in HomePage");
+      //  console.log(e);
     });
 
     API.getAvdLists(authID).then((avdData) => {
-       console.log("Approved Data Response foe API.getAvdLists(authID) ");
-       console.log(avdData.data);
+      //  console.log("Approved Data Response foe API.getAvdLists(authID) ");
+      //  console.log(avdData.data);
 
       let e = [];
-
-
-      // let result = avdData.data.map(o => {
-      //   myShift: o.shift;
-      //    myName: o.name;
-      //    myDate: moment(o.start).format("MMMM Do YYYY");
-      //    myTime:
-      //      moment(o.start).format(" HH:mm:ss") +
-      //      " - " +
-      //      moment(o.end).format("HH:mm:ss");
-      //    myAuthId: o.authID;
-      //    myTradeState: o.traded;
-      //    myId: o._id;
-      //   o = Object.assign({}, o); //To clone the obj. Will not affect the original array
-      //   o.approvedLists = o.approvedLists.map(v => 
-          
-      //       approvedPersonsShift: v.shift;
-      //       approvedPersonsName:v.name;
-      //       approvedPersonsAuthID: v.authID;
-      //       approvedPersonsDate: v.date;
-      //       approvedPersonsTime: v.time;
-      //       approvedPersonsId: v.id;
-        
-      //     };
-      //   };
-      //   return o;
-      // });
 
       for (var i = 0; i < avdData.data.length; i++) {
       // Retrieve their own traded details
@@ -104,14 +77,23 @@ function HomePage(props) {
        }
    
       setAvdEvents(e);
-       console.log("Approved Events in HomePage");
-       console.log(e);
+      //  console.log("Approved Events in HomePage");
+      //  console.log(e);
     });
   };
 
   useEffect(() => {
     API.getShiftByAuthId(authID).then((data) => {
+      // console.log("data response from getShiftByAuthId");
+      // console.log(data.data);
+      data.data = data.data.filter(d => {
+       return moment(d.start).isAfter();
+
+      })
+      // console.log("After filtering");
+      // console.log(data.data);
       setDetails(data.data);
+     
     });
     reload();
   }, [authID]);

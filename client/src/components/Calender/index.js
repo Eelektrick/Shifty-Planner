@@ -43,8 +43,8 @@ const eventStyleGetter = (events, start, end, isSelected) => {
   };
 };
 
-console.log("name");
-console.log(name);
+// console.log("name");
+// console.log(name);
 const dayPropGetter = (Date) => {};
 
 class Calender extends Component {
@@ -134,16 +134,16 @@ class Calender extends Component {
       // console.log(response);
     });
 
-    emailjs.send("shiftyPlannerEmail", "template_clhajc8", formData).then(
-      function (response) {
-        console.log("SUCCESS!", response.status, response.text);
-      },
-      function (error) {
-        console.log("FAILED...", error);
-      }
-    );
-    this.closeModal();
-  };
+   emailjs.send("shiftyPlannerEmail", "template_clhajc8", formData).then(
+     function (response) {
+       console.log("SUCCESS!", response.status, response.text);
+     },
+     function (error) {
+       console.log("FAILED...", error);
+     }
+   );
+     this.closeModal();
+   };
 
   closeModal = () =>
     this.setState({

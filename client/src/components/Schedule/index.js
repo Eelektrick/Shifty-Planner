@@ -19,7 +19,7 @@ function Schedule(props) {
     API.saveID(myId, avdAuthid).then((data) => {
       setavdEvents(newList);
       API.removefromAvd(myId, avdAuthid).then((data) => {
-        API.updateShift(myId, 1);
+        // API.updateShift(myId, 1);
         props.reload();
       });
     });
@@ -77,7 +77,7 @@ function Schedule(props) {
                       Shift : {details.myShift}{" "}
                     </h6>
                     <ul className="list-group list-group-flush">
-                      <li key= '1' className="list-group-item">
+                      <li className="list-group-item">
                         Date :{" "}
                         <div
                           style={{
@@ -88,7 +88,7 @@ function Schedule(props) {
                           {details.myDate}
                         </div>{" "}
                       </li>
-                      <li key= '2' className="list-group-item">
+                      <li className="list-group-item">
                         Time :{" "}
                         <div
                           style={{
@@ -109,7 +109,7 @@ function Schedule(props) {
                     </h6>
                     <div className="card-text">
                       <ul className="list-group list-group-flush">
-                        <li key='3' className="list-group-item">
+                        <li className="list-group-item">
                           Date:{" "}
                           <div
                             style={{
@@ -120,7 +120,7 @@ function Schedule(props) {
                             {details.approvedPersonsDate}
                           </div>
                         </li>
-                        <li key = '4' className="list-group-item">
+                        <li className="list-group-item">
                           Time :{" "}
                           <div
                             style={{

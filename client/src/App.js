@@ -22,7 +22,7 @@ function App() {
           scope: "create:schedule",
         });
         const decoded = jwt_decode(token);
-        console.log(decoded);
+        // console.log(decoded);
         const role = decoded["https://shifty-planner.com/roles"][0];
         setIsAdmin(role === "supervisor");
       } catch (e) {
