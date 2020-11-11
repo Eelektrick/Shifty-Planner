@@ -3,11 +3,12 @@ import { Button, Modal, Form } from "react-bootstrap";
 import API from "../../utils/API";
 import moment from "moment";
 import { useAuth0 } from "@auth0/auth0-react";
+import { NotificationManager } from 'react-notifications';
 
 function Table(props) {
   const [isOpen, setIsOpen] = useState(false);
   const [modalDetails, setModalDetails] = useState(" ");
-  const [dropDownVal, setDropDownVal] = useState(" ");
+  const [dropDownVal, setDropDownVal] = useState("Sample Value");
   const [events, setEvents] = useState([]);
   const handleClose = () => setIsOpen(false);
   const { user } = useAuth0();
@@ -25,11 +26,12 @@ function Table(props) {
     props.reload();
   };
 
-  const handleChange = (event, value) => {
+  const handleChange = (event) => {
     event.preventDefault();
-    setDropDownVal(value);
+    console.log("event.target.value");
+    console.log(event.target.value);
+    setDropDownVal(event.target.value);
   };
-
 
   const handleOpen = (id) =>{
     setIsOpen(true);
@@ -59,6 +61,7 @@ function Table(props) {
     const traded = 3;
     API.updateShift(id, traded);
     handleClose();
+    NotificationManager.info('Thanks for your proposal!!', 'Proposal Submission!', 2000);
   };
 
   const MyModal = (props) => {
@@ -74,16 +77,15 @@ function Table(props) {
                 <Form.Group controlId="exampleForm.ControlSelect1">
                   <Form.Label>
                     {" "}
-                    Please select from your shift to swap with:
+                     Select from your shift to swap with:
                   </Form.Label>
 
                   <Form.Control
                     as="select"
                     value={dropDownVal}
-                    onChange={(e) => {
-                      handleChange(e, e.target.value);
-                    }}
+                    onChange = {handleChange}
                   >
+                    <option>Please select a value from dropdown</option>
                     {props.modaldetails.map((detail) => (
                       <option
                         key={detail._id}
@@ -101,6 +103,7 @@ function Table(props) {
                           moment(detail.end).format("HH:mm:ss ")
                         }
                       >
+                        
                         {detail.name} {detail.shift}{" "}
                         {moment(detail.start).format("MMMM Do YYYY")}{" "}
                         {moment(detail.start).format(" HH:mm:ss ")} -{" "}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./style.css";
 import API from "../../utils/API";
+import { NotificationManager } from 'react-notifications';
 // import { useAuth0 } from "@auth0/auth0-react";
 
 function Schedule(props) {
@@ -45,6 +46,7 @@ function Schedule(props) {
         props.reload();
       });
     });
+    NotificationManager.info(`Your shift is successfully swapped with ${details.approvedPersonsName}!!`, 'Success!', 2000);
   };
 
   return (

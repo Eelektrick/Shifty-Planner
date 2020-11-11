@@ -59,8 +59,8 @@ class Calender extends Component {
     };
   }
 
-  componentDidMount() {
-    emailjs.init("user_BCfmpqcEj5v3szKGPYNTP");
+   calendarReload = () => {
+
     API.getShifts().then((data) => {
       const e = [];
       for (var i = 0; i < data.data.length; i++) {
@@ -78,41 +78,39 @@ class Calender extends Component {
       this.setState({ events: e });
       // console.log(e);
     });
+
+  }
+  componentDidMount() {
+    emailjs.init("user_BCfmpqcEj5v3szKGPYNTP");
+    this.calendarReload();
   }
 
-   openNotfication() {
-     Notification.open({
-       title: "Notification",
-       description:
-         "Your shift trade successful done!! It will be notified to others too..",
-     });
-   }
+  //  openNotfication() {
+  //    Notification.open({
+  //      title: "Notification",
+  //      description:
+  //        "Your shift trade successful done!! It will be notified to others too..",
+  //    });
+  //  }
 
-   handleOnclickTread = () => {
-    //  event.preventDefault();
-    console.log("Notification");
-     store.addNotification({
-       title: "Trade schedule",
-       message: "Your schedule is now ready to be trade!",
-       type: "info",
-       container: "center",
-       insert: "Center",
-       animationIn: ["animate__animated", "animate__flipInY"],
-       animationOut: ["animate__animated", "animate__flipOutY"],
-       dismiss: {
-         duration: 5000,
-         showIcon: true,
-         onScreen: true,
-       },
-     });
-
-    //  const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-
-    //  async function submit(){
-    //   await sleep(5000);
-    //   this.handleSubmit();
-    // }
-   };
+  //  handleOnclickTread = () => {
+  //   //  event.preventDefault();
+  //   console.log("Notification");
+  //    store.addNotification({
+  //      title: "Trade schedule",
+  //      message: "Your schedule is now ready to be trade!",
+  //      type: "info",
+  //      container: "center",
+  //      insert: "Center",
+  //      animationIn: ["animate__animated", "animate__flipInY"],
+  //      animationOut: ["animate__animated", "animate__flipOutY"],
+  //      dismiss: {
+  //        duration: 5000,
+  //        showIcon: true,
+  //        onScreen: true,
+  //      },
+  //    });
+  //  };
 
   handleSelect = (event) => {
     const authID = this.props.authID;
@@ -143,17 +141,18 @@ class Calender extends Component {
       // this.handleOnclickTread();
     });
 
-  //  emailjs.send("shiftyPlannerEmail", "template_clhajc8", formData).then(
-  //    function (response) {
-  //      console.log("SUCCESS!", response.status, response.text);
-  //    },
-  //    function (error) {
-  //      console.log("FAILED...", error);
-  //    }
-  //  );
+    emailjs.send("shiftyPlannerEmail", "template_clhajc8", formData).then(
+      function (response) {
+        console.log("SUCCESS!", response.status, response.text);
+      },
+      function (error) {
+        console.log("FAILED...", error);
+      }
+    );
     
      this.closeModal();
-     NotificationManager.success('Your schedule is now ready to trade!!', 'Trade schedule!', 2000);
+     NotificationManager.info('Your schedule is now ready to trade!!', 'Trade schedule!', 2000);
+     this.calendarReload();
 
    };
 
