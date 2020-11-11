@@ -9,10 +9,10 @@ import API from "../../utils/API";
 import "react-notifications-component/dist/theme.css";
 import emailjs from "emailjs-com";
 import "animate.css";
-import { Notification } from "rsuite";
+// import { Notification } from "rsuite";
 // import HomePage from "../../pages/HomePage";
-import ReactNotification from "react-notifications-component";
-import { store } from "react-notifications-component";
+// import ReactNotification from "react-notifications-component";
+// import { store } from "react-notifications-component";
 import { NotificationManager } from 'react-notifications';
 const localizer = momentLocalizer(moment);
 
@@ -196,7 +196,7 @@ class Calender extends Component {
           <Button variant="primary" id="trade" onClick={this.handleSubmit} >
             Trade
           </Button>
-          <ReactNotification /> 
+          {/* <ReactNotification />  */}
         </Modal.Footer>
       
       </Modal>
