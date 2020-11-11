@@ -204,7 +204,6 @@ function Table(props) {
                     </button>
                   </div>
                 </div>
-               
               </>
             ))}
           </div>
