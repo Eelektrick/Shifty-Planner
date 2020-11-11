@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./style.css";
 import API from "../../utils/API";
+import { NotificationManager } from 'react-notifications';
 // import { useAuth0 } from "@auth0/auth0-react";
 
 function Schedule(props) {
@@ -15,11 +16,10 @@ function Schedule(props) {
   // console.log(props.avdEvents);
   const handleReject = (avdAuthid, myId) => {
     const newList = props.avdEvents.filter((e) => e._id !== myId);
-
+    setavdEvents(newList);
     API.saveID(myId, avdAuthid).then((data) => {
-      setavdEvents(newList);
       API.removefromAvd(myId, avdAuthid).then((data) => {
-        API.updateShift(myId, 1);
+        // API.updateShift(myId, 1);
         props.reload();
       });
     });
@@ -46,6 +46,7 @@ function Schedule(props) {
         props.reload();
       });
     });
+    NotificationManager.info(`Your shift is successfully swapped with ${details.approvedPersonsName}!!`, 'Success!', 2000);
   };
 
   return (
@@ -77,7 +78,7 @@ function Schedule(props) {
                       Shift : {details.myShift}{" "}
                     </h6>
                     <ul className="list-group list-group-flush">
-                      <li key= '1' className="list-group-item">
+                      <li className="list-group-item">
                         Date :{" "}
                         <div
                           style={{
@@ -88,7 +89,7 @@ function Schedule(props) {
                           {details.myDate}
                         </div>{" "}
                       </li>
-                      <li key= '2' className="list-group-item">
+                      <li className="list-group-item">
                         Time :{" "}
                         <div
                           style={{
@@ -109,7 +110,7 @@ function Schedule(props) {
                     </h6>
                     <div className="card-text">
                       <ul className="list-group list-group-flush">
-                        <li key='3' className="list-group-item">
+                        <li className="list-group-item">
                           Date:{" "}
                           <div
                             style={{
@@ -120,7 +121,7 @@ function Schedule(props) {
                             {details.approvedPersonsDate}
                           </div>
                         </li>
-                        <li key = '4' className="list-group-item">
+                        <li className="list-group-item">
                           Time :{" "}
                           <div
                             style={{

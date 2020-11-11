@@ -1,11 +1,13 @@
 const { query } = require("express");
 const db = require("../models");
+const moment = require("moment");
 
 // Defining methods for the shiftsController
 module.exports = {
   findAll: function (req, res) {
     db.Shift
-      .find({ ignoredLists: { $ne: req.query.userId }})
+      // .find( { ignoredLists: { $ne: req.query.userId }} , {"acceptedLists.authID" : { $ne: req.query.userId } } )
+      .find( { $and:  [ { ignoredLists: { $ne: req.query.userId } }, { "approvedLists.authID" : { $ne: req.query.userId } } ] } )
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
@@ -19,7 +21,7 @@ module.exports = {
   },
   findByAuthId: function (req, res) {
     // console.log(req.query.authID);
-
+    //  moment().format().toDate().isAfter();
     db.Shift
       .find({ authID: req.query.authID, traded: 1 })
       .sort({ date: -1 })
@@ -30,7 +32,6 @@ module.exports = {
   },
   findByDate: function (req, res) {
     // console.log(req.query.authID);
-    
     db.Shift
     // "dt" : {"$gte": ISODate("2013-10-01T00:00:00.000Z")}  '2020-11-04T14:00:00.000+00:00'
       .find( {start: { $eq: req.query.start } } )

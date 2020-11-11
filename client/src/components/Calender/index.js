@@ -13,6 +13,7 @@ import "animate.css";
 // import HomePage from "../../pages/HomePage";
 // import ReactNotification from "react-notifications-component";
 // import { store } from "react-notifications-component";
+import { NotificationManager } from 'react-notifications';
 const localizer = momentLocalizer(moment);
 
 // let allViews = Object.keys(Views).map((k) => Views[k]);
@@ -43,8 +44,8 @@ const eventStyleGetter = (events, start, end, isSelected) => {
   };
 };
 
-console.log("name");
-console.log(name);
+// console.log("name");
+// console.log(name);
 const dayPropGetter = (Date) => {};
 
 class Calender extends Component {
@@ -58,8 +59,8 @@ class Calender extends Component {
     };
   }
 
-  componentDidMount() {
-    emailjs.init("user_BCfmpqcEj5v3szKGPYNTP");
+   calendarReload = () => {
+
     API.getShifts().then((data) => {
       const e = [];
       for (var i = 0; i < data.data.length; i++) {
@@ -77,33 +78,39 @@ class Calender extends Component {
       this.setState({ events: e });
       // console.log(e);
     });
+
+  }
+  componentDidMount() {
+    emailjs.init("user_BCfmpqcEj5v3szKGPYNTP");
+    this.calendarReload();
   }
 
-  // openNotfication() {
-  //   Notification.open({
-  //     title: "Notification",
-  //     description:
-  //       "Your shift trade successful done!! It will be notified to others too..",
-  //   });
-  // }
+  //  openNotfication() {
+  //    Notification.open({
+  //      title: "Notification",
+  //      description:
+  //        "Your shift trade successful done!! It will be notified to others too..",
+  //    });
+  //  }
 
-  // handleOnclickTread = (event) => {
-  //   event.preventDefault();
-  //   store.addNotification({
-  //     title: "Trade schedule",
-  //     message: "Your schedule is now ready to be trade!",
-  //     type: "info",
-  //     container: "center",
-  //     insert: "Center",
-  //     animationIn: ["animate__animated", "animate__flipInY"],
-  //     animationOut: ["animate__animated", "animate__flipOutY"],
-  //     dismiss: {
-  //       duration: 5000,
-  //       showIcon: true,
-  //       onScreen: true,
-  //     },
-  //   });
-  // };
+  //  handleOnclickTread = () => {
+  //   //  event.preventDefault();
+  //   console.log("Notification");
+  //    store.addNotification({
+  //      title: "Trade schedule",
+  //      message: "Your schedule is now ready to be trade!",
+  //      type: "info",
+  //      container: "center",
+  //      insert: "Center",
+  //      animationIn: ["animate__animated", "animate__flipInY"],
+  //      animationOut: ["animate__animated", "animate__flipOutY"],
+  //      dismiss: {
+  //        duration: 5000,
+  //        showIcon: true,
+  //        onScreen: true,
+  //      },
+  //    });
+  //  };
 
   handleSelect = (event) => {
     const authID = this.props.authID;
@@ -131,7 +138,7 @@ class Calender extends Component {
     // console.log(this.state.cal_events);
     const traded = 2;
     API.updateShift(this.state.cal_events._id, traded).then((response) => {
-      // console.log(response);
+      // this.handleOnclickTread();
     });
 
     emailjs.send("shiftyPlannerEmail", "template_clhajc8", formData).then(
@@ -142,8 +149,12 @@ class Calender extends Component {
         console.log("FAILED...", error);
       }
     );
-    this.closeModal();
-  };
+    
+     this.closeModal();
+     NotificationManager.info('Your schedule is now ready to trade!!', 'Trade schedule!', 2000);
+     this.calendarReload();
+
+   };
 
   closeModal = () =>
     this.setState({

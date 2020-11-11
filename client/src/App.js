@@ -10,6 +10,9 @@ import Footer from "./components/Footer";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { useAuth0 } from "@auth0/auth0-react";
 import jwt_decode from "jwt-decode";
+// React Notification
+import 'react-notifications/lib/notifications.css';
+import { NotificationContainer } from 'react-notifications';
 
 function App() {
   const { isAuthenticated, getAccessTokenSilently } = useAuth0();
@@ -22,7 +25,7 @@ function App() {
           scope: "create:schedule",
         });
         const decoded = jwt_decode(token);
-        console.log(decoded);
+        // console.log(decoded);
         const role = decoded["https://shifty-planner.com/roles"][0];
         setIsAdmin(role === "supervisor");
       } catch (e) {
@@ -40,6 +43,7 @@ function App() {
         <ProtectedRoute exact path="/scheduler" component={Scheduler} />
         <ProtectedRoute exact path="/home" component={HomePage} />
         <ProtectedRoute exact path="/license" component={License} />
+        <NotificationContainer />
         <Footer />
       </div>
     </Router>
