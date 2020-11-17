@@ -4,6 +4,7 @@ import API from "../../utils/API";
 import moment from "moment";
 import "./style.css";
 
+
 class CalenderRefresher extends React.Component {
   constructor(props) {
     super(props);
@@ -174,20 +175,20 @@ class CalenderRefresher extends React.Component {
   ///* ---------Final Gen-------------- */
   handleGenerate() {
     API.saveShift(this.state.newShiftVar);
+ 
   }
   //---------------------------------------------------
   render() {
     return (
-      <div className="container">
-        <div className="card-header">
+      <div>
+      <div className="container" id="admin"> 
+      <h3>Admin</h3>
+
           {/* -------------Month----------- */}
           <form onSubmit={this.handleSubmitMonth}>
             <h5
               style={{
-                color: "white",
-                marginBottom: "20px",
-                fontSize: "22px",
-                fontFamily: "Kanit, sans-serif",
+          
               }}
             >
               Select Month:
@@ -200,16 +201,18 @@ class CalenderRefresher extends React.Component {
                 name="start"
                 value={this.state.selectedMonth}
                 onChange={this.handleChangeMonth}
-                style={{ marginLeft: "10px" }}
+                id="calendar"
+                
               />
             </label>
             <input
               type="submit"
               value="Submit"
               id="submit1"
-              style={{ marginLeft: "10px" }}
+             
             />
           </form>
+          <hr/>
           {/* -------------SHIFT----------- */}
           {/* <form  > */}
           {/* <h2>Shift to be made</h2>
@@ -225,14 +228,7 @@ class CalenderRefresher extends React.Component {
         </form> */}
 
           <form onSubmit={this.handleSubmitShift}>
-            <h5
-              style={{
-                color: "white",
-                marginBottom: "20px",
-                fontSize: "22px",
-                fontFamily: "Kanit, sans-serif",
-              }}
-            >
+            <h5>
               Please select Shift:
             </h5>
             <input
@@ -264,6 +260,7 @@ class CalenderRefresher extends React.Component {
             <br />
             <input type="submit" value="Submit" id="submit1" />
           </form>
+          <hr/>
           {/* ---------------NAME------------- */}
           {/* <form onSubmit={this.handleSubmitName}>
           <h2>Personnel on the shift </h2>
@@ -286,6 +283,7 @@ class CalenderRefresher extends React.Component {
           </form>
           <br />
         </div>
+   
       </div>
     );
   }
