@@ -151,7 +151,7 @@ class Calender extends Component {
     );
     
      this.closeModal();
-     NotificationManager.info('Your schedule is now ready to trade!!', 'Trade schedule!', 2000);
+     NotificationManager.info('Your schedule is now traded!!', 'Trade schedule!', 2000);
      this.calendarReload();
 
    };
