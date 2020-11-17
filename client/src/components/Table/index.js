@@ -41,11 +41,11 @@ function Table(props) {
 
   const saveDetails = (event, id) => {
     event.preventDefault();
-    console.log("dropDownVal");
-    console.log(dropDownVal);
-    if(dropDownVal === " "){
+    // console.log("dropDownVal");
+    // console.log(dropDownVal);
+    if(dropDownVal === " " || dropDownVal === "Please select a value from dropdown"){
       // document.getElementById("dropdown").innerHTML = "<p>Please select a value from dropdown</p>";
-      alert("Please select a value from dropdown or your dropdown don't have any shift available to swap with...Sorry !! ");
+      alert("Please select a value from dropdown or you don't have any shift available to swap with...Sorry !! ");
       return;
     }
     const value = dropDownVal.split("|");
@@ -59,7 +59,7 @@ function Table(props) {
     };
     //  console.log("avdDetails");
     //  console.log(avdDetails);
-     console.log(id);
+    //  console.log(id);
 
      
     API.saveAvdDetails(id, avdDetails).then((data) => {
