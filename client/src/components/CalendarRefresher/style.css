@@ -2,15 +2,64 @@
   border: none;
   outline: none;
   font-family: "Kanit", "sans-serif";
-  margin: 10px;
   padding: 8px;
-  background-color: rgb(1, 136, 177);
+  background-color: rgb(0, 185, 241);
+  color: rgb(68, 68, 68);
   border-radius: 10px;
+  margin: auto;
+  display: block;
 }
 
 #submit1:hover {
   box-shadow: 0 5px 5px #666;
-  background-color: #036674;
+  background-color: rgb(20, 166, 211);
   border: none;
   transform: scale(1.05);
+}
+
+#submit1:active {
+  font-family: "Kanit", "sans-serif";
+  box-shadow: 0 5px 5px #666;
+  background-color: rgb(20, 166, 211);
+  transform: translateY(3px);
+  border: none;
+}
+
+#admin {
+  background-color: rgba(255, 255, 255, 0.836);
+  /* border: 6px solid rgba(255, 255, 255, 0.836); */
+  border-radius: 10px;
+  min-height: 200px;
+  width: 320px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  position: relative;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-family: "Kanit", sans-serif;
+}
+
+h3 {
+  text-align: center;
+  color: rgb(68, 68, 68);
+  padding: 10px;
+}
+
+h5 {
+  color: rgb(68, 68, 68);
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-family: "Kanit", sans-serif;
+}
+
+label {
+  color: rgb(68, 68, 68);
+  padding-left: 5px;
+}
+
+#calendar {
+  margin-left: 10px;
+}
+
+#calendar:hover {
+  cursor: pointer;
 }
