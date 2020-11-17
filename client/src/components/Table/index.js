@@ -4,11 +4,12 @@ import API from "../../utils/API";
 import moment from "moment";
 import { useAuth0 } from "@auth0/auth0-react";
 import { NotificationManager } from 'react-notifications';
+import "./style.css";
 
 function Table(props) {
   const [isOpen, setIsOpen] = useState(false);
   const [modalDetails, setModalDetails] = useState(" ");
-  const [dropDownVal, setDropDownVal] = useState("Sample Value");
+  const [dropDownVal, setDropDownVal] = useState(" ");
   const [events, setEvents] = useState([]);
   const handleClose = () => setIsOpen(false);
   const { user } = useAuth0();
@@ -28,8 +29,8 @@ function Table(props) {
 
   const handleChange = (event) => {
     event.preventDefault();
-    console.log("event.target.value");
-    console.log(event.target.value);
+    // console.log("event.target.value");
+    // console.log(event.target.value);
     setDropDownVal(event.target.value);
   };
 
@@ -40,6 +41,13 @@ function Table(props) {
 
   const saveDetails = (event, id) => {
     event.preventDefault();
+    console.log("dropDownVal");
+    console.log(dropDownVal);
+    if(dropDownVal === " "){
+      // document.getElementById("dropdown").innerHTML = "<p>Please select a value from dropdown</p>";
+      alert("Please select a value from dropdown or your dropdown don't have any shift available to swap with...Sorry !! ");
+      return;
+    }
     const value = dropDownVal.split("|");
     const avdDetails = {
       id: value[0],
@@ -49,8 +57,8 @@ function Table(props) {
       date: value[3],
       time: value[4],
     };
-     console.log("avdDetails");
-     console.log(avdDetails);
+    //  console.log("avdDetails");
+    //  console.log(avdDetails);
      console.log(id);
 
      
@@ -79,15 +87,19 @@ function Table(props) {
                     {" "}
                      Select from your shift to swap with:
                   </Form.Label>
-
+                  {/* <div id= "dropdown"></div> */}
                   <Form.Control
+                    // className= "formControl"
                     as="select"
                     value={dropDownVal}
                     onChange = {handleChange}
                   >
-                    <option>Please select a value from dropdown</option>
+                  
+                    <option >Please select a value from dropdown</option>
+                   
                     {props.modaldetails.map((detail) => (
-                      <option
+                      <option 
+                       
                         key={detail._id}
                         value={
                           detail._id +
@@ -111,7 +123,9 @@ function Table(props) {
                       </option>
                     ))}
                   </Form.Control>
+                 
                   <br />
+                
                   <Button
                     type="submit"
                     id="submit"
